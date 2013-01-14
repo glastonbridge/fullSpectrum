@@ -1,11 +1,18 @@
 #pragma once
 
+#ifndef __MACOSX_CORE__
+
 #include "ofMain.h"
 #include "ofxiPhone.h"
 #include "ofxiPhoneExtras.h"
 
 #include "ofxOpenCv.h"
+#include "ofxBlender.h"
+
 #include "VideoSource.h"
+#include "Choreography.h"
+#include "OverlayLibrary.h"
+#include "SensorLibrary.h"
 
 class Lens : public ofxiPhoneApp{
 	
@@ -36,6 +43,24 @@ private:
     
     /** The bitmap of the camera view, underneath any overlays */
     ofxCvColorImage lensImage;
+    
+    /** The choreography that we are following */
+    Choreography choreography;
+    
+    /** The overlays in our possession */
+    OverlayLibrary overlayLibrary;
+    
+    /** The sensors being applied to the scene */
+    SensorLibrary sensorLibrary;
+    
+    
+    // Hack to add in a 3d model
+    ofxBlender blendFile;
+    ofEasyCam cam;
+    ofLight light;
+
 };
+
+#endif
 
 

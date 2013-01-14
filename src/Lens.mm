@@ -1,5 +1,7 @@
 #include "Lens.h"
 
+#ifndef __MACOSX_CORE__
+
 /**
  * Called once, when the app is opened
  */
@@ -15,15 +17,29 @@ void Lens::setup(){
     streamWidth = 320;
     streamHeight = 240;
     
-    // Request a camera.  May not be exactly the dimensions requested, so
+    // Request a camera/video.  May not be exactly the dimensions requested, so
     // update streamWidth and streamHeight with the correct data.
-    //videoIn.allocateCamera(streamWidth, streamHeight);
-    videoIn.allocateVideo(0,0, "fingers.m4v");
-    //streamWidth = videoIn.getWidth();
-    //streamHeight = videoIn.getHeight();
+    //videoIn.allocateVideo(0,0, "fingers.m4v");
+    videoIn.allocateCamera(streamWidth, streamHeight);
+    streamWidth = videoIn.getWidth();
+    streamHeight = videoIn.getHeight();
     
     lensImage.allocate(streamWidth, streamHeight);
     ofSetFrameRate(60);
+    
+    choreography.setOverlayLibrary(&overlayLibrary);
+    choreography.setSensorLibrary(&sensorLibrary);
+    
+    // Hack to add blendre
+    
+	glEnable(GL_DEPTH_TEST);
+	//ofSetSmoothLighting(true);
+    
+	blendFile.load("beach.blend");
+    
+	glShadeModel(GL_SMOOTH);
+	glEnable(GL_RESCALE_NORMAL);
+	glEnable(GL_DEPTH_TEST);
 }
 
 /**
@@ -36,6 +52,9 @@ void Lens::update(){
     if (videoIn.isFrameNew())
     {
         if (videoIn.getPixels()) lensImage.setFromPixels(videoIn.getPixels(), streamWidth, streamHeight);
+        choreography.onEnterFrame(streamWidth, streamHeight);
+        sensorLibrary.onEnterFrame(&lensImage);
+        overlayLibrary.update(&lensImage);
     }
 }
 
@@ -44,6 +63,12 @@ void Lens::update(){
  */
 void Lens::draw(){
 	lensImage.draw(0,0);
+    overlayLibrary.draw();
+    
+	cam.begin();
+	ofScale(50, 50, 50);
+	blendFile.getActiveScene()->activeCamera = NULL;
+	blendFile.getActiveScene()->draw();
 }
 
 //--------------------------------------------------------------
@@ -96,3 +121,4 @@ void Lens::deviceOrientationChanged(int newOrientation){
 
 }
 
+#endif
