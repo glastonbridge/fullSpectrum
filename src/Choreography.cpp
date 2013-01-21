@@ -25,9 +25,10 @@ void Choreography::setSensorLibrary(SensorLibrary *newSensorLibrary)
 
 void Choreography::onEnterFrame(float width, float height)
 {
-    static bool runonce = false;
-    if ( runonce ) return;
-    runonce = true;
-    Overlay* newOverlay = _overlayLibrary->addOverlay(BlobOverlay::NAME, width, height);
-    newOverlay->attachSensor(_sensorLibrary->addSensor(ColouredBlobSensor::NAME, width, height));
+}
+
+void Choreography::addActiveEffect(Effect e, float width, float height)
+{
+    Overlay* newOverlay = _overlayLibrary->addOverlay(e.overlayName, width, height);
+    newOverlay->attachSensor(_sensorLibrary->addSensor(e.sensorName, width, height));
 }

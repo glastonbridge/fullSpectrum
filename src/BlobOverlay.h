@@ -18,7 +18,7 @@ public:
     virtual void update(ofxCvColorImage* input);
     virtual void draw();  
     virtual void setup(float width, float height);
-    
+    virtual std::string getName();
 private:
     ofImage blobMarker;
 };

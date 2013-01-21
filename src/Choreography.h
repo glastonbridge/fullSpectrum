@@ -11,6 +11,7 @@
 
 #include "OverlayLibrary.h"
 #include "SensorLibrary.h"
+#include "Effect.h"
 
 class Choreography
 {
@@ -18,6 +19,7 @@ public:
     void setOverlayLibrary(OverlayLibrary* newOverlayLibrary);
     void setSensorLibrary(SensorLibrary* newSensorLibrary);
     void onEnterFrame(float width, float height);
+    void addActiveEffect(Effect e, float width, float height);
     
 private:
     OverlayLibrary* _overlayLibrary;

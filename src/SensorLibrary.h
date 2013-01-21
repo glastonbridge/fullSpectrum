@@ -19,6 +19,7 @@ class SensorLibrary
 public:
     void onEnterFrame(ofxCvColorImage* input);
     Sensor* addSensor(std::string id, float width, float height);
+    std::vector<Sensor*> getActiveSensors();
     
 private:
     std::vector<Sensor*> sensors;

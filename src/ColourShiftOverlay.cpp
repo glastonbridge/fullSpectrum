@@ -27,3 +27,8 @@ void ColourShiftOverlay::draw()
 {
     shiftImage.draw(0,0);
 }
+
+std::string ColourShiftOverlay::getName()
+{
+    return NAME;
+}

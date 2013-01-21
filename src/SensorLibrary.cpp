@@ -8,6 +8,7 @@
 
 #include "SensorLibrary.h"
 #include "ColouredBlobSensor.h"
+#include "PerspectiveQuadSensor.h"
 
 void SensorLibrary::onEnterFrame(ofxCvColorImage *input)
 {   
@@ -17,9 +18,23 @@ void SensorLibrary::onEnterFrame(ofxCvColorImage *input)
 
 Sensor* SensorLibrary::addSensor(std::string id, float width, float height)
 {
-    ColouredBlobSensor* newSensor = new ColouredBlobSensor;
+    Sensor* newSensor;
+    
+    if (id == ColouredBlobSensor::NAME)
+    {
+        newSensor = new ColouredBlobSensor;
+    }
+    else if (id == PerspectiveQuadSensor::NAME)
+    {
+        newSensor = new PerspectiveQuadSensor;
+    }
     
     newSensor->setup(width, height);
     sensors.push_back(newSensor);
     return newSensor;
+}
+
+std::vector<Sensor*> SensorLibrary::getActiveSensors()
+{
+    return sensors;
 }

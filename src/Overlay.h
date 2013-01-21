@@ -12,11 +12,12 @@
 #include "ofxOpenCv.h"
 
 #include "Sensor.h"
+#include "Parameterisable.h"
 
 /**
  * The interface which all Overlays must implement
  */
-class Overlay
+class Overlay : public Parameterisable
 {
 public:
     virtual void update(ofxCvColorImage* input) = 0;

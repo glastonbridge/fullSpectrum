@@ -9,6 +9,8 @@
 #include "OverlayLibrary.h"
 #include "ColourShiftOverlay.h"
 #include "BlobOverlay.h"
+#include "PerspectiveImageOverlay.h"
+#include "PerspectiveObjectOverlay.h"
 
 void OverlayLibrary::update(ofxCvColorImage *input)
 {
@@ -34,8 +36,21 @@ Overlay* OverlayLibrary::addOverlay(const std::string& overlayName, float width,
     {
         newOverlay = new BlobOverlay;
     }
+    else if (overlayName.compare(PerspectiveImageOverlay::NAME) ==0)
+    {
+        newOverlay = new PerspectiveImageOverlay;
+    }
+    else if (overlayName.compare(PerspectiveObjectOverlay::NAME) ==0)
+    {
+        newOverlay = new PerspectiveObjectOverlay;
+    }
     if (!newOverlay) return 0; // TODO: exceptions!
     newOverlay->setup(width, height);
     overlays.push_back(newOverlay);
     return newOverlay;
+}
+
+std::vector<Overlay*> OverlayLibrary::getActiveOverlays()
+{
+    return overlays;
 }

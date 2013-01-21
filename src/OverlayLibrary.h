@@ -19,7 +19,7 @@ public:
     void update(ofxCvColorImage* input);
     void draw();
     Overlay* addOverlay(const std::string& overlayName, float width, float height);
-    
+    std::vector<Overlay*> getActiveOverlays();
 private:
     std::vector<Overlay*> overlays;
 };

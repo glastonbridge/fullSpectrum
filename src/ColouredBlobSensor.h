@@ -18,6 +18,7 @@ public:
     
     virtual void setup(float width, float height);
     virtual void analyse(ofxCvColorImage* input);
+    virtual std::string getName();
     ofxCvContourFinder contours;    
     //ofxCvGrayscaleImage reds, greens, blues;
     ofxCvGrayscaleImage hue, huemax, sat, val;
