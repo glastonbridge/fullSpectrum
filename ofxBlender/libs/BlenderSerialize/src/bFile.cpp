@@ -20,7 +20,7 @@ subject to the following restrictions:
 #include <string.h>
 #include <stdlib.h>
 #include "bDefines.h"
-#include "LinearMath/btSerializer.h"
+#include "btSerializer.h"
 
 #define SIZEOFBLENDERHEADER 12
 #define MAX_ARRAY_LENGTH 512

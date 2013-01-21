@@ -9,6 +9,7 @@
 #include "ofxBlenderMaterial.h"
 #include "ofxBlenderLight.h"
 
+#include <map>
 
 //for blend loader
 #include "bMain.h"

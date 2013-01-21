@@ -59,16 +59,6 @@ void PerspectiveQuadSensor::analyse(ofxCvColorImage* input)
         if (++expectedSize != topToBottom.size())
             topToBottom.push_back(*blobSearch);
     }
-    CvPoint2D32f plainQuad[4], dstQuad[4];
-    plainQuad[0].x=0;
-    plainQuad[0].y=0;
-    plainQuad[1].x=10;
-    plainQuad[1].y=0;
-    plainQuad[2].x=0;
-    plainQuad[2].y=10;
-    plainQuad[3].x=10;
-    plainQuad[4].y=10;
-    
     
     if (topToBottom[0].centroid.x<topToBottom[1].centroid.x)
     {
@@ -90,17 +80,16 @@ void PerspectiveQuadSensor::analyse(ofxCvColorImage* input)
     
     return;
     
-    bottomRight.y -= topLeft.y;
-    bottomRight.x -= topLeft.x;
-    topRight.y -= topLeft.y;
-    topRight.x -= topLeft.x;
-    bottomLeft.y -= topLeft.y;
-    bottomLeft.x -= topLeft.x;
+    CvPoint2D32f plainQuad[4], dstQuad[4];
+    plainQuad[0].x=0;
+    plainQuad[0].y=0;
+    plainQuad[1].x=10;
+    plainQuad[1].y=0;
+    plainQuad[2].x=0;
+    plainQuad[2].y=10;
+    plainQuad[3].x=10;
+    plainQuad[4].y=10;
     
-    topLeft.x = 0;
-    topLeft.y = 0;
-    
-    return;
     
     dstQuad[0].x = topLeft.x;
     dstQuad[0].y = topLeft.y;
@@ -113,4 +102,6 @@ void PerspectiveQuadSensor::analyse(ofxCvColorImage* input)
     
     
     cvGetPerspectiveTransform(plainQuad, dstQuad, cvWarpMatrix);
+    
+    ;
 }

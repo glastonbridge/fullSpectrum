@@ -25,6 +25,8 @@ public:
     
 private:
     
+    ofPoint* srcPoints, *dstPoints;
+    
     ofxAssimpModelLoader model;
     
     ofVboMesh mesh;
@@ -33,6 +35,8 @@ private:
     ofPoint scale;
     
     ofLight	light;
+    
+    ofImage bob;
 };
 
 
