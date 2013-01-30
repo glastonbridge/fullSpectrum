@@ -16,6 +16,8 @@ class ColouredBlobSensor : public Sensor
 public:
     static const std::string NAME;
     
+    ColouredBlobSensor();
+    
     virtual void setup(float width, float height);
     virtual void analyse(ofxCvColorImage* input);
     virtual std::string getName();

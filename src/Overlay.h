@@ -23,6 +23,7 @@ public:
     virtual void update(ofxCvColorImage* input) = 0;
     virtual void draw() = 0;
     virtual void setup(float width, float height) = 0;
+    
     virtual void attachSensor(Sensor* toAttach);
 protected:
     vector<Sensor*> sensors;

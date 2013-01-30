@@ -11,18 +11,22 @@
 
 #include "ofxOpenCv.h"
 #include <vector>
+#include <map>
 #include "Sensor.h"
-
 
 class SensorLibrary
 {
 public:
     void onEnterFrame(ofxCvColorImage* input);
-    Sensor* addSensor(std::string id, float width, float height);
+    Sensor* addSensor(const std::string& id, const std::string& type);
+    /** getActiveSensors is used for debugging purposes in FullSpectrumAnalyser */
     std::vector<Sensor*> getActiveSensors();
+    Sensor* activate(const std::string& id, float width, float height);
     
 private:
-    std::vector<Sensor*> sensors;
+    std::vector<Sensor*> activeSensors;
+    std::map<std::string, Sensor*> sensors;
+    
 };
 
 #endif

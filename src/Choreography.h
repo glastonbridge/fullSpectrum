@@ -12,18 +12,21 @@
 #include "OverlayLibrary.h"
 #include "SensorLibrary.h"
 #include "Effect.h"
+#include <map>
+#include <string>
 
 class Choreography
 {
 public:
     void setOverlayLibrary(OverlayLibrary* newOverlayLibrary);
     void setSensorLibrary(SensorLibrary* newSensorLibrary);
-    void onEnterFrame(float width, float height);
-    void addActiveEffect(Effect e, float width, float height);
-    
+    /** Loads a cue sheet.  Returns the effect that should begin immediately */
+    std::string loadCueSheet(std::string path);
+    void activateEffect(const std::string& effect, float width, float height);
 private:
     OverlayLibrary* _overlayLibrary;
     SensorLibrary* _sensorLibrary;
+    std::map<std::string, Effect*> effects;
 };
 
 #endif

@@ -14,6 +14,8 @@
 class PerspectiveQuadSensor : public ColouredBlobSensor
 {
 public:
+    PerspectiveQuadSensor();
+    
     static const std::string NAME;
     virtual std::string getName();
     virtual void setup(float width, float height);

@@ -12,7 +12,7 @@
 
 #include <string>
 
-const std::string PerspectiveImageOverlay::NAME="perspectiveimageoverlay";
+const std::string PerspectiveImageOverlay::NAME="perspective image overlay";
 
 std::string PerspectiveImageOverlay::getName()
 {

@@ -20,6 +20,7 @@ public:
     static const int PARAM_FLOAT = 1;
     static const int PARAM_BOOL = 2;
     static const int PARAM_INT = 3;
+    static const int PARAM_STRING = 4;
     
     virtual std::string getName() = 0;
     int getParamCount();
@@ -35,6 +36,8 @@ public:
     void setIntValue(int index, int value);
     bool getBoolValue(int index);
     void setBoolValue(int index, bool value);
+    std::string getStringValue(int index);
+    void setStringValue(int index, const std::string& value);
     
     int getParamId(const std::string& name);
     
@@ -44,12 +47,15 @@ protected:
     void addFloatParam(std::string name, float defaultValue, float min, float max);
     void addIntParam(std::string name, int defaultValue, int min, int max);
     void addBoolParam(std::string name, bool defaultValue);
+    void addStringParam(const std::string& name, const std::string& defaultValue);
+    
+    void copyParameters(Parameterisable& dest);
+    
+    /** Override this if you want to be notified when a parameter changes */
+    virtual void paramChanged(int id);
     
 private:
-    // TODO: support values other than floats
     std::vector<Param*> paramValues;
-    std::vector<std::string> parameterNames;
-
 };
 
 #endif

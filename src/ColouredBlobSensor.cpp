@@ -8,7 +8,19 @@
 
 #include "ColouredBlobSensor.h"
 
-const std::string ColouredBlobSensor::NAME = "colouredblobsensor";
+const std::string ColouredBlobSensor::NAME = "coloured blob sensor";
+
+ColouredBlobSensor::ColouredBlobSensor()
+{
+    addIntParam("hue range", 30, 0, 255); // 0
+    addIntParam("hue offset", 90, 0, 255);// 1
+    addIntParam("sat threshold",150, 0, 255);// 2
+    addIntParam("val threshold", 100, 0, 255); // 3
+    
+    addIntParam("min blob width", 6, 5, 400); // 4
+    addIntParam("max blob width", 200, 5, 800); // 5
+    addIntParam("num blobs", 1, 1, 16); // 6
+}
 
 void ColouredBlobSensor::setup(float width, float height)
 {
@@ -18,14 +30,6 @@ void ColouredBlobSensor::setup(float width, float height)
     huemax.allocate(width, height);
     sat.allocate(width,height);
     val.allocate(width,height);
-    addIntParam("hue range", 30, 0, 255); // 0
-    addIntParam("hue offset", 90, 0, 255);// 1
-    addIntParam("sat threshold",150, 0, 255);// 2
-    addIntParam("val threshold", 100, 0, 255); // 3
-    
-    addIntParam("min blob width", 6, 5, 400); // 4
-    addIntParam("max blob width", 200, 5, 800); // 5
-    addIntParam("num blobs", 1, 1, 16); // 6
 }
 
 void ColouredBlobSensor::analyse(ofxCvColorImage *input)

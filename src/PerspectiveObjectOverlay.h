@@ -19,10 +19,14 @@ public:
     static const std::string NAME;
     virtual std::string getName();
     
+    PerspectiveObjectOverlay();
+    
     virtual void update(ofxCvColorImage* input);
     virtual void draw();
     virtual void setup(float width, float height);
     
+protected:
+    virtual void paramChanged(int index);
 private:
     
     ofPoint* srcPoints, *dstPoints;

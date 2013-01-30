@@ -10,6 +10,18 @@
 
 const std::string PerspectiveQuadSensor::NAME="perspective quad sensor";
 
+PerspectiveQuadSensor::PerspectiveQuadSensor()
+{
+    setIntValue(getParamId("hue range"),21); // 0
+    setIntValue(getParamId("hue offset"), 96);// 1
+    setIntValue(getParamId("sat threshold"),33);// 2
+    setIntValue(getParamId("val threshold"), 74); // 3
+    
+    setIntValue(getParamId("min blob width"), 8); // 4
+    setIntValue(getParamId("max blob width"), 200); // 5
+    setIntValue(getParamId("num blobs"), 4); // 6
+}
+
 std::string PerspectiveQuadSensor::getName()
 {
     return NAME;
@@ -19,14 +31,6 @@ void PerspectiveQuadSensor::setup(float width, float height)
 {
     ColouredBlobSensor::setup(width, height);
     
-    setIntValue(getParamId("hue range"),21); // 0
-    setIntValue(getParamId("hue offset"), 96);// 1
-    setIntValue(getParamId("sat threshold"),33);// 2
-    setIntValue(getParamId("val threshold"), 74); // 3
-    
-    setIntValue(getParamId("min blob width"), 8); // 4
-    setIntValue(getParamId("max blob width"), 200); // 5
-    setIntValue(getParamId("num blobs"), 4); // 6
     
     cvWarpMatrix = cvCreateMat(3,3,CV_32FC1);
 }

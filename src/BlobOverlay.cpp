@@ -10,14 +10,18 @@
 
 #include "ColouredBlobSensor.h"
 
-const std::string BlobOverlay::NAME="bloboverlay";
+const std::string BlobOverlay::NAME="blob overlay";
 
-void BlobOverlay::setup(float width, float height)
+BlobOverlay::BlobOverlay()
 {
     addBoolParam("draw contours", true);
     addBoolParam("draw hue", false);
     addBoolParam("draw sat", false);
     addBoolParam("draw val", false);
+}
+
+void BlobOverlay::setup(float width, float height)
+{
 }
 
 void BlobOverlay::update(ofxCvColorImage *input)

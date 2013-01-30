@@ -9,32 +9,43 @@
 #include "SensorLibrary.h"
 #include "ColouredBlobSensor.h"
 #include "PerspectiveQuadSensor.h"
+#include "PaddleSensor.h"
 
 void SensorLibrary::onEnterFrame(ofxCvColorImage *input)
 {   
-    for(int i = 0; i < sensors.size(); ++i)
-        sensors[i]->analyse(input);
+    for(int i = 0; i < activeSensors.size(); ++i)
+        activeSensors[i]->analyse(input);
 }
 
-Sensor* SensorLibrary::addSensor(std::string id, float width, float height)
+Sensor* SensorLibrary::activate(const std::string &id, float width, float height)
+{
+    activeSensors.push_back(sensors[id]);
+    sensors[id]->setup(width, height);
+    return sensors[id];
+}
+
+Sensor* SensorLibrary::addSensor(const std::string& id, const std::string& type)
 {
     Sensor* newSensor;
     
-    if (id == ColouredBlobSensor::NAME)
+    if (type == ColouredBlobSensor::NAME)
     {
         newSensor = new ColouredBlobSensor;
     }
-    else if (id == PerspectiveQuadSensor::NAME)
+    else if (type == PerspectiveQuadSensor::NAME)
     {
         newSensor = new PerspectiveQuadSensor;
     }
+    else if (type == PaddleSensor::NAME)
+    {
+        newSensor = new PaddleSensor;
+    }
     
-    newSensor->setup(width, height);
-    sensors.push_back(newSensor);
+    sensors[id] = newSensor;
     return newSensor;
 }
 
 std::vector<Sensor*> SensorLibrary::getActiveSensors()
 {
-    return sensors;
+    return activeSensors;
 }
