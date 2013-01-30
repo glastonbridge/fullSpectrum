@@ -146,23 +146,23 @@ ofMatrix4x4 findHomography(ofPoint src[4], ofPoint dst[4]){
 	gaussian_elimination(&P[0][0],9);
 
 	matrix(0,0)=P[0][8];
-	matrix(0,1)=P[1][8];
-	matrix(0,2)=0;
-	matrix(0,3)=P[2][8];
-
-	matrix(1,0)=P[3][8];
-	matrix(1,1)=P[4][8];
-	matrix(1,2)=0;
-	matrix(1,3)=P[5][8];
-
+	matrix(1,0)=P[1][8];
 	matrix(2,0)=0;
-	matrix(2,1)=0;
-	matrix(2,2)=0;
-	matrix(2,3)=0;
+	matrix(3,0)=P[2][8];
 
-	matrix(3,0)=P[6][8];
-	matrix(3,1)=P[7][8];
+	matrix(0,1)=P[3][8];
+	matrix(1,1)=P[4][8];
+	matrix(2,1)=0;
+	matrix(3,1)=P[5][8];
+
+	matrix(0,2)=0;
+	matrix(1,2)=0;
+	matrix(2,2)=0;
 	matrix(3,2)=0;
+
+	matrix(0,3)=P[6][8];
+	matrix(1,3)=P[7][8];
+	matrix(2,3)=0;
 	matrix(3,3)=1;
 
 	return matrix;
