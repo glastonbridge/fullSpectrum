@@ -7,3 +7,25 @@
 //
 
 #include "CurtainStageSensor.h"
+
+const std::string CurtainStageSensor::NAME = "curtain stage sensor";
+
+std::string CurtainStageSensor::getName()
+{
+    return NAME;
+}
+
+CurtainStageSensor::CurtainStageSensor()
+{
+    
+}
+
+void CurtainStageSensor::setup(float width, float height)
+{
+    
+}
+
+void CurtainStageSensor::analyse(ofxCvColorImage *input)
+{
+    
+}
