@@ -12,6 +12,8 @@
 #include "PerspectiveImageOverlay.h"
 #include "PerspectiveObjectOverlay.h"
 #include "PongOverlay.h"
+#include "StageObjectOverlay.h"
+#include "ShakeOverlay.h"
 
 void OverlayLibrary::update(ofxCvColorImage *input)
 {
@@ -55,6 +57,14 @@ Overlay* OverlayLibrary::addOverlay(const std::string& name, const std::string& 
     else if (type.compare(PongOverlay::NAME) ==0)
     {
         newOverlay = new PongOverlay;
+    }
+    else if (type.compare(StageObjectOverlay::NAME) ==0)
+    {
+        newOverlay = new StageObjectOverlay;
+    }
+    else if (type.compare(ShakeOverlay::NAME) ==0)
+    {
+        newOverlay = new ShakeOverlay;
     }
     if (!newOverlay) return 0; // TODO: exceptions!
     overlays[name] = newOverlay;

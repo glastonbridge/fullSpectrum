@@ -10,6 +10,7 @@
 #include "ColouredBlobSensor.h"
 #include "PerspectiveQuadSensor.h"
 #include "PaddleSensor.h"
+#include "CurtainStageSensor.h"
 
 void SensorLibrary::onEnterFrame(ofxCvColorImage *input)
 {   
@@ -39,6 +40,10 @@ Sensor* SensorLibrary::addSensor(const std::string& id, const std::string& type)
     else if (type == PaddleSensor::NAME)
     {
         newSensor = new PaddleSensor;
+    }
+    else if (type == CurtainStageSensor::NAME)
+    {
+        newSensor = new CurtainStageSensor;
     }
     
     sensors[id] = newSensor;

@@ -42,7 +42,7 @@ void choreographyLoadValues(ofxXmlSettings& settings, Parameterisable* parameter
             continue;
         }
         int paramType = parameterisable->getParamType(paramIndex);
-        ofLog(OF_LOG_VERBOSE, std::string("Setting param ")+paramName+" to " +settings.getValue("Property","unknown") );
+        ofLog(OF_LOG_VERBOSE, std::string("Setting param ")+paramName+" to " +settings.getValue("Property","unknown", p) );
         if (paramType == Parameterisable::PARAM_INT)
         {
             parameterisable->setIntValue(paramIndex, settings.getValue("Property", 0, p));
@@ -53,11 +53,11 @@ void choreographyLoadValues(ofxXmlSettings& settings, Parameterisable* parameter
         }
         else if (paramType==Parameterisable::PARAM_BOOL)
         {
-            parameterisable->setBoolValue(paramIndex, settings.getValue("Property", "false")=="true");
+            parameterisable->setBoolValue(paramIndex, settings.getValue("Property", "false", p)=="true");
         }
         else if (paramType==Parameterisable::PARAM_STRING)
         {
-            parameterisable->setStringValue(paramIndex, settings.getValue("Property", ""));
+            parameterisable->setStringValue(paramIndex, settings.getValue("Property", "", p));
         }
     }
 }

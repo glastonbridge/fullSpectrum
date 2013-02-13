@@ -20,6 +20,7 @@ ColouredBlobSensor::ColouredBlobSensor()
     addIntParam("min blob width", 6, 5, 400); // 4
     addIntParam("max blob width", 200, 5, 800); // 5
     addIntParam("num blobs", 1, 1, 16); // 6
+    addBoolParam("val invert", false); // 7
 }
 
 void ColouredBlobSensor::setup(float width, float height)
@@ -47,6 +48,8 @@ void ColouredBlobSensor::analyse(ofxCvColorImage *input)
     hue &= sat;
     int valVal = getIntValue(3);
     val.threshold(valVal);
+    bool valInv = getBoolValue(7);
+    if (valInv) val.invert();
     hue &= val;
     int minBlob = getIntValue(4);
     int maxBlob = getIntValue(5);
