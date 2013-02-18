@@ -54,16 +54,8 @@ void CutOutOverlay::draw()
     
     displayImage->draw(0,0);
      */
-    glDisable(GL_DEPTH_TEST);
-    float width = displayImage.getWidth();
-    float height = displayImage.getHeight();
-    float scalex = ofGetWidth()/width;
-    float scaley = ofGetHeight()/height;
-    ofPushMatrix();
-    ofScale(scalex, scaley);
+
     displayImage.draw(0,0);
-    ofPopMatrix();
-    glEnable(GL_DEPTH_TEST);
 }
 
 void CutOutOverlay::setup(float width, float height)

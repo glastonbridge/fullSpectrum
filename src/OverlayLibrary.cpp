@@ -15,7 +15,7 @@
 #include "StageObjectOverlay.h"
 #include "ShakeOverlay.h"
 #include "CutOutOverlay.h"
-
+#include "CineOverlay.h"
 
 Overlay* OverlayLibrary::addOverlay(const std::string& name, const std::string& type)
 {
@@ -51,6 +51,10 @@ Overlay* OverlayLibrary::addOverlay(const std::string& name, const std::string& 
     else if (type.compare(CutOutOverlay::NAME) ==0)
     {
         newOverlay = new CutOutOverlay;
+    }
+    else if (type.compare(CineOverlay::NAME) ==0)
+    {
+        newOverlay = new CineOverlay;
     }
     if (!newOverlay) return 0; // TODO: exceptions!
     overlays[name] = newOverlay;

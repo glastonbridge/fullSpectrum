@@ -120,8 +120,9 @@ std::vector<std::string> Choreography::loadCueSheet(std::string path)
 
 void Choreography::activateEffect(const std::string &effectName, float width, float height)
 {
+    Sensor* sensor;
     Effect* effect(effects[effectName]);
-    Sensor* sensor(_sensorLibrary->activate(effect->sensorName, width, height));
+    if (effect->sensorName != "bad ref") sensor = _sensorLibrary->activate(effect->sensorName, width, height);
     Overlay* overlay(_overlayLibrary->activate(effect->overlayName, width, height));
-    overlay->attachSensor(sensor);
+    if (sensor) overlay->attachSensor(sensor);
 }

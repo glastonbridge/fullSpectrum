@@ -25,6 +25,10 @@ public:
     virtual void setup(float width, float height) = 0;
     
     virtual void attachSensor(Sensor* toAttach);
+    
+    static const int ORTHO = 1;
+    static const int PERSPECTIVE = 2;
+    virtual int getGeometry();
 protected:
     vector<Sensor*> sensors;
 };
