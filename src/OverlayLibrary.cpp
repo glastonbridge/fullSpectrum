@@ -14,26 +14,8 @@
 #include "PongOverlay.h"
 #include "StageObjectOverlay.h"
 #include "ShakeOverlay.h"
+#include "CutOutOverlay.h"
 
-void OverlayLibrary::update(ofxCvColorImage *input)
-{
-    for(int i = 0; i < activeOverlays.size(); ++i)
-        activeOverlays[i]->update(input);
-}
-
-void OverlayLibrary::draw()
-{
-    for(int i = 0; i < activeOverlays.size(); ++i)
-        activeOverlays[i]->draw();
-    
-}
-
-Overlay* OverlayLibrary::activate(const std::string &id, float width, float height)
-{
-    activeOverlays.push_back(overlays[id]);
-    overlays[id]->setup(width, height);
-    return overlays[id];
-}
 
 Overlay* OverlayLibrary::addOverlay(const std::string& name, const std::string& type)
 {
@@ -66,9 +48,33 @@ Overlay* OverlayLibrary::addOverlay(const std::string& name, const std::string& 
     {
         newOverlay = new ShakeOverlay;
     }
+    else if (type.compare(CutOutOverlay::NAME) ==0)
+    {
+        newOverlay = new CutOutOverlay;
+    }
     if (!newOverlay) return 0; // TODO: exceptions!
     overlays[name] = newOverlay;
     return newOverlay;
+}
+
+void OverlayLibrary::update(ofxCvColorImage *input)
+{
+    for(int i = 0; i < activeOverlays.size(); ++i)
+        activeOverlays[i]->update(input);
+}
+
+void OverlayLibrary::draw()
+{
+    for(int i = 0; i < activeOverlays.size(); ++i)
+        activeOverlays[i]->draw();
+    
+}
+
+Overlay* OverlayLibrary::activate(const std::string &id, float width, float height)
+{
+    activeOverlays.push_back(overlays[id]);
+    overlays[id]->setup(width, height);
+    return overlays[id];
 }
 
 std::vector<Overlay*> OverlayLibrary::getActiveOverlays()

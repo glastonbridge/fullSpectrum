@@ -31,14 +31,20 @@ void BlobOverlay::update(ofxCvColorImage *input)
 
 void BlobOverlay::draw()
 {
-    if (getBoolValue(0)) (dynamic_cast<ColouredBlobSensor*>(sensors[0]))->contours.draw();
-    else if (getBoolValue(1)) (dynamic_cast<ColouredBlobSensor*>(sensors[0]))->hue.draw(0,0);
-    else if (getBoolValue(2)) (dynamic_cast<ColouredBlobSensor*>(sensors[0]))->sat.draw(0,0);
-    else if (getBoolValue(3)) (dynamic_cast<ColouredBlobSensor*>(sensors[0]))->val.draw(0,0);
-    return;
-    if((dynamic_cast<ColouredBlobSensor*>(sensors[0]))->contours.blobs.size()<1) return;
-    ofPoint blobPoint = (dynamic_cast<ColouredBlobSensor*>(sensors[0]))->contours.blobs[0].pts[0]; //.draw(0,0);
-    //blobMarker.draw(blobPoint);
+    ColouredBlobSensor* sensor = dynamic_cast<ColouredBlobSensor*>(sensors[0]);
+    glDisable(GL_DEPTH_TEST);
+    float width = sensor->hue.getWidth();
+    float height = sensor->hue.getHeight();
+    float scalex = ofGetWidth()/width;
+    float scaley = ofGetHeight()/height;
+    ofPushMatrix();
+    ofScale(scalex, scaley);
+    if (getBoolValue(0)) sensor->contours.draw();
+    else if (getBoolValue(1)) sensor->hue.draw(0,0);
+    else if (getBoolValue(2)) sensor->sat.draw(0,0);
+    else if (getBoolValue(3)) sensor->val.draw(0,0);
+    ofPopMatrix();
+    glEnable(GL_DEPTH_TEST);
 }
 
 std::string BlobOverlay::getName()

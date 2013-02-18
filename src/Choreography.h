@@ -21,7 +21,7 @@ public:
     void setOverlayLibrary(OverlayLibrary* newOverlayLibrary);
     void setSensorLibrary(SensorLibrary* newSensorLibrary);
     /** Loads a cue sheet.  Returns the effect that should begin immediately */
-    std::string loadCueSheet(std::string path);
+    std::vector<std::string> loadCueSheet(std::string path);
     void activateEffect(const std::string& effect, float width, float height);
 private:
     OverlayLibrary* _overlayLibrary;

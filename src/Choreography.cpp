@@ -63,7 +63,7 @@ void choreographyLoadValues(ofxXmlSettings& settings, Parameterisable* parameter
 }
 
 
-std::string Choreography::loadCueSheet(std::string path)
+std::vector<std::string> Choreography::loadCueSheet(std::string path)
 {
     ofxXmlSettings settings;
     
@@ -109,9 +109,13 @@ std::string Choreography::loadCueSheet(std::string path)
         settings.popTag();
     }
     
-    std::string startEffectName(settings.getAttribute("InitialEffect", "ref", ""));
+    std::vector<std::string> startEffectNames;
+    unsigned int numStartEffects = settings.getNumTags("InitialEffect");
+    for (unsigned int i = 0; i < numStartEffects; ++i)
+        startEffectNames.push_back(settings.getAttribute("InitialEffect", "ref", "",i));
+    
     settings.popTag();
-    return startEffectName;
+    return startEffectNames;
 }
 
 void Choreography::activateEffect(const std::string &effectName, float width, float height)
