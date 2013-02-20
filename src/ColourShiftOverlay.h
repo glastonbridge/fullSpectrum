@@ -19,8 +19,13 @@ public:
     virtual void draw();  
     virtual void setup(float width, float height);
     virtual std::string getName();
+    ColourShiftOverlay();
 private:
     ofxCvColorImage shiftImage;
+    ofxCvGrayscaleImage h, s, v;
+    ofTexture alphaImage;
+    ofImage outImage;
+    unsigned char* pixels;
 };
 
 #endif

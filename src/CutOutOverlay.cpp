@@ -9,6 +9,8 @@
 #include "CutOutOverlay.h"
 #include "ColouredBlobSensor.h"
 
+#include "ImageUtils.h"
+
 const std::string CutOutOverlay::NAME = "cut out overlay";
 std::string CutOutOverlay::getName() { return NAME; }
 
@@ -19,25 +21,15 @@ CutOutOverlay::CutOutOverlay()
 
 void CutOutOverlay::update(ofxCvColorImage* input)
 {
-    int width = input->getWidth(), height = input->getHeight();
     ColouredBlobSensor* blobSensor = dynamic_cast<ColouredBlobSensor*> (sensors[0]);
-    unsigned char* alphaPixels = blobSensor->val.getPixels();
-    unsigned char* colourPixels = input->getPixels();
+    
     if (!displayImage.isAllocated())
     {
+        int width = input->getWidth(), height = input->getHeight();
         displayImage.allocate(width, height ,GL_RGBA);
         pixels = new unsigned char[width*height*4];
     }
-    for (int i = 0; i < width; ++i){
-		for (int j = 0; j < height; ++j){
-			int pos = (j * width + i);
-			pixels[pos*4  ] = colourPixels[pos * 3];
-			pixels[pos*4+1] = colourPixels[pos * 3+1];
-			pixels[pos*4+2] = colourPixels[pos * 3+2];
-			pixels[pos*4+3] = alphaPixels[pos];
-		}
-    }
-    displayImage.loadData(pixels, width, height, GL_RGBA);
+    setAlphaImage(displayImage, *input, blobSensor->hue, pixels);
 }
 
 void CutOutOverlay::draw()

@@ -23,6 +23,8 @@ ColouredBlobSensor::ColouredBlobSensor()
     addBoolParam("val invert", false); // 7
     addBoolParam("sat invert", false); // 8
     addBoolParam("hue invert", false); // 9
+    
+    addBoolParam("contour on val", false); // 10
 }
 
 void ColouredBlobSensor::setup(float width, float height)
@@ -64,7 +66,7 @@ void ColouredBlobSensor::analyse(ofxCvColorImage *input)
     int minBlob = getIntValue(4);
     int maxBlob = getIntValue(5);
     int numBlobs = getIntValue(6);
-    contours.findContours(hue, minBlob*minBlob, maxBlob * maxBlob, numBlobs, false, true);
+    contours.findContours(getBoolValue(10)?val:hue, minBlob*minBlob, maxBlob * maxBlob, numBlobs, false, true);
 }
 
 std::string ColouredBlobSensor::getName()
