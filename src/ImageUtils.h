@@ -9,6 +9,9 @@
 #ifndef fullSpectrumAnalyser_ImageUtils_h
 #define fullSpectrumAnalyser_ImageUtils_h
 
+#include "ofMain.h"
+#include "ofxCvMain.h"
 
+void setAlphaImage(ofTexture& displayImage, ofxCvColorImage& colourImage, ofxCvGrayscaleImage& alphaImage, unsigned char* pixels);
 
 #endif
