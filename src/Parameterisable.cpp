@@ -245,3 +245,14 @@ void Parameterisable::paramChanged(int id)
 {
     // Default implementation does nothing
 }
+
+ void Parameterisable::setInstanceName(const std::string& name)
+{
+    instanceName = name;
+}
+
+ const std::string& Parameterisable::getInstanceName()
+{
+    return instanceName;
+}
+

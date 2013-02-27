@@ -23,7 +23,6 @@ public:
 private:
     ofxCvColorImage shiftImage;
     ofxCvGrayscaleImage h, s, v;
-    ofTexture alphaImage;
     ofImage outImage;
     unsigned char* pixels;
 };

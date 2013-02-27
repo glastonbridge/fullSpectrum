@@ -8,7 +8,7 @@
 
 #include "ImageUtils.h"
 
-void setAlphaImage(ofTexture& displayImage, ofxCvColorImage& colourImage, ofxCvGrayscaleImage& alphaImage, unsigned char* pixels)
+void setAlphaImage(ofImage& displayImage, ofxCvColorImage& colourImage, ofxCvGrayscaleImage& alphaImage, unsigned char* pixels)
 {
     int width = displayImage.getWidth(), height = displayImage.getHeight();
     unsigned char* colourPixels = colourImage.getPixels();
@@ -17,12 +17,12 @@ void setAlphaImage(ofTexture& displayImage, ofxCvColorImage& colourImage, ofxCvG
     for (int i = 0; i < width; ++i){
         for (int j = 0; j < height; ++j){
             int pos = (j * width + i);
-            pixels[pos*4  ] = 0xFF;//colourPixels[pos * 3];
-            pixels[pos*4+1] = 0;//colourPixels[pos * 3+1];
-            pixels[pos*4+2] = 0;//colourPixels[pos * 3+2];
-            pixels[pos*4+3] = 0xFF;//alphaPixels[pos];
+            pixels[pos*4  ] = colourPixels[pos * 3];
+            pixels[pos*4+1] = colourPixels[pos * 3+1];
+            pixels[pos*4+2] = colourPixels[pos * 3+2];
+            pixels[pos*4+3] = alphaPixels[pos];
         }
     }
-    displayImage.loadData(pixels, width, height, GL_RGBA);
+    displayImage.setFromPixels(pixels, width, height, OF_IMAGE_COLOR_ALPHA);
 }
 

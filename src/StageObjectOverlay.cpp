@@ -26,13 +26,15 @@ std::string StageObjectOverlay::getName()
     return NAME;
 }
 
+int StageObjectOverlay::getGeometry() { return PERSPECTIVE ; }
+
 StageObjectOverlay::StageObjectOverlay()
 {
     addStringParam("source", "");
     addFloatParam("xoffset", 0, -200, 200);
     addFloatParam("yoffset", 0, -200, 200);
-    addFloatParam("zoffset", 0, -200, 200);
-    addFloatParam("scale",1,0,10);
+    addFloatParam("zoffset", 0, -400, 0);
+    addFloatParam("scale",1,0,50);
     addFloatParam("rot angle", 0, -180, 180);
     addFloatParam("xrot", 0, 0, 1);
     addFloatParam("yrot", 0, 0, 1);

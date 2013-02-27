@@ -12,6 +12,6 @@
 #include "ofMain.h"
 #include "ofxCvMain.h"
 
-void setAlphaImage(ofTexture& displayImage, ofxCvColorImage& colourImage, ofxCvGrayscaleImage& alphaImage, unsigned char* pixels);
+void setAlphaImage(ofImage& displayImage, ofxCvColorImage& colourImage, ofxCvGrayscaleImage& alphaImage, unsigned char* pixels);
 
 #endif

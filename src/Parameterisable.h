@@ -23,6 +23,8 @@ public:
     static const int PARAM_STRING = 4;
     
     virtual std::string getName() = 0;
+    virtual void setInstanceName(const std::string& name);
+    virtual const std::string& getInstanceName();
     int getParamCount();
     std::string getParamName(int index);
     int getParamType(int index);
@@ -56,6 +58,7 @@ protected:
     
 private:
     std::vector<Param*> paramValues;
+    std::string instanceName;
 };
 
 #endif

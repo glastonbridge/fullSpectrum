@@ -26,10 +26,10 @@ void CutOutOverlay::update(ofxCvColorImage* input)
     if (!displayImage.isAllocated())
     {
         int width = input->getWidth(), height = input->getHeight();
-        displayImage.allocate(width, height ,GL_RGBA);
+        displayImage.allocate(width, height ,OF_IMAGE_COLOR_ALPHA);
         pixels = new unsigned char[width*height*4];
     }
-    setAlphaImage(displayImage, *input, blobSensor->hue, pixels);
+    setAlphaImage(displayImage, *input, blobSensor->val, pixels);
 }
 
 void CutOutOverlay::draw()

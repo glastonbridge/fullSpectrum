@@ -23,6 +23,9 @@ public:
     std::vector<Sensor*> getActiveSensors();
     Sensor* activate(const std::string& id, float width, float height);
     
+    Sensor*& operator[] (const std::string& index);
+    
+    void removeSensor(const std::string& id);
 private:
     std::vector<Sensor*> activeSensors;
     std::map<std::string, Sensor*> sensors;

@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 Glastonbridge Software Limited. All rights reserved.
 //
 
+#include <algorithm>
+
 #include "OverlayLibrary.h"
 #include "ColourShiftOverlay.h"
 #include "BlobOverlay.h"
@@ -16,6 +18,8 @@
 #include "ShakeOverlay.h"
 #include "CutOutOverlay.h"
 #include "CineOverlay.h"
+#include "ParticleStormOverlay.h"
+#include "EffectChangeOverlay.h"
 
 Overlay* OverlayLibrary::addOverlay(const std::string& name, const std::string& type)
 {
@@ -56,7 +60,17 @@ Overlay* OverlayLibrary::addOverlay(const std::string& name, const std::string& 
     {
         newOverlay = new CineOverlay;
     }
+    else if (type.compare(ParticleStormOverlay::NAME) ==0)
+    {
+        newOverlay = new ParticleStormOverlay;
+    }
+    else if (type.compare(EffectChangeOverlay::NAME) ==0)
+    {
+        newOverlay = new EffectChangeOverlay;
+    }
     if (!newOverlay) return 0; // TODO: exceptions!
+    newOverlay->setInstanceName(name);
+    newOverlay->setChoreography(choreography);
     overlays[name] = newOverlay;
     return newOverlay;
 }
@@ -74,8 +88,14 @@ void OverlayLibrary::draw()
     
 }
 
+Overlay*& OverlayLibrary::operator[] (const std::string& index)
+{
+    return overlays[index];
+}
+
 Overlay* OverlayLibrary::activate(const std::string &id, float width, float height)
 {
+    if (std::find(activeOverlays.begin(), activeOverlays.end(), overlays[id])!=activeOverlays.end()) return;
     activeOverlays.push_back(overlays[id]);
     overlays[id]->setup(width, height);
     return overlays[id];
@@ -85,3 +105,22 @@ std::vector<Overlay*> OverlayLibrary::getActiveOverlays()
 {
     return activeOverlays;
 }
+
+void OverlayLibrary::setChoreography(Choreography* newChoreography)
+{
+    choreography = newChoreography;
+    std::map<std::string,Overlay*>::const_iterator overlay = overlays.begin();
+
+    for (;
+         overlay != overlays.end();
+         ++overlay)
+    {
+        (*overlay).second->setChoreography(choreography);
+    }
+}
+
+void OverlayLibrary::removeOverlay(const std::string& overlay)
+{
+    activeOverlays.erase(std::find(activeOverlays.begin(), activeOverlays.end(), overlays[overlay]));
+}
+

@@ -1,33 +1,34 @@
 //
-//  CutOutOverlay.h
+//  ParticleStormOverlay.h
 //  fullSpectrumAnalyser
 //
-//  Created by Alex Shaw on 14/02/2013.
+//  Created by Alex Shaw on 20/02/2013.
 //
 //
 
-#ifndef fullSpectrumAnalyser_CutOutOverlay_h
-#define fullSpectrumAnalyser_CutOutOverlay_h
+#ifndef fullSpectrumAnalyser_ParticleStormOverlay_h
+#define fullSpectrumAnalyser_ParticleStormOverlay_h
 
 #include "Overlay.h"
 
-class CutOutOverlay : public Overlay
+class ParticleStormOverlay : public Overlay
 {
     
 public:
     static const std::string NAME;
     virtual std::string getName();
     
-    CutOutOverlay();
+    ParticleStormOverlay();
     
     virtual void update(ofxCvColorImage* input);
     virtual void draw();
     virtual void setup(float width, float height);
-    
+
 private:
+    std::vector<ofPoint> molecules;
+
     ofImage displayImage;
-    
-	unsigned char * pixels ;
+    unsigned char * pixels ;
 };
 
 #endif

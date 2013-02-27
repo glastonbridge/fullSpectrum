@@ -12,12 +12,16 @@
 #include "ColourShiftOverlay.h"
 
 #include "ColouredBlobSensor.h"
-
+#include "OverlayLibrary.h"
+#include "SensorLibrary.h"
 #include "ofxXmlSettings.h"
+
+#include <algorithm>
 
 void Choreography::setOverlayLibrary(OverlayLibrary* newOverlayLibrary)
 {
     _overlayLibrary = newOverlayLibrary;
+    _overlayLibrary->setChoreography(this);
 }
 
 void Choreography::setSensorLibrary(SensorLibrary *newSensorLibrary)
@@ -90,6 +94,7 @@ std::vector<std::string> Choreography::loadCueSheet(std::string path)
         std::string overlayType = settings.getAttribute("Overlay", "type", "bad type",i);
         std::string overlayName = settings.getAttribute("Overlay", "id", "bad id",i);
         Overlay* overlay = _overlayLibrary->addOverlay(overlayName, overlayType);
+        if (!overlay) ofLog(OF_LOG_ERROR, std::string("could not create overlay of type ") + overlayType);
         settings.pushTag("Overlay",i);
         choreographyLoadValues(settings, overlay);
         settings.popTag();
@@ -103,8 +108,10 @@ std::vector<std::string> Choreography::loadCueSheet(std::string path)
         Effect* effect = new Effect;
         std::vector<std::string> attributes;
         bool got = settings.getAttributeNames("Sensor", attributes);
-        effect->sensorName=settings.getAttribute("Sensor", "ref","bad ref");
-        effect->overlayName=settings.getAttribute("Overlay", "ref","bad ref");
+        for (int i=0; i<settings.getNumTags("Sensor"); ++i)
+            effect->pushSensor(settings.getAttribute("Sensor", "ref","bad ref", i));
+        for (int i=0; i<settings.getNumTags("Overlay"); ++i)
+            effect->pushOverlay(settings.getAttribute("Overlay", "ref","bad ref"));
         effects[effectId]=effect;
         settings.popTag();
     }
@@ -120,9 +127,90 @@ std::vector<std::string> Choreography::loadCueSheet(std::string path)
 
 void Choreography::activateEffect(const std::string &effectName, float width, float height)
 {
-    Sensor* sensor;
     Effect* effect(effects[effectName]);
-    if (effect->sensorName != "bad ref") sensor = _sensorLibrary->activate(effect->sensorName, width, height);
-    Overlay* overlay(_overlayLibrary->activate(effect->overlayName, width, height));
-    if (sensor) overlay->attachSensor(sensor);
+    for (int i = 0; i < activeEffects.size(); ++i) if (activeEffects[i]==effect) return;
+    activeEffects.push_back(effect);
+    
+    std::vector<std::string> sensors(effect->getSensors());
+    for (int i = 0; i < sensors.size(); ++i)
+    {
+        if (sensors[i] != "bad ref") _sensorLibrary->activate(sensors[i], width, height);
+    }
+    std::vector<std::string> overlays(effect->getOverlays());
+    for (int i = 0; i < overlays.size(); ++i)
+    {
+        Overlay* overlay(_overlayLibrary->activate(overlays[i], width, height));
+        std::vector<Sensor *> activeSensors ( _sensorLibrary->getActiveSensors());
+        for (int j = 0; j < sensors.size(); ++j)
+            overlay->attachSensor( (*_sensorLibrary)[sensors[j]]);
+    }
+    
 }
+
+std::string findKeyByValue(const std::map<std::string,Effect*>& map, Effect* effectToFind)
+{
+    std::map<std::string,Effect*>::const_iterator eff = map.begin();
+    for(;eff != map.end(); ++eff)
+    {
+        if (eff->second == effectToFind)
+        {
+            return eff->first;
+        }
+    }
+    return "";
+}
+
+void Choreography::removeEffect(const std::string& effectName)
+{
+    Effect* effect = effects[effectName];
+    
+    // IF not active, do nothing
+    std::vector<Effect *>::iterator effectIter = std::find(activeEffects.begin(), activeEffects.end(), effect);
+    if (effectIter == activeEffects.end()) return;
+    
+    std::vector<std::string> overlaysToRemove = effect->getOverlays();
+    std::vector<std::string> sensorsToRemove = effect->getSensors();
+    
+    // Check for other references to this overlay
+    // TODO: this would be so much clearer with a reference counted type
+    for (int i = 0; i < activeEffects.size(); ++i)
+    {
+        Effect* effectToTest = activeEffects[i];
+        if (effectToTest != effect) // don't include the key to remove when checking for remaining references to s/os
+        {
+            for (int o = 0; o < effectToTest->getOverlays().size(); ++o)
+            {
+                std::vector<std::string>::iterator myOverlay = std::find(overlaysToRemove.begin(), overlaysToRemove.end(),effectToTest->getOverlays()[o]);
+                if (myOverlay != overlaysToRemove.end())
+                {
+                    
+                    ofLog(OF_LOG_VERBOSE, std::string("not removing overlay ")+(*myOverlay) + " as it is also used by " + findKeyByValue(effects, effectToTest));
+                    overlaysToRemove.erase(myOverlay);
+                }
+            }
+            for (int s = 0; s < effectToTest->getSensors().size(); ++s)
+            {
+                std::vector<std::string>::iterator mySensor = std::find(sensorsToRemove.begin(), sensorsToRemove.end(),effectToTest->getSensors()[s]);
+                if (mySensor != sensorsToRemove.end())
+                {
+                    
+                    ofLog(OF_LOG_VERBOSE, std::string("not removing sensor ")+(*mySensor) + " as it is also used by "+ findKeyByValue(effects, effectToTest));
+                    sensorsToRemove.erase(mySensor);
+
+                }
+            }
+        }
+    }
+    
+    for (int i = 0; i < overlaysToRemove.size(); ++i)
+    {
+        _overlayLibrary->removeOverlay(overlaysToRemove[i]);
+    }
+    for (int i = 0; i < sensorsToRemove.size(); ++i)
+    {
+        _sensorLibrary->removeSensor(sensorsToRemove[i]);
+    }
+    
+    activeEffects.erase(effectIter);
+}
+

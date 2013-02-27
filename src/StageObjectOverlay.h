@@ -24,6 +24,7 @@ public:
     virtual void draw();
     virtual void setup(float width, float height);
     
+    virtual int getGeometry();
 protected:
     virtual void paramChanged(int index);
 private:
