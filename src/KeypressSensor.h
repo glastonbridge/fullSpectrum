@@ -9,9 +9,9 @@
 #ifndef fullSpectrumAnalyser_KeypressSensor_h
 #define fullSpectrumAnalyser_KeypressSensor_h
 
-#include "Sensor.h"
+#include "Trigger.h"
 
-class KeypressSensor : public Sensor
+class KeypressSensor : public Trigger
 {
 public:
     
@@ -22,7 +22,7 @@ public:
     virtual void setup(float width, float height);
     virtual void analyse(ofxCvColorImage* input);
     virtual std::string getName();
-    bool triggered();
+    virtual bool triggered();
     
 private:
     void keyPressed(ofKeyEventArgs& args);

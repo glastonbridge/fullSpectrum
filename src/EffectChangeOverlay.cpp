@@ -7,13 +7,13 @@
 //
 
 #include "EffectChangeOverlay.h"
-#include "KeypressSensor.h"
+#include "Trigger.h"
 
 
  const std::string EffectChangeOverlay::NAME="effect change";
 void EffectChangeOverlay::update(ofxCvColorImage* input)
 {
-    if (dynamic_cast<KeypressSensor*>(sensors[0])->triggered())
+    if (dynamic_cast<Trigger*>(sensors[0])->triggered())
     {
         std::string effectsToRemove = getStringValue(0);
         while (effectsToRemove.size() > 0)
