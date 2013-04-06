@@ -1,0 +1,15 @@
+# Blender v2.66 (sub 1) OBJ File: 'FireplaceVideo.blend'
+# www.blender.org
+mtllib fireplaceVideo.mtl
+o FireplaceVideo
+v 0.528606 0.048128 -2.739916
+v -0.235076 0.048128 -2.739916
+v 0.528606 0.811810 -2.739916
+v -0.235076 0.811810 -2.739916
+vt 0.120541 0.000000
+vt 0.929050 -0.011303
+vt 0.949395 0.943486
+vt 0.104011 0.925402
+usemtl FireVideo
+s off
+f 2/1 1/2 3/3 4/4

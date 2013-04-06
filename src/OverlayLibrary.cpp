@@ -20,6 +20,8 @@
 #include "CineOverlay.h"
 #include "ParticleStormOverlay.h"
 #include "EffectChangeOverlay.h"
+#include "TeleportOverlay.h"
+#include "LinesOverlay.h"
 
 Overlay* OverlayLibrary::addOverlay(const std::string& name, const std::string& type)
 {
@@ -68,6 +70,14 @@ Overlay* OverlayLibrary::addOverlay(const std::string& name, const std::string& 
     {
         newOverlay = new EffectChangeOverlay;
     }
+    else if (type.compare(TeleportOverlay::NAME) ==0)
+    {
+        newOverlay = new TeleportOverlay;
+    }
+    else if (type.compare(LinesOverlay::NAME) ==0)
+    {
+        newOverlay = new LinesOverlay;
+    }
     if (!newOverlay) return 0; // TODO: exceptions!
     newOverlay->setInstanceName(name);
     newOverlay->setChoreography(choreography);
@@ -95,7 +105,7 @@ Overlay*& OverlayLibrary::operator[] (const std::string& index)
 
 Overlay* OverlayLibrary::activate(const std::string &id, float width, float height)
 {
-    if (std::find(activeOverlays.begin(), activeOverlays.end(), overlays[id])!=activeOverlays.end()) return;
+    if (std::find(activeOverlays.begin(), activeOverlays.end(), overlays[id])!=activeOverlays.end()) return 0;
     activeOverlays.push_back(overlays[id]);
     overlays[id]->setup(width, height);
     return overlays[id];

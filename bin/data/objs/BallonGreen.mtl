@@ -1,0 +1,20 @@
+# Blender MTL File: 'partystuff.blend'
+# Material Count: 2
+
+newmtl BallonGreen
+Ns 223.529412
+Ka 0.000000 0.000000 0.000000
+Kd 0.000000 0.800000 0.046482
+Ks 0.011356 0.940594 0.038605
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl String
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.057802 0.051383 0.038132
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1

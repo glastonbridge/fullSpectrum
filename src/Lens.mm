@@ -14,32 +14,29 @@ void Lens::setup(){
 	
 	ofBackground(0,0,0);
     
-    streamWidth = 320;
-    streamHeight = 240;
+    streamWidth =  1280;
+    streamHeight =720;
     
     // Request a camera/video.  May not be exactly the dimensions requested, so
     // update streamWidth and streamHeight with the correct data.
     //videoIn.allocateVideo(0,0, "fingers.m4v");
-    videoIn.allocateCamera(streamWidth, streamHeight);
-    streamWidth = videoIn.getWidth();
-    streamHeight = videoIn.getHeight();
+    //videoIn.allocateCamera(streamWidth, streamHeight);
+    //streamWidth = videoIn.getWidth();
+    //streamHeight = videoIn.getHeight();
+    
+    videoIn.allocateVideo(streamWidth, streamHeight, "walkabout.mov");
     
     lensImage.allocate(streamWidth, streamHeight);
     ofSetFrameRate(60);
     
     choreography.setOverlayLibrary(&overlayLibrary);
     choreography.setSensorLibrary(&sensorLibrary);
+    std::vector<std::string> startEffects = choreography.loadCueSheet("cue-lines.xml");
     
-    // Hack to add blendre
-    
-	glEnable(GL_DEPTH_TEST);
-	//ofSetSmoothLighting(true);
-    
-	blendFile.load("beach.blend");
-    
-	glShadeModel(GL_SMOOTH);
-	glEnable(GL_RESCALE_NORMAL);
-	glEnable(GL_DEPTH_TEST);
+    std::vector<std::string>::const_iterator startEffect = startEffects.begin();
+    for(;startEffect<startEffects.end(); ++startEffect)
+        choreography.activateEffect(*startEffect, streamWidth, streamHeight);
+
 }
 
 /**
@@ -47,15 +44,16 @@ void Lens::setup(){
  * The user viewport will be updated in draw()
  */
 void Lens::update(){
+    
     ofBackground(0);
     videoIn.update();
     if (videoIn.isFrameNew())
     {
         if (videoIn.getPixels()) lensImage.setFromPixels(videoIn.getPixels(), streamWidth, streamHeight);
-        choreography.onEnterFrame(streamWidth, streamHeight);
         sensorLibrary.onEnterFrame(&lensImage);
         overlayLibrary.update(&lensImage);
     }
+    
 }
 
 /**
@@ -67,8 +65,6 @@ void Lens::draw(){
     
 	cam.begin();
 	ofScale(50, 50, 50);
-	blendFile.getActiveScene()->activeCamera = NULL;
-	blendFile.getActiveScene()->draw();
 }
 
 //--------------------------------------------------------------

@@ -1,0 +1,15 @@
+# Blender v2.66 (sub 1) OBJ File: 'painting.blend'
+# www.blender.org
+mtllib PaintingVideo.mtl
+o PaintingVideo
+v -0.570877 -0.004816 -0.369453
+v 0.570877 -0.004816 -0.369453
+v 0.570876 -0.004816 0.369453
+v -0.570877 -0.004816 0.369453
+vt 0.000000 1.000000
+vt 0.000000 0.000000
+vt 1.000000 0.000000
+vt 1.000000 1.000000
+usemtl PaintingVideo
+s off
+f 1/1 4/2 3/3 2/4

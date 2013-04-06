@@ -1,0 +1,12 @@
+# Blender MTL File: 'floor.blend'
+# Material Count: 1
+
+newmtl Material.004
+Ns 239.215686
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.022896 0.009694 0.005570
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd ../textures/floor.jpg

@@ -32,6 +32,31 @@
 		E4D8936E11527B74007E1F53 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4D8936B11527B74007E1F53 /* main.mm */; };
 		E4D8936F11527B74007E1F53 /* Lens.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4D8936D11527B74007E1F53 /* Lens.mm */; };
 		FA2036C1169D76F900DECBB8 /* SensorLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA2036C0169D76F900DECBB8 /* SensorLibrary.cpp */; };
+		FA578511170ECA73006E9041 /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA57850A170ECA73006E9041 /* tinyxml.cpp */; };
+		FA578512170ECA73006E9041 /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA57850C170ECA73006E9041 /* tinyxmlerror.cpp */; };
+		FA578513170ECA73006E9041 /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA57850D170ECA73006E9041 /* tinyxmlparser.cpp */; };
+		FA578514170ECA73006E9041 /* ofxXmlSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA57850F170ECA73006E9041 /* ofxXmlSettings.cpp */; };
+		FA57851A170F3E64006E9041 /* Effect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA578516170F3E64006E9041 /* Effect.cpp */; };
+		FA57851B170F3E64006E9041 /* Parameterisable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA578518170F3E64006E9041 /* Parameterisable.cpp */; };
+		FA578532170F3EA9006E9041 /* LinesOverlay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA57851C170F3EA9006E9041 /* LinesOverlay.cpp */; };
+		FA578533170F3EA9006E9041 /* StageObjectOverlay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA57851F170F3EA9006E9041 /* StageObjectOverlay.cpp */; };
+		FA578534170F3EA9006E9041 /* PongOverlay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA578520170F3EA9006E9041 /* PongOverlay.cpp */; };
+		FA578535170F3EA9006E9041 /* TeleportOverlay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA578522170F3EA9006E9041 /* TeleportOverlay.cpp */; };
+		FA578536170F3EA9006E9041 /* EffectChangeOverlay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA578524170F3EA9006E9041 /* EffectChangeOverlay.cpp */; };
+		FA578537170F3EA9006E9041 /* CutOutOverlay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA578525170F3EA9006E9041 /* CutOutOverlay.cpp */; };
+		FA578538170F3EA9006E9041 /* ParticleStormOverlay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA578527170F3EA9006E9041 /* ParticleStormOverlay.cpp */; };
+		FA578539170F3EA9006E9041 /* CineOverlay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA57852B170F3EA9006E9041 /* CineOverlay.cpp */; };
+		FA57853A170F3EA9006E9041 /* PerspectiveImageOverlay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA57852D170F3EA9006E9041 /* PerspectiveImageOverlay.cpp */; };
+		FA57853B170F3EA9006E9041 /* ShakeOverlay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA57852F170F3EA9006E9041 /* ShakeOverlay.cpp */; };
+		FA57853C170F3EA9006E9041 /* PerspectiveObjectOverlay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA578531170F3EA9006E9041 /* PerspectiveObjectOverlay.cpp */; };
+		FA57854B170F3EF9006E9041 /* LinesSensor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA57853D170F3EF9006E9041 /* LinesSensor.cpp */; };
+		FA57854C170F3EF9006E9041 /* PoseSensor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA57853F170F3EF9006E9041 /* PoseSensor.cpp */; };
+		FA57854D170F3EF9006E9041 /* KeypressSensor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA578542170F3EF9006E9041 /* KeypressSensor.cpp */; };
+		FA57854E170F3EF9006E9041 /* PaddleSensor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA578543170F3EF9006E9041 /* PaddleSensor.cpp */; };
+		FA57854F170F3EF9006E9041 /* DancerBlobSensor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA578545170F3EF9006E9041 /* DancerBlobSensor.cpp */; };
+		FA578550170F3EF9006E9041 /* CurtainStageSensor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA578546170F3EF9006E9041 /* CurtainStageSensor.cpp */; };
+		FA578551170F3EF9006E9041 /* PerspectiveQuadSensor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA578548170F3EF9006E9041 /* PerspectiveQuadSensor.cpp */; };
+		FA578554170F4414006E9041 /* ImageUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA578552170F4414006E9041 /* ImageUtils.cpp */; };
 		FA99296816A9A5C00048A2AA /* install.xml in Resources */ = {isa = PBXBuildFile; fileRef = FA99293516A9A5C00048A2AA /* install.xml */; };
 		FA99296916A9A5C00048A2AA /* aiColor4D.inl in Resources */ = {isa = PBXBuildFile; fileRef = FA99293D16A9A5C00048A2AA /* aiColor4D.inl */; };
 		FA99296A16A9A5C00048A2AA /* aiMaterial.inl in Resources */ = {isa = PBXBuildFile; fileRef = FA99294316A9A5C00048A2AA /* aiMaterial.inl */; };
@@ -187,6 +212,54 @@
 		E4D8936D11527B74007E1F53 /* Lens.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Lens.mm; path = src/Lens.mm; sourceTree = SOURCE_ROOT; };
 		FA2036BE169D76A400DECBB8 /* SensorLibrary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SensorLibrary.h; sourceTree = "<group>"; };
 		FA2036C0169D76F900DECBB8 /* SensorLibrary.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SensorLibrary.cpp; sourceTree = "<group>"; };
+		FA57850A170ECA73006E9041 /* tinyxml.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxml.cpp; sourceTree = "<group>"; };
+		FA57850B170ECA73006E9041 /* tinyxml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinyxml.h; sourceTree = "<group>"; };
+		FA57850C170ECA73006E9041 /* tinyxmlerror.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlerror.cpp; sourceTree = "<group>"; };
+		FA57850D170ECA73006E9041 /* tinyxmlparser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlparser.cpp; sourceTree = "<group>"; };
+		FA57850F170ECA73006E9041 /* ofxXmlSettings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxXmlSettings.cpp; sourceTree = "<group>"; };
+		FA578510170ECA73006E9041 /* ofxXmlSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxXmlSettings.h; sourceTree = "<group>"; };
+		FA578516170F3E64006E9041 /* Effect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Effect.cpp; sourceTree = "<group>"; };
+		FA578517170F3E64006E9041 /* Effect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Effect.h; sourceTree = "<group>"; };
+		FA578518170F3E64006E9041 /* Parameterisable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Parameterisable.cpp; sourceTree = "<group>"; };
+		FA578519170F3E64006E9041 /* Parameterisable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Parameterisable.h; sourceTree = "<group>"; };
+		FA57851C170F3EA9006E9041 /* LinesOverlay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LinesOverlay.cpp; sourceTree = "<group>"; };
+		FA57851D170F3EA9006E9041 /* LinesOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinesOverlay.h; sourceTree = "<group>"; };
+		FA57851E170F3EA9006E9041 /* StageObjectOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StageObjectOverlay.h; sourceTree = "<group>"; };
+		FA57851F170F3EA9006E9041 /* StageObjectOverlay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StageObjectOverlay.cpp; sourceTree = "<group>"; };
+		FA578520170F3EA9006E9041 /* PongOverlay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PongOverlay.cpp; sourceTree = "<group>"; };
+		FA578521170F3EA9006E9041 /* TeleportOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeleportOverlay.h; sourceTree = "<group>"; };
+		FA578522170F3EA9006E9041 /* TeleportOverlay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TeleportOverlay.cpp; sourceTree = "<group>"; };
+		FA578523170F3EA9006E9041 /* EffectChangeOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EffectChangeOverlay.h; sourceTree = "<group>"; };
+		FA578524170F3EA9006E9041 /* EffectChangeOverlay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EffectChangeOverlay.cpp; sourceTree = "<group>"; };
+		FA578525170F3EA9006E9041 /* CutOutOverlay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CutOutOverlay.cpp; sourceTree = "<group>"; };
+		FA578526170F3EA9006E9041 /* PongOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PongOverlay.h; sourceTree = "<group>"; };
+		FA578527170F3EA9006E9041 /* ParticleStormOverlay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ParticleStormOverlay.cpp; sourceTree = "<group>"; };
+		FA578528170F3EA9006E9041 /* CineOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CineOverlay.h; sourceTree = "<group>"; };
+		FA578529170F3EA9006E9041 /* ParticleStormOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParticleStormOverlay.h; sourceTree = "<group>"; };
+		FA57852A170F3EA9006E9041 /* CutOutOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CutOutOverlay.h; sourceTree = "<group>"; };
+		FA57852B170F3EA9006E9041 /* CineOverlay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CineOverlay.cpp; sourceTree = "<group>"; };
+		FA57852C170F3EA9006E9041 /* PerspectiveImageOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PerspectiveImageOverlay.h; sourceTree = "<group>"; };
+		FA57852D170F3EA9006E9041 /* PerspectiveImageOverlay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PerspectiveImageOverlay.cpp; sourceTree = "<group>"; };
+		FA57852E170F3EA9006E9041 /* PerspectiveObjectOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PerspectiveObjectOverlay.h; sourceTree = "<group>"; };
+		FA57852F170F3EA9006E9041 /* ShakeOverlay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ShakeOverlay.cpp; sourceTree = "<group>"; };
+		FA578530170F3EA9006E9041 /* ShakeOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShakeOverlay.h; sourceTree = "<group>"; };
+		FA578531170F3EA9006E9041 /* PerspectiveObjectOverlay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PerspectiveObjectOverlay.cpp; sourceTree = "<group>"; };
+		FA57853D170F3EF9006E9041 /* LinesSensor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LinesSensor.cpp; sourceTree = "<group>"; };
+		FA57853E170F3EF9006E9041 /* PoseSensor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoseSensor.h; sourceTree = "<group>"; };
+		FA57853F170F3EF9006E9041 /* PoseSensor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PoseSensor.cpp; sourceTree = "<group>"; };
+		FA578540170F3EF9006E9041 /* LinesSensor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinesSensor.h; sourceTree = "<group>"; };
+		FA578541170F3EF9006E9041 /* KeypressSensor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeypressSensor.h; sourceTree = "<group>"; };
+		FA578542170F3EF9006E9041 /* KeypressSensor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KeypressSensor.cpp; sourceTree = "<group>"; };
+		FA578543170F3EF9006E9041 /* PaddleSensor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PaddleSensor.cpp; sourceTree = "<group>"; };
+		FA578544170F3EF9006E9041 /* DancerBlobSensor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DancerBlobSensor.h; sourceTree = "<group>"; };
+		FA578545170F3EF9006E9041 /* DancerBlobSensor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DancerBlobSensor.cpp; sourceTree = "<group>"; };
+		FA578546170F3EF9006E9041 /* CurtainStageSensor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CurtainStageSensor.cpp; sourceTree = "<group>"; };
+		FA578547170F3EF9006E9041 /* CurtainStageSensor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurtainStageSensor.h; sourceTree = "<group>"; };
+		FA578548170F3EF9006E9041 /* PerspectiveQuadSensor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PerspectiveQuadSensor.cpp; sourceTree = "<group>"; };
+		FA578549170F3EF9006E9041 /* PaddleSensor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaddleSensor.h; sourceTree = "<group>"; };
+		FA57854A170F3EF9006E9041 /* PerspectiveQuadSensor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PerspectiveQuadSensor.h; sourceTree = "<group>"; };
+		FA578552170F4414006E9041 /* ImageUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageUtils.cpp; sourceTree = "<group>"; };
+		FA578553170F4414006E9041 /* ImageUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageUtils.h; sourceTree = "<group>"; };
 		FA99293516A9A5C00048A2AA /* install.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = install.xml; sourceTree = "<group>"; };
 		FA99293916A9A5C00048A2AA /* aiAnim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aiAnim.h; sourceTree = "<group>"; };
 		FA99293A16A9A5C00048A2AA /* aiAssert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aiAssert.h; sourceTree = "<group>"; };
@@ -584,6 +657,7 @@
 		BB16F26B0F2B646B00518274 /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				FA578508170ECA73006E9041 /* ofxXmlSettings */,
 				FA99293416A9A5C00048A2AA /* ofxAssimpModelLoader */,
 				FAD9B7BB16A04AE800BA162B /* ofxBlender */,
 				a0b90d3b0adb9c1716816714bf7f212b /* ofxOpenCv */,
@@ -622,6 +696,7 @@
 		E4D8936A11527B74007E1F53 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				FA578515170F3E40006E9041 /* Datatypes */,
 				FAF62C9C169B49E300F3CD2D /* Sensor */,
 				FAF62C91169B178D00F3CD2D /* Overlay */,
 				FAF62C8A169AF08100F3CD2D /* utils */,
@@ -633,6 +708,47 @@
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
+		};
+		FA578508170ECA73006E9041 /* ofxXmlSettings */ = {
+			isa = PBXGroup;
+			children = (
+				FA578509170ECA73006E9041 /* libs */,
+				FA57850E170ECA73006E9041 /* src */,
+			);
+			name = ofxXmlSettings;
+			path = ../of_v0073_ios_release/addons/ofxXmlSettings;
+			sourceTree = "<group>";
+		};
+		FA578509170ECA73006E9041 /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				FA57850A170ECA73006E9041 /* tinyxml.cpp */,
+				FA57850B170ECA73006E9041 /* tinyxml.h */,
+				FA57850C170ECA73006E9041 /* tinyxmlerror.cpp */,
+				FA57850D170ECA73006E9041 /* tinyxmlparser.cpp */,
+			);
+			path = libs;
+			sourceTree = "<group>";
+		};
+		FA57850E170ECA73006E9041 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				FA57850F170ECA73006E9041 /* ofxXmlSettings.cpp */,
+				FA578510170ECA73006E9041 /* ofxXmlSettings.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		FA578515170F3E40006E9041 /* Datatypes */ = {
+			isa = PBXGroup;
+			children = (
+				FA578516170F3E64006E9041 /* Effect.cpp */,
+				FA578517170F3E64006E9041 /* Effect.h */,
+				FA578518170F3E64006E9041 /* Parameterisable.cpp */,
+				FA578519170F3E64006E9041 /* Parameterisable.h */,
+			);
+			name = Datatypes;
+			sourceTree = "<group>";
 		};
 		FA99293416A9A5C00048A2AA /* ofxAssimpModelLoader */ = {
 			isa = PBXGroup;
@@ -890,6 +1006,8 @@
 		FAF62C8A169AF08100F3CD2D /* utils */ = {
 			isa = PBXGroup;
 			children = (
+				FA578552170F4414006E9041 /* ImageUtils.cpp */,
+				FA578553170F4414006E9041 /* ImageUtils.h */,
 				FAF62C8B169AF0C900F3CD2D /* VideoSource.h */,
 				FAF62C8C169AF14C00F3CD2D /* VideoSource.cpp */,
 			);
@@ -908,6 +1026,28 @@
 		FAF62C91169B178D00F3CD2D /* Overlay */ = {
 			isa = PBXGroup;
 			children = (
+				FA57851C170F3EA9006E9041 /* LinesOverlay.cpp */,
+				FA57851D170F3EA9006E9041 /* LinesOverlay.h */,
+				FA57851E170F3EA9006E9041 /* StageObjectOverlay.h */,
+				FA57851F170F3EA9006E9041 /* StageObjectOverlay.cpp */,
+				FA578520170F3EA9006E9041 /* PongOverlay.cpp */,
+				FA578521170F3EA9006E9041 /* TeleportOverlay.h */,
+				FA578522170F3EA9006E9041 /* TeleportOverlay.cpp */,
+				FA578523170F3EA9006E9041 /* EffectChangeOverlay.h */,
+				FA578524170F3EA9006E9041 /* EffectChangeOverlay.cpp */,
+				FA578525170F3EA9006E9041 /* CutOutOverlay.cpp */,
+				FA578526170F3EA9006E9041 /* PongOverlay.h */,
+				FA578527170F3EA9006E9041 /* ParticleStormOverlay.cpp */,
+				FA578528170F3EA9006E9041 /* CineOverlay.h */,
+				FA578529170F3EA9006E9041 /* ParticleStormOverlay.h */,
+				FA57852A170F3EA9006E9041 /* CutOutOverlay.h */,
+				FA57852B170F3EA9006E9041 /* CineOverlay.cpp */,
+				FA57852C170F3EA9006E9041 /* PerspectiveImageOverlay.h */,
+				FA57852D170F3EA9006E9041 /* PerspectiveImageOverlay.cpp */,
+				FA57852E170F3EA9006E9041 /* PerspectiveObjectOverlay.h */,
+				FA57852F170F3EA9006E9041 /* ShakeOverlay.cpp */,
+				FA578530170F3EA9006E9041 /* ShakeOverlay.h */,
+				FA578531170F3EA9006E9041 /* PerspectiveObjectOverlay.cpp */,
 				FAF62C92169B17B200F3CD2D /* OverlayLibrary.cpp */,
 				FAF62C94169B17C100F3CD2D /* OverlayLibrary.h */,
 				FAF62C98169B213C00F3CD2D /* Overlay.h */,
@@ -923,6 +1063,20 @@
 		FAF62C9C169B49E300F3CD2D /* Sensor */ = {
 			isa = PBXGroup;
 			children = (
+				FA57853D170F3EF9006E9041 /* LinesSensor.cpp */,
+				FA57853E170F3EF9006E9041 /* PoseSensor.h */,
+				FA57853F170F3EF9006E9041 /* PoseSensor.cpp */,
+				FA578540170F3EF9006E9041 /* LinesSensor.h */,
+				FA578541170F3EF9006E9041 /* KeypressSensor.h */,
+				FA578542170F3EF9006E9041 /* KeypressSensor.cpp */,
+				FA578543170F3EF9006E9041 /* PaddleSensor.cpp */,
+				FA578544170F3EF9006E9041 /* DancerBlobSensor.h */,
+				FA578545170F3EF9006E9041 /* DancerBlobSensor.cpp */,
+				FA578546170F3EF9006E9041 /* CurtainStageSensor.cpp */,
+				FA578547170F3EF9006E9041 /* CurtainStageSensor.h */,
+				FA578548170F3EF9006E9041 /* PerspectiveQuadSensor.cpp */,
+				FA578549170F3EF9006E9041 /* PaddleSensor.h */,
+				FA57854A170F3EF9006E9041 /* PerspectiveQuadSensor.h */,
 				FAF62C9D169B49F900F3CD2D /* Sensor.h */,
 				FA2036BE169D76A400DECBB8 /* SensorLibrary.h */,
 				FA2036C0169D76F900DECBB8 /* SensorLibrary.cpp */,
@@ -1168,6 +1322,31 @@
 				FAD9B83716A04AE800BA162B /* ofxBlenderObject.cpp in Sources */,
 				FAD9B83816A04AE800BA162B /* ofxBlenderScene.cpp in Sources */,
 				FA99297016A9A5C00048A2AA /* ofxAssimpModelLoader.cpp in Sources */,
+				FA578511170ECA73006E9041 /* tinyxml.cpp in Sources */,
+				FA578512170ECA73006E9041 /* tinyxmlerror.cpp in Sources */,
+				FA578513170ECA73006E9041 /* tinyxmlparser.cpp in Sources */,
+				FA578514170ECA73006E9041 /* ofxXmlSettings.cpp in Sources */,
+				FA57851A170F3E64006E9041 /* Effect.cpp in Sources */,
+				FA57851B170F3E64006E9041 /* Parameterisable.cpp in Sources */,
+				FA578532170F3EA9006E9041 /* LinesOverlay.cpp in Sources */,
+				FA578533170F3EA9006E9041 /* StageObjectOverlay.cpp in Sources */,
+				FA578534170F3EA9006E9041 /* PongOverlay.cpp in Sources */,
+				FA578535170F3EA9006E9041 /* TeleportOverlay.cpp in Sources */,
+				FA578536170F3EA9006E9041 /* EffectChangeOverlay.cpp in Sources */,
+				FA578537170F3EA9006E9041 /* CutOutOverlay.cpp in Sources */,
+				FA578538170F3EA9006E9041 /* ParticleStormOverlay.cpp in Sources */,
+				FA578539170F3EA9006E9041 /* CineOverlay.cpp in Sources */,
+				FA57853A170F3EA9006E9041 /* PerspectiveImageOverlay.cpp in Sources */,
+				FA57853B170F3EA9006E9041 /* ShakeOverlay.cpp in Sources */,
+				FA57853C170F3EA9006E9041 /* PerspectiveObjectOverlay.cpp in Sources */,
+				FA57854B170F3EF9006E9041 /* LinesSensor.cpp in Sources */,
+				FA57854C170F3EF9006E9041 /* PoseSensor.cpp in Sources */,
+				FA57854D170F3EF9006E9041 /* KeypressSensor.cpp in Sources */,
+				FA57854E170F3EF9006E9041 /* PaddleSensor.cpp in Sources */,
+				FA57854F170F3EF9006E9041 /* DancerBlobSensor.cpp in Sources */,
+				FA578550170F3EF9006E9041 /* CurtainStageSensor.cpp in Sources */,
+				FA578551170F3EF9006E9041 /* PerspectiveQuadSensor.cpp in Sources */,
+				FA578554170F4414006E9041 /* ImageUtils.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1190,12 +1369,14 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = iPhone_Prefix.pch;
 				INFOPLIST_FILE = "ofxiphone-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/ofxAssimpModelLoader/libs/assimp/lib/ios\"",
 					"\"$(SRCROOT)/ofxAssimpModelLoader/libs/assimp/lib/osx\"",
 				);
 				PRODUCT_NAME = "${TARGET_NAME}";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "armv6 armv7";
 			};
 			name = Debug;
@@ -1207,12 +1388,14 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = iPhone_Prefix.pch;
 				INFOPLIST_FILE = "ofxiphone-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/ofxAssimpModelLoader/libs/assimp/lib/ios\"",
 					"\"$(SRCROOT)/ofxAssimpModelLoader/libs/assimp/lib/osx\"",
 				);
 				PRODUCT_NAME = "${TARGET_NAME}";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "armv6 armv7";
 			};
 			name = Release;

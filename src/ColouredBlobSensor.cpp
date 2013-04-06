@@ -17,7 +17,7 @@ ColouredBlobSensor::ColouredBlobSensor()
     addIntParam("sat threshold",150, -10, 255);// 2
     addIntParam("val threshold", 100, 0, 255); // 3
     
-    addIntParam("min blob width", 6, 5, 400); // 4
+    addIntParam("min blob width", 6, 1, 400); // 4
     addIntParam("max blob width", 200, 5, 800); // 5
     addIntParam("num blobs", 1, 1, 16); // 6
     addBoolParam("val invert", false); // 7

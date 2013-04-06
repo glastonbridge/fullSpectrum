@@ -38,7 +38,7 @@ void PongOverlay::resetBall()
 void PongOverlay::update(ofxCvColorImage *input)
 {
     PaddleSensor* paddles = dynamic_cast<PaddleSensor*> (sensors[0]);
-    if (_ballPos.y>_height || _ballPos.y<0) _ballVel.y = -_ballVel.y;
+    if (_ballPos.y>_height-20 || _ballPos.y<20) _ballVel.y = -_ballVel.y;
     
     if (_ballVel.x > 0) // ball travelling left-to-right
     {
@@ -79,6 +79,9 @@ void PongOverlay::draw()
     
     ofRect(paddlePadding, paddles->leftPaddle, paddleWidth , paddleHeight);
     ofRect(_width-paddleWidth-paddlePadding, paddles->rightPaddle, paddleWidth, paddleHeight);
+    
+    ofRect(0,10,_width,10);
+    ofRect(0,_height-20,_width,10);
     
     ofCircle(_ballPos, paddleWidth/2);
 }

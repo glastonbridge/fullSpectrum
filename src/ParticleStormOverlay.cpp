@@ -61,7 +61,7 @@ void ParticleStormOverlay::draw()
         float circleY = stormCentre.y + molecule->y * cosAngle;
         
         molecule->z +=0.1;
-        if (molecule->z >= 2*pi) molecule->z -= 2*pi;
+        if (molecule->z >= 2*PI) molecule->z -= 2*PI;
         
         if (cosAngle <=0) continue;
         
@@ -79,7 +79,7 @@ void ParticleStormOverlay::setup(float width, float height)
 {
     for (int i = 0; i < NUM_MOLECULES; ++i)
     {
-        molecules.push_back(ofPoint(ofRandom(25,50), ofRandom(10), ofRandom(2*pi)));
+        molecules.push_back(ofPoint(ofRandom(25,50), ofRandom(10), ofRandom(2*PI)));
     }
 }
 

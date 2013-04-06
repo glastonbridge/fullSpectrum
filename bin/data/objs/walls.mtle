@@ -1,0 +1,12 @@
+# Blender MTL File: 'walls.blend'
+# Material Count: 1
+
+newmtl Walls
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd /home/digitalstages/Desktop/TEAMS/EPHEMERIS/Workfiles/Scene1&4/textures/walls_red.jpg

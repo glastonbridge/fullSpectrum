@@ -1,0 +1,12 @@
+# Blender MTL File: 'ImageVideo.blend'
+# Material Count: 1
+
+newmtl ImageFrame
+Ns 235.294118
+Ka 0.000000 0.000000 0.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.756585 0.569652 0.036101
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd /home/digitalstages/Desktop/TEAMS/EPHEMERIS/Workfiles/Scene1&4/textures/ImageFrame.jpg

@@ -13,6 +13,8 @@
 #include "CurtainStageSensor.h"
 #include "DancerBlobSensor.h"
 #include "KeypressSensor.h"
+#include "LinesSensor.h"
+#include "PoseSensor.h"
 
 #include <algorithm>
 
@@ -70,6 +72,14 @@ Sensor* SensorLibrary::addSensor(const std::string& id, const std::string& type)
     else if (type == KeypressSensor::NAME)
     {
         newSensor = new KeypressSensor;
+    }
+    else if (type == LinesSensor::NAME)
+    {
+        newSensor = new LinesSensor;
+    }
+    else if (type == PoseSensor::NAME)
+    {
+        newSensor = new PoseSensor;
     }
     newSensor->setInstanceName(id);
     sensors[id] = newSensor;

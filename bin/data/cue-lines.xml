@@ -1,0 +1,68 @@
+<CueSheet>
+    <!-- Sensors -->
+    <Sensor id="stage" type="pose">
+        <Property name="threshold1">46</Property>
+        <Property name="threshold2">104</Property>
+        <Property name="min length">48</Property>
+        <Property name="max length">65</Property>
+        
+        <Property name="hue range">21</Property>
+        <Property name="hue offset">14</Property>
+        <Property name="sat threshold">38</Property>
+        <Property name="val threshold">174</Property>
+        <Property name="val invert">true</Property>
+        <Property name="max blob width">80</Property>
+        <Property name="min blob width">2</Property>
+        <Property name="num blobs">16</Property>
+    </Sensor>
+    
+    <!-- Overlays -->
+    <Overlay id="floor" type="lines overlay">
+        <Property name="source">objs/floor.obj</Property>
+        <Property name="xoffset">6.25</Property>
+        <Property name="yoffset">9.38</Property>
+        <Property name="zoffset">-65.62</Property>
+        <Property name="scale">6.48</Property>
+        <Property name="wireframe">false</Property>
+        <Property name="rot angle">0</Property>
+    </Overlay>
+    <Overlay id="table" type="lines overlay">
+        <Property name="source">objs/table.obj</Property>
+        <Property name="xoffset">0</Property>
+        <Property name="yoffset">22.5</Property>
+        <Property name="zoffset">-180</Property>
+        <Property name="scale">2.50</Property>
+        <Property name="wireframe">false</Property>
+        <Property name="rot angle">0</Property>
+    </Overlay>
+    <Overlay id="chair" type="lines overlay">
+        <Property name="source">objs/chair.obj</Property>
+        <Property name="xoffset">66</Property>
+        <Property name="yoffset">38.75</Property>
+        <Property name="zoffset">-180</Property>
+        <Property name="scale">1.25</Property>
+        <Property name="wireframe">false</Property>
+        <Property name="rot angle">28</Property>
+        <Property name="yrot">1</Property>
+        
+    </Overlay>
+    
+    <!-- Effects -->
+    <Effect id="floor">
+        <Sensor ref="stage" />
+        <Overlay ref="floor" />
+    </Effect>
+    <Effect id="table">
+        <Sensor ref="stage" />
+        <Overlay ref="table" />
+    </Effect>
+    
+    <Effect id="chair">
+        <Sensor ref="stage" />
+        <Overlay ref="chair" />
+    </Effect>
+    
+    <InitialEffect ref="floor" />
+    <InitialEffect ref="table" />
+    <InitialEffect ref="chair" />
+</CueSheet>

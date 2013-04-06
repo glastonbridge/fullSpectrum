@@ -1,0 +1,12 @@
+# Blender MTL File: 'bookshelf.blend'
+# Material Count: 1
+
+newmtl bookshelf
+Ns 225.490196
+Ka 0.000000 0.000000 0.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.696850 0.696850 0.696850
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd /home/digitalstages/Desktop/TEAMS/EPHEMERIS/Workfiles/Scene1&4/textures/bookshelf.jpg

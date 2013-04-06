@@ -26,11 +26,11 @@ public:
     
     virtual int getGeometry();
 protected:
+    ofxAssimpModelLoader model;
     virtual void paramChanged(int index);
 private:
     float _width, _height;
     
-    ofxAssimpModelLoader model;
     
     ofVboMesh mesh;
     ofPoint position;

@@ -1,0 +1,15 @@
+# Blender v2.66 (sub 1) OBJ File: 'ImageVideo.blend'
+# www.blender.org
+mtllib ImageVideo.mtl
+o ImageVideo
+v 0.074004 -0.115733 0.004883
+v -0.074004 -0.115733 0.004883
+v 0.074004 0.115733 0.004880
+v -0.074004 0.115733 0.004880
+vt 0.000054 0.005852
+vt 1.001703 0.005887
+vt 1.000803 0.994514
+vt 0.002818 0.994454
+usemtl ImageVideo
+s off
+f 2/1 1/2 3/3 4/4
