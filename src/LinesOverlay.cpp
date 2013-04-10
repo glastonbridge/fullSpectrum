@@ -16,7 +16,7 @@ const ofColor colorList[] = {
     ofColor(0,255,255),
     ofColor(0,0,255),
     ofColor(255,0,255)};
-//void renderCube(float size);
+void renderCube(float size);
 const std::string LinesOverlay::NAME = "lines overlay";
 void LinesOverlay::update(ofxCvColorImage* input)
 {
@@ -41,22 +41,20 @@ void LinesOverlay::draw()
 	//glEnable( GL_LIGHTING );
 	//glEnable( GL_LIGHT0 );
     
-    StageObjectOverlay::draw();
-    
-	
-    for (int i = 0; i < sensor->modelPoints.size(); ++i)
+    StageObjectOverlay::draw();    
+	/*for (int i = 0; i < sensor->modelPoints.size(); ++i)
     {
         ofSetColor(colorList[i]);
         CvPoint3D32f& pt = sensor->modelPoints[i];
         glPushMatrix();
         glTranslatef(pt.x,pt.y,pt.z);
         ofBox(2);
-        //renderCube(2);
+        renderCube(2);
         glPopMatrix();
-    }
+    }*/
     
 	//renderCube( 10 );
-	glDisable( GL_LIGHTING );
+	//glDisable( GL_LIGHTING );
     //glDisable( GL_LIGHT0 );
     //glLoadIdentity();
     
@@ -66,31 +64,20 @@ void LinesOverlay::draw()
     glDisable(GL_DEPTH_TEST);
     glLoadMatrixf(storeModelView);
     
-    ofSetColor(0,255,0);
     
     
-    for (int i = 0; i < sensor->points.size(); ++i)
+    /*
+     ofSetColor(0,255,0);
+     for (int i = 0; i < sensor->points.size(); ++i)
     {
         ofSetColor(colorList[i]);
         ofCircle(sensor->points[i], 2);
-    }
-    /*
-    //glMatrixMode( GL_MODELVIEW );
-    glPushMatrix();
-    glScalef( 1.0f, 1.0f, -1.0f);
-    glMultMatrixf( sensor->posePOSIT );
+    }*/
     
-    glTranslatef(sensor->translation_vector[0], sensor->translation_vector[1], sensor->translation_vector[2]);
-    //glMultMatrixf(sensor->rotation_matrix);
+    //ofRect(0,0,100,100);
     
-    ofRect(0,0,10,10);
-    float cubeSize = 10;
-    
-    //ofBox(0,0,0,cubeSize);
-    
-    glPopMatrix();*/
-    
-    
+    //sensor->lines.draw(0,0);
+
     ofSetColor(255,255,255);
 }
 void LinesOverlay::setup(float width, float height)
@@ -102,7 +89,7 @@ LinesOverlay::LinesOverlay() {}
 
 
 int LinesOverlay::getGeometry() {return ORTHO;}
-/*
+
 void renderCube(float size)
 {
 	glBegin(GL_QUADS);
@@ -143,4 +130,4 @@ void renderCube(float size)
     glVertex3f( 0.0f,  size, size);
     glVertex3f( 0.0f,  0.0f, size);
     glEnd();
-}*/
+}

@@ -70,17 +70,15 @@ void StageObjectOverlay::draw()
 {
     
     ofSetColor(255, 255, 255, 255);
-        //note we have to enable depth buffer in main.mm
-	//see: window->enableDepthBuffer(); in main.mm
     
 	glEnable(GL_DEPTH_TEST);
     
     
     ofPushMatrix();
     float scale = getFloatValue(4);
-    glScalef(scale, scale, scale);
-    glTranslatef(getFloatValue(1), getFloatValue(2), getFloatValue(3));
     glRotatef (getFloatValue(5),getFloatValue(6), getFloatValue(7),getFloatValue(8));
+    glTranslatef(getFloatValue(1), getFloatValue(2), getFloatValue(3));
+    glScalef(scale, scale, scale);
     if (getBoolValue(9))
         model.drawWireframe();
     else
@@ -100,9 +98,9 @@ void StageObjectOverlay::setup(float width, float height)
     
     //some model / light stuff
     glShadeModel(GL_SMOOTH);
-    ofMatrix4x4 moveOhs;
-    moveOhs.translate((width - ofGetWidth())/2, (height-ofGetHeight())/2, 0);
-    ofLoadMatrix(moveOhs);
+    //ofMatrix4x4 moveOhs;
+    //moveOhs.translate((width - ofGetWidth())/2, (height-ofGetHeight())/2, 0);
+    //ofLoadMatrix(moveOhs);
     //light.enable();
     //ofEnableSeparateSpecularLight();
     /*glEnable(GL_DEPTH_TEST);

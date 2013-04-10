@@ -88,7 +88,7 @@ void LinesSensor::analyse(ofxCvColorImage* input)
     int numBlobs = getIntValue(6);
     
     // first get the squares
-    contours.findContours(lines, 80*40, 180*180, 1, false, true);
+    contours.findContours(lines, 40*40, 90*80, 1, false, true);
     
     getLinesUsingContours(contours,points);
     points = sortPoints(points);

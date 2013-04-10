@@ -22,6 +22,7 @@
 #include "EffectChangeOverlay.h"
 #include "TeleportOverlay.h"
 #include "LinesOverlay.h"
+#include "GravityStageOverlay.h"
 
 Overlay* OverlayLibrary::addOverlay(const std::string& name, const std::string& type)
 {
@@ -77,6 +78,10 @@ Overlay* OverlayLibrary::addOverlay(const std::string& name, const std::string& 
     else if (type.compare(LinesOverlay::NAME) ==0)
     {
         newOverlay = new LinesOverlay;
+    }
+    else if (type.compare(GravityStageOverlay::NAME) ==0)
+    {
+        newOverlay = new GravityStageOverlay;
     }
     if (!newOverlay) return 0; // TODO: exceptions!
     newOverlay->setInstanceName(name);
