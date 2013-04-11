@@ -28,6 +28,7 @@ void VideoSource::allocateVideo(float width, float height, std::string videoFile
     (*videoInput).loadMovie(videoFile);
     (*videoInput).setLoopState(OF_LOOP_NORMAL);
     (*videoInput).play();
+    videoPlayerHeight = height; videoPlayerWidth = width;
 }
 
 void VideoSource::update()
@@ -38,14 +39,14 @@ void VideoSource::update()
 
 float VideoSource::getWidth()
 {
-    if (videoInput.get()) return (*videoInput).getWidth();
+    if (videoInput.get()) return videoPlayerWidth; //(*videoInput).getWidth();
     if (cameraInput.get()) return (*cameraInput).getWidth();
     return -1;
 }
 
 float VideoSource::getHeight()
 {
-    if (videoInput.get()) return (*videoInput).getHeight();
+    if (videoInput.get()) return videoPlayerHeight; // (*videoInput).getHeight();
     if (cameraInput.get()) return (*cameraInput).getHeight();
     return -1;
 }

@@ -35,6 +35,10 @@ private:
      */
     std::auto_ptr<ofVideoGrabber> cameraInput;
     std::auto_ptr<ofVideoPlayer> videoInput;
+    
+    /** When using a video player, it doesn't always report the width and height (poss. loading issue).
+      This is a kludge */
+    float videoPlayerWidth, videoPlayerHeight;
 };
 
 #endif
