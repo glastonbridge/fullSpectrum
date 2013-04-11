@@ -60,12 +60,6 @@ void LinesSensor::setup(float width, float height)
     lines.allocate(width, height);
     
     storage = cvCreateMemStorage(0);
-    CvPoint3D32f* positPoints = new CvPoint3D32f[4];
-    positPoints[0].x=0; positPoints[0].y=0; positPoints[0].z=0;
-    positPoints[1].x=10; positPoints[1].y=0; positPoints[1].z=0;
-    positPoints[2].x=10; positPoints[2].y=10; positPoints[2].z=0;
-    positPoints[3].x=0; positPoints[3].y=10; positPoints[3].z=0;
-    object = cvCreatePOSITObject(positPoints, 4);
 }
 
 void LinesSensor::analyse(ofxCvColorImage* input)
@@ -95,7 +89,15 @@ void LinesSensor::analyse(ofxCvColorImage* input)
     
     // then get the lines below
     if (points.size()<4) return;
-    lines.setROI(points[0].x-10, points[2].y +40, 150, 200);
+    
+    // Assumes points are ccw
+    float rectHeight = points[0].distance(points[1]);
+    float rectWidth = points[2].distance(points[1]);
+    
+    float roiOffsetX = points[0].x-(rectWidth/2);
+    float roiOffsetY = points[2].y +rectHeight;
+    
+    lines.setROI(roiOffsetX, roiOffsetY, rectWidth*2, rectHeight);
     contours.findContours(lines, 1, 64, 2, false);
     lines.resetROI();
     
@@ -104,8 +106,8 @@ void LinesSensor::analyse(ofxCvColorImage* input)
     {
         // remove the offset caused by constraining the ROI
         ofPoint unRoiedPoint(contIter->boundingRect.getBottomRight());
-        unRoiedPoint.x += points[0].x-10;
-        unRoiedPoint.y += points[2].y+40;
+        unRoiedPoint.x += roiOffsetX;
+        unRoiedPoint.y += roiOffsetY;
         basePoints.push_back(unRoiedPoint);
     }
     
@@ -175,7 +177,6 @@ void getLinesUsingContours(ofxCvContourFinder& contours, std::vector<ofPoint>& p
         
         if (approx.size()==4)
         {
-            
             for (int j=0; j<approx.size(); ++j)
             {
                 //ofPoint a; a.x = approx[j-1].x; a.y=approx[j-1].y;

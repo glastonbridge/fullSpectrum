@@ -9,6 +9,9 @@
 #include "LinesOverlay.h"
 #include "PoseSensor.h"
 
+// for debug
+#include <sstream>
+
 const ofColor colorList[] = {
     ofColor(255,0,0),
     ofColor(255,255,0),
@@ -64,21 +67,25 @@ void LinesOverlay::draw()
     glDisable(GL_DEPTH_TEST);
     glLoadMatrixf(storeModelView);
     
-    
-    
-    /*
-     ofSetColor(0,255,0);
-     for (int i = 0; i < sensor->points.size(); ++i)
+    for (int i = 0; i < sensor->points.size(); ++i)
     {
         ofSetColor(colorList[i]);
         ofCircle(sensor->points[i], 2);
-    }*/
+    }
     
     //ofRect(0,0,100,100);
     
     //sensor->lines.draw(0,0);
 
     ofSetColor(255,255,255);
+    /*std::stringstream data;
+    data << sensor->rotation_matrix[0];
+    data << ", ";
+    data << sensor->rotation_matrix[1];
+    data << ", ";
+    data << sensor->rotation_matrix[2];
+    
+    ofDrawBitmapString(data.str(),20,20);*/
 }
 void LinesOverlay::setup(float width, float height)
 {
