@@ -43,7 +43,6 @@ public:
     
     int getParamId(const std::string& name);
     
-    
     virtual ~Parameterisable();
 protected:
     void addFloatParam(std::string name, float defaultValue, float min, float max);

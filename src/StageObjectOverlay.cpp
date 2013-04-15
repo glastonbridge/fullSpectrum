@@ -18,6 +18,7 @@
 
 #include <string>
 #include <iostream>
+#include <map>
 
 const std::string StageObjectOverlay::NAME = "stage object overlay";
 
@@ -33,12 +34,12 @@ StageObjectOverlay::StageObjectOverlay()
     addStringParam("source", "");
     addFloatParam("xoffset", 0, -200, 200);
     addFloatParam("yoffset", 0, -200, 200);
-    addFloatParam("zoffset", 0, -400, 0);
+    addFloatParam("zoffset", 0, 0, 250);
     addFloatParam("scale",1,0,50);
     addFloatParam("rot angle", 0, -180, 180);
-    addFloatParam("xrot", 0, 0, 1);
-    addFloatParam("yrot", 0, 0, 1);
-    addFloatParam("zrot", 0, 0, 1);
+    addFloatParam("xrot", 0, -180, 180);
+    addFloatParam("yrot", 0, -180, 180);
+    addFloatParam("zrot", 0, -180, 180);
     addBoolParam("wireframe", false);
 }
 
@@ -49,20 +50,31 @@ void StageObjectOverlay::update(ofxCvColorImage* input)
 
 void StageObjectOverlay::paramChanged(int index)
 {
+    static std::map<std::string, ofxAssimpModelLoader*> models;
     if (getParamName(index)=="source")
     {
-        model.loadModel(getStringValue(index), true);
-        //model.setAnimation(0);
-        model.setPosition(0,8,0);
-        model.setScale(0.1, 0.1, 0.1);
-        model.enableColors();
-        model.enableMaterials();
-        
-//        int meshes = model.getNumMeshes();
-        mesh = model.getMesh(0);
-        position = model.getPosition();
-        normScale = model.getNormalizedScale();
-        scale = model.getScale();
+        if (models.find(getStringValue(index))!=models.end())
+        {
+            model = models[getStringValue(index)];
+        }
+        else
+        {
+            model = new ofxAssimpModelLoader;
+            model->loadModel(getStringValue(index), true);
+            //model.setAnimation(0);
+            //model.setPosition(0,8,0);
+            model->setScale(1, 1, 1);
+            model->enableColors();
+            model->enableMaterials();
+            
+            //        int meshes = model.getNumMeshes();
+            mesh = model->getMesh(0);
+            position = model->getPosition();
+            normScale = model->getNormalizedScale();
+            scale = model->getScale();
+            model->setScaleNomalization(false);
+            models[getStringValue(index)] = model;
+        }
     }
 }
 
@@ -76,13 +88,14 @@ void StageObjectOverlay::draw()
     
     ofPushMatrix();
     float scale = getFloatValue(4);
+    glScalef(scale, scale, scale);
+
     glRotatef (getFloatValue(5),getFloatValue(6), getFloatValue(7),getFloatValue(8));
     glTranslatef(getFloatValue(1), getFloatValue(2), getFloatValue(3));
-    glScalef(scale, scale, scale);
     if (getBoolValue(9))
-        model.drawWireframe();
+        model->drawWireframe();
     else
-        model.drawFaces();
+        model->drawFaces();
     //mesh.drawFaces();
     ofPopMatrix();    
 }

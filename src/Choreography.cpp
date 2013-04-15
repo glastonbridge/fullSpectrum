@@ -111,7 +111,7 @@ std::vector<std::string> Choreography::loadCueSheet(std::string path)
         for (int i=0; i<settings.getNumTags("Sensor"); ++i)
             effect->pushSensor(settings.getAttribute("Sensor", "ref","bad ref", i));
         for (int i=0; i<settings.getNumTags("Overlay"); ++i)
-            effect->pushOverlay(settings.getAttribute("Overlay", "ref","bad ref"));
+            effect->pushOverlay(settings.getAttribute("Overlay", "ref","bad ref", i));
         effects[effectId]=effect;
         settings.popTag();
     }
@@ -140,7 +140,6 @@ void Choreography::activateEffect(const std::string &effectName, float width, fl
     for (int i = 0; i < overlays.size(); ++i)
     {
         Overlay* overlay(_overlayLibrary->activate(overlays[i], width, height));
-        std::vector<Sensor *> activeSensors ( _sensorLibrary->getActiveSensors());
         for (int j = 0; j < sensors.size(); ++j)
             overlay->attachSensor( (*_sensorLibrary)[sensors[j]]);
     }
@@ -171,6 +170,15 @@ void Choreography::removeEffect(const std::string& effectName)
     std::vector<std::string> overlaysToRemove = effect->getOverlays();
     std::vector<std::string> sensorsToRemove = effect->getSensors();
     
+    std::vector<std::string>::iterator mySensor = sensorsToRemove.begin();
+    for (;mySensor < sensorsToRemove.end(); ++mySensor)
+    {
+        if ((*_sensorLibrary)[*mySensor]->isPersistent())
+        {
+            sensorsToRemove.erase(mySensor);
+        }
+    }
+    
     // Check for other references to this overlay
     // TODO: this would be so much clearer with a reference counted type
     for (int i = 0; i < activeEffects.size(); ++i)
@@ -191,12 +199,13 @@ void Choreography::removeEffect(const std::string& effectName)
             for (int s = 0; s < effectToTest->getSensors().size(); ++s)
             {
                 std::vector<std::string>::iterator mySensor = std::find(sensorsToRemove.begin(), sensorsToRemove.end(),effectToTest->getSensors()[s]);
+                
                 if (mySensor != sensorsToRemove.end())
                 {
                     
                     ofLog(OF_LOG_VERBOSE, std::string("not removing sensor ")+(*mySensor) + " as it is also used by "+ findKeyByValue(effects, effectToTest));
                     sensorsToRemove.erase(mySensor);
-
+                    
                 }
             }
         }

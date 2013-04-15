@@ -31,11 +31,31 @@ void EffectChangeOverlay::update(ofxCvColorImage* input)
             }
             choreography->removeEffect(nextEffect);
         }
+        std::string effectsToAdd = getStringValue(1);
+        while (effectsToAdd.size() > 0)
+        {
+            std::string nextEffect;
+            if (effectsToAdd.find(',')!=std::string::npos)
+            {
+                nextEffect = effectsToAdd.substr(0,effectsToAdd.find(","));
+                effectsToAdd = effectsToAdd.substr(effectsToAdd.find(",")+1);
+            }
+            else
+            {
+                nextEffect = effectsToAdd;
+                effectsToAdd = "";
+            }
+            choreography->activateEffect(nextEffect, _width, _height);
+        }
     }
 }
 
 void EffectChangeOverlay::draw() {}
-void EffectChangeOverlay::setup(float width, float height) {}
+void EffectChangeOverlay::setup(float width, float height)
+{
+    _width = width; _height = height;
+}
+
 std::string EffectChangeOverlay::getName() {return NAME;}
 EffectChangeOverlay::EffectChangeOverlay()
 {

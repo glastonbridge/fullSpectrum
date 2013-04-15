@@ -9,4 +9,4 @@ Ks 0.192810 0.192810 0.192810
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd /home/digitalstages/Desktop/TEAMS/EPHEMERIS/Workfiles/Scene1&4/textures/painting2.jpg
+map_Kd ../textures/painting2.jpg

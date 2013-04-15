@@ -13,6 +13,10 @@
 
 const float FOCAL_LENGTH = 760.0;
 
+bool PoseSensor::requiresRepositioning = true;
+
+bool PoseSensor::isPersistent() {return true;}
+
 PoseSensor::PoseSensor()
 {
     addFloatParam("focal length", 130,1,500);
@@ -71,10 +75,19 @@ void createOpenGLProjectionMatrix( float* projectionMatrix, CvMat* intrinsics, c
     modelPoints.push_back(cvPoint3D32f(cubeSize, 0.0f, 0.0f));
     modelPoints.push_back(cvPoint3D32f(0.0f, 2*cubeSize, 2*cubeSize));
     modelPoints.push_back(cvPoint3D32f(cubeSize, 2*cubeSize, 2*cubeSize));
+  
     
+    /*modelPoints.push_back(cvPoint3D32f(0.0f, 0.0f, 0.0f));
+    modelPoints.push_back(cvPoint3D32f(cubeSize, 0.0f, 0.0f));
+    modelPoints.push_back(cvPoint3D32f(cubeSize,-cubeSize, 0.0f));
+    modelPoints.push_back(cvPoint3D32f( 0.0f, -cubeSize, 0.0f));
+    modelPoints.push_back(cvPoint3D32f(2*cubeSize, 0.0f, 2*cubeSize));
+    modelPoints.push_back(cvPoint3D32f(2*cubeSize, -cubeSize, 2*cubeSize));*/
     
 	initializeIntrinsics( intrinsics, width, height );
 	createOpenGLProjectionMatrix(projectionMatrix, intrinsics, width, height, 1.0, 1000.0 );
+    //initializeIntrinsics( intrinsics, height, width );
+	//createOpenGLProjectionMatrix(projectionMatrix, intrinsics, height, width, 1.0, 1000.0 );
     
     positObject = cvCreatePOSITObject( &modelPoints[0], static_cast<int>(modelPoints.size()) );
     
@@ -94,6 +107,7 @@ void createOpenGLProjectionMatrix( float* projectionMatrix, CvMat* intrinsics, c
 }
  void PoseSensor::analyse(ofxCvColorImage* input)
 {
+    if (!PoseSensor::requiresRepositioning) return;
     LinesSensor::analyse(input);
     std::vector<CvPoint2D32f> projectedPoints;
     float halfWidth = _width/2;
@@ -137,6 +151,7 @@ void createOpenGLProjectionMatrix( float* projectionMatrix, CvMat* intrinsics, c
     if (posePOSIT[0]==posePOSIT[0]) // not NaN
     {
         float a = posePOSIT[0];
+        PoseSensor::requiresRepositioning = false;
     }
     
 }

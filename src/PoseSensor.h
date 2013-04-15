@@ -29,6 +29,10 @@ public:
     
 	float projectionMatrix[16];
     std::vector<CvPoint3D32f> modelPoints;
+    
+    static bool requiresRepositioning;
+    
+    virtual bool isPersistent();
 private:
     
     /*CvMat *rot_mat = cvCreateMat( 3, 3, CV_32FC1);

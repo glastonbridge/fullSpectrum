@@ -9,7 +9,7 @@ Ks 1.000000 0.752399 0.298256
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd /home/digitalstages/Desktop/TEAMS/EPHEMERIS/Workfiles/Scene1&4/textures/lamp.jpg
+map_Kd ../textures/lamp.jpg
 
 newmtl Lampshade
 Ns 96.078431
@@ -19,4 +19,4 @@ Ks 0.054455 0.054455 0.054455
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd /home/digitalstages/Desktop/TEAMS/EPHEMERIS/Workfiles/Scene1&4/textures/lamp.jpg
+map_Kd ../textures/lamp.jpg

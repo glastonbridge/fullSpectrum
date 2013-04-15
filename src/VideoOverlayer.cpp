@@ -26,6 +26,8 @@ VideoOverlayer::VideoOverlayer()
 void VideoOverlayer::setVideoInput(VideoSource* newVideoIn)
 {
     videoIn = newVideoIn;
+    streamWidth = videoIn->getWidth();
+    streamHeight = videoIn->getHeight();
 }
 void VideoOverlayer::setChoreography(const std::string path)
 {

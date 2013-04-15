@@ -26,7 +26,7 @@ public:
     
     virtual int getGeometry();
 protected:
-    ofxAssimpModelLoader model;
+    ofxAssimpModelLoader* model;
     virtual void paramChanged(int index);
 private:
     float _width, _height;

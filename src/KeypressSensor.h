@@ -10,6 +10,7 @@
 #define fullSpectrumAnalyser_KeypressSensor_h
 
 #include "Trigger.h"
+#include "ThreadedNetwork.h"
 
 class KeypressSensor : public Trigger
 {
@@ -18,6 +19,7 @@ public:
     static const std::string NAME;
     
     KeypressSensor();
+    ~KeypressSensor();
     
     virtual void setup(float width, float height);
     virtual void analyse(ofxCvColorImage* input);
@@ -27,7 +29,9 @@ public:
 private:
     void keyPressed(ofKeyEventArgs& args);
     void keyReleased(ofKeyEventArgs& args);
+    void keyMessage(std::string& message);
     bool _triggered;
+    static ThreadedNetwork network;
 };
 
 #endif

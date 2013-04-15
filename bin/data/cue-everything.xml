@@ -1,0 +1,666 @@
+<CueSheet>
+    
+    <!-- Sensors -->
+    <Sensor id="stage" type="pose">
+        <Property name="threshold1">46</Property>
+        <Property name="threshold2">104</Property>
+        <Property name="min length">48</Property>
+        <Property name="max length">65</Property>
+        
+        <Property name="hue range">21</Property>
+        <Property name="hue offset">14</Property>
+        <Property name="sat threshold">38</Property>
+        <Property name="val threshold">174</Property>
+        <Property name="val invert">true</Property>
+        <Property name="max blob width">80</Property>
+        <Property name="min blob width">2</Property>
+        <Property name="num blobs">16</Property>
+    </Sensor>
+    
+    <Sensor id="dancer" type="dancer blob sensor">
+        <Property name="val threshold">110</Property>
+        <Property name="val invert">true</Property>
+    </Sensor>
+    
+    <Sensor id="key-a" type="keypress">
+        <Property name="key">a</Property>
+    </Sensor>
+    <Sensor id="key-o" type="keypress">
+        <Property name="key">o</Property>
+    </Sensor>
+    <Sensor id="key-e" type="keypress">
+        <Property name="key">e</Property>
+    </Sensor>
+    
+    <!---------------------------------------------------------------
+     SCENE 1
+     
+     1
+     Dummy 1
+     0:00
+     Fade From Black
+     2
+     0:00-0:40
+   Y Addition of scene (1)
+     3
+     0:06
+     Cube fracture and smash (1)
+     4
+     0:13
+     Cube fracture and smash (2)
+     5
+     0:18
+     Cube fall from mantelpiece
+     6
+     0:18-0:32
+     Video starts playing in picture
+     frame
+     7
+     0:32
+     Cube fracture and smash (3)
+     8
+     0:42-0:43
+     Duplication along diagonal(1)
+     9
+     1:00
+     Flicker of scene 1
+     
+     -->
+    
+    <!-- Overlays -->
+    <Overlay id="floor" type="lines overlay">
+        <Property name="source">objs/floor.obj</Property>
+        <Property name="xoffset">0</Property>
+        <Property name="yoffset">30</Property>
+        <Property name="zoffset">60</Property>
+        <Property name="scale">20</Property>
+    </Overlay>
+    <Overlay id="table" type="lines overlay">
+        <Property name="source">objs/table.obj</Property>
+        <Property name="xoffset">3.71</Property>
+        <Property name="yoffset">27.57</Property>
+        <Property name="zoffset">20</Property>
+        <Property name="scale">7</Property>
+        <Property name="wireframe">false</Property>
+        <Property name="yrot">25</Property>
+    </Overlay>
+    <Overlay id="chair" type="lines overlay">
+        <Property name="source">objs/chair.obj</Property>
+        <Property name="xoffset">37.14</Property>
+        <Property name="yoffset">25.57</Property>
+        <Property name="zoffset">28</Property>
+        <Property name="scale">7</Property>
+        <Property name="wireframe">false</Property>
+        <Property name="yrot">-30</Property>
+    </Overlay>
+    <Overlay id="fireplace" type="lines overlay">
+        <Property name="source">objs/fireplace.obj</Property>
+        <Property name="xoffset">35</Property>
+        <Property name="yoffset">-17</Property>
+        <Property name="zoffset">6</Property>
+        <Property name="scale">14.71</Property>
+        <Property name="wireframe">false</Property>
+    </Overlay>
+    <Overlay id="fireplace-cube" type="lines overlay">
+        <Property name="source">objs/icecube_w.obj</Property>
+        <Property name="xoffset">37.14</Property>
+        <Property name="yoffset">4.5</Property>
+        <Property name="zoffset">11.8</Property>
+        <Property name="scale">2.64</Property>
+        <Property name="wireframe">false</Property>
+    </Overlay>
+    <Overlay id="fireplace-cube-fall" type="gravity object">
+        <Property name="source">objs/icecube_w.obj</Property>
+        <Property name="xoffset">37.14</Property>
+        <Property name="yoffset">4.5</Property>
+        <Property name="zoffset">14.8</Property>
+        <Property name="scale">2.64</Property>
+        <Property name="wireframe">false</Property>
+    </Overlay>
+    <Overlay id="personplacer" type="cut out overlay">
+    </Overlay>
+    
+    <!-- Effect changes -->
+    <Overlay id="putpersonbehind" type="effect change">
+        <Property name="to remove">person in front of table,trigger move to back</Property>
+    </Overlay>
+    <Overlay id="drop cube" type="effect change">
+        <Property name="to remove">fireplace-cube,drop cube</Property>
+        <Property name="to add">fireplace-cube-fall,end scene 1 </Property>
+    </Overlay>
+    <Overlay id="end scene 1" type="effect change">
+        <Property name="to remove">fireplace-cube-fall,fireplace,table,chair,end scene 1</Property>
+        <Property name="to add">start scene 3</Property>
+    </Overlay>
+    
+    
+    <!-- Effects -->
+    <Effect id="floor">
+        <Sensor ref="stage" />
+        <Overlay ref="floor" />
+    </Effect>
+    <Effect id="table">
+        <Sensor ref="stage" />
+        <Overlay ref="table" />
+    </Effect>
+    <Effect id="chair">
+        <Sensor ref="stage" />
+        <Overlay ref="chair" />
+    </Effect>
+    <Effect id="fireplace">
+        <Sensor ref="stage" />
+        <Overlay ref="fireplace" />
+    </Effect>
+    <Effect id="fireplace-cube">
+        <Sensor ref="stage" />
+        <Overlay ref="fireplace-cube" />
+    </Effect>
+    <Effect id="fireplace-cube-fall">
+        <Sensor ref="stage" />
+        <Overlay ref="fireplace-cube-fall" />
+    </Effect>
+    <Effect id="person in front of table">
+        <Sensor ref="dancer" />
+        <Overlay ref="personplacer" />
+    </Effect>
+    <Effect id="chair">
+        <Sensor ref="stage" />
+        <Overlay ref="chair" />
+    </Effect>
+    
+    <Effect id="trigger move to back">
+        <Sensor ref="key-a" />
+        <Overlay ref="putpersonbehind" />
+    </Effect>
+    <Effect id="drop cube">
+        <Sensor ref="key-o" />
+        <Overlay ref="drop cube" />
+    </Effect>
+    <Effect id="end scene 1">
+        <Sensor ref="key-e" />
+        <Overlay ref="end scene 1" />
+    </Effect>
+    
+    <!--<InitialEffect ref="floor" />-->
+    <InitialEffect ref="fireplace" />
+    <InitialEffect ref="fireplace-cube" />
+    <InitialEffect ref="drop cube" />
+    <InitialEffect ref="table" />
+    <!--<InitialEffect ref="person in front of table" />-->
+    <InitialEffect ref="trigger move to back" />
+    <InitialEffect ref="chair" />
+    
+    <!--------------------------------------------------------------
+     SCENE 2
+     9.5
+     1:02
+     Soft wash overlay colour 1
+     10
+     1:27-2:31
+     Pre-recorded video, dancer enters
+     and watches (1)
+     10.5
+     1:27
+     Soft wash overlay colour 2
+     11
+     2:02-2:31
+     Pre-recorded video, dancer enters and watches (2). First watcher leaves.
+     11.5
+     2:02
+     Soft wash overlay colour 3
+     12
+     2:31
+     Patches of space are cine
+     13
+     3:06
+     Cine space grows on one side
+     -->
+    
+    
+    <!--------------------------------------------------------------
+     SCENE 3
+     14
+     3:18
+     Dancer enters cine space - whole
+     scene becomes cine
+     15
+     3:18-3:37
+     Stutters
+     16
+     3:43-3:53
+     Exponentially increasing time lag
+     17
+     3:53-4:02
+     Time lag catches up
+     18
+     3:57-4:10
+     Fade to black
+     -->
+    
+    <!-- Sensors -->
+    <Sensor id="dumb" type="coloured blob sensor" />
+    
+    <!-- Overlays -->
+    <Overlay id="cine" type="cine overlay">
+    </Overlay>
+    
+    <!-- Effect changes -->
+    <Overlay id="start scene 3" type="effect change">
+        <Property name="to remove">start scene 3</Property>
+        <Property name="to add">cine,end scene 3</Property>
+    </Overlay>
+    <Overlay id="end scene 3" type="effect change">
+        <Property name="to remove">cine,end scene 3</Property>
+        <Property name="to add">table,chair,fireplace,end scene 4</Property>
+    </Overlay>
+    
+    <!-- Effects -->
+    <Effect id="start scene 3">
+        <Sensor ref="key-a" />
+        <Overlay ref="start scene 3" />
+    </Effect>
+    <Effect id="end scene 3">
+        <Sensor ref="key-o" />
+        <Overlay ref="end scene 3" />
+    </Effect>
+    <Effect id="cine">
+        <Sensor ref="dumb" />
+        <Overlay ref="cine" />
+    </Effect>
+    
+    <!--------------------------------------------------------------
+     SCENE 4
+     
+     19
+     4:15-4:20
+     Single candle light
+     20
+     4:20-5:11
+     Addition of scene (2)
+     21
+     4:51
+     Candle blown out
+     22
+     5:02-5:08
+     Present picked up. Shaken, turns
+     into cube.
+     23
+     5:11
+     Cube thrown at scene, cracks &
+     blocks screen
+     24
+     5:11-5:50
+     Scene 2 flickers in and out
+    -->
+    
+    <Overlay id="end scene 4" type="effect change">
+        <Property name="to remove">table,chair,fireplace,end scene 4</Property>
+        <Property name="to add">add icecube set 1</Property>
+    </Overlay>
+    
+    <Effect id="end scene 4">
+        <Sensor ref="key-a" />
+        <Overlay ref="end scene 4" />
+    </Effect>
+    
+    <!--------------------------------------------------------------
+     SCENE 5
+     
+     24.5
+     5:11-5:50
+     Soft brightness fade roughly centred
+     on dancer
+     25
+     6:10
+     -->
+    
+    <!--------------------------------------------------------------
+     SCENE 6
+     
+     26
+     6:27
+     Cube picked up
+     27
+     6:33-6:45
+     Cube starts raining from sky
+     !
+     NUM
+     VIDEO
+     TIME
+     EVENT
+     28
+     6:51-7:08
+     Cubes fracture and smash, vanishing, one large one appears downstage right. This one has video in it
+     29
+     7:25-7:30
+     Duplication along diagonal(2). In-
+     clude child if at all possible.
+     30
+     Dummy 2
+     8:12-8:40
+     Prison starts to build
+     -->
+    
+    
+    <!-- Overlays -->
+    
+    <Overlay id="icecube-1-1" type="lines overlay">
+        <Property name="source">objs/icecube_b.obj</Property>
+        <Property name="xoffset">33</Property>
+        <Property name="yoffset">30</Property>
+        <Property name="zoffset">70</Property>
+        <Property name="scale">4</Property>
+        <Property name="yrot">5</Property>
+    </Overlay>
+    <Overlay id="icecube-1-2" type="lines overlay">
+        <Property name="source">objs/icecube_b.obj</Property>
+        <Property name="xoffset">42</Property>
+        <Property name="yoffset">30</Property>
+        <Property name="zoffset">66</Property>
+        <Property name="scale">4</Property>
+        <Property name="yrot">5</Property>
+    </Overlay>
+    <Overlay id="icecube-1-3" type="lines overlay">
+        <Property name="source">objs/icecube_b.obj</Property>
+        <Property name="xoffset">51</Property>
+        <Property name="yoffset">30</Property>
+        <Property name="zoffset">62</Property>
+        <Property name="scale">4</Property>
+        <Property name="yrot">5</Property>
+    </Overlay>
+    <Overlay id="icecube-1-4" type="lines overlay">
+        <Property name="source">objs/icecube_b.obj</Property>
+        <Property name="xoffset">35</Property>
+        <Property name="yoffset">30</Property>
+        <Property name="zoffset">56</Property>
+        <Property name="scale">4</Property>
+        <Property name="yrot">5</Property>
+        
+    </Overlay>
+    <Overlay id="icecube-1-5" type="lines overlay">
+        <Property name="source">objs/icecube_b.obj</Property>
+        <Property name="xoffset">37</Property>
+        <Property name="yoffset">30</Property>
+        <Property name="zoffset">42</Property>
+        <Property name="scale">4</Property>
+        <Property name="yrot">5</Property>
+    </Overlay>
+    
+    <Overlay id="icecube-2-1" type="lines overlay">
+        <Property name="source">objs/icecube_b.obj</Property>
+        <Property name="xoffset">33</Property>
+        <Property name="yoffset">22</Property>
+        <Property name="zoffset">70</Property>
+        <Property name="scale">4</Property>
+        <Property name="yrot">5</Property>
+    </Overlay>
+    <Overlay id="icecube-2-2" type="lines overlay">
+        <Property name="source">objs/icecube_b.obj</Property>
+        <Property name="xoffset">42</Property>
+        <Property name="yoffset">22</Property>
+        <Property name="zoffset">66</Property>
+        <Property name="scale">4</Property>
+        <Property name="yrot">5</Property>
+    </Overlay>
+    <Overlay id="icecube-2-3" type="lines overlay">
+        <Property name="source">objs/icecube_b.obj</Property>
+        <Property name="xoffset">51</Property>
+        <Property name="yoffset">22</Property>
+        <Property name="zoffset">62</Property>
+        <Property name="scale">4</Property>
+        <Property name="yrot">5</Property>
+    </Overlay>
+    <Overlay id="icecube-2-4" type="lines overlay">
+        <Property name="source">objs/icecube_b.obj</Property>
+        <Property name="xoffset">35</Property>
+        <Property name="yoffset">22</Property>
+        <Property name="zoffset">56</Property>
+        <Property name="scale">4</Property>
+        <Property name="yrot">5</Property>
+        
+    </Overlay>
+    <Overlay id="icecube-2-5" type="lines overlay">
+        <Property name="source">objs/icecube_b.obj</Property>
+        <Property name="xoffset">37</Property>
+        <Property name="yoffset">22</Property>
+        <Property name="zoffset">42</Property>
+        <Property name="scale">4</Property>
+        <Property name="yrot">5</Property>
+    </Overlay>
+    <Overlay id="icecube-3-1" type="lines overlay">
+        <Property name="source">objs/icecube_b.obj</Property>
+        <Property name="xoffset">33</Property>
+        <Property name="yoffset">14</Property>
+        <Property name="zoffset">70</Property>
+        <Property name="scale">4</Property>
+        <Property name="yrot">5</Property>
+    </Overlay>
+    <Overlay id="icecube-3-2" type="lines overlay">
+        <Property name="source">objs/icecube_b.obj</Property>
+        <Property name="xoffset">42</Property>
+        <Property name="yoffset">14</Property>
+        <Property name="zoffset">66</Property>
+        <Property name="scale">4</Property>
+        <Property name="yrot">5</Property>
+    </Overlay>
+    <Overlay id="icecube-3-3" type="lines overlay">
+        <Property name="source">objs/icecube_b.obj</Property>
+        <Property name="xoffset">51</Property>
+        <Property name="yoffset">14</Property>
+        <Property name="zoffset">62</Property>
+        <Property name="scale">4</Property>
+        <Property name="yrot">5</Property>
+    </Overlay>
+    <Overlay id="icecube-3-4" type="lines overlay">
+        <Property name="source">objs/icecube_b.obj</Property>
+        <Property name="xoffset">35</Property>
+        <Property name="yoffset">14</Property>
+        <Property name="zoffset">56</Property>
+        <Property name="scale">4</Property>
+        <Property name="yrot">5</Property>
+        
+    </Overlay>
+    <Overlay id="icecube-3-5" type="lines overlay">
+        <Property name="source">objs/icecube_b.obj</Property>
+        <Property name="xoffset">37</Property>
+        <Property name="yoffset">14</Property>
+        <Property name="zoffset">42</Property>
+        <Property name="scale">4</Property>
+        <Property name="yrot">5</Property>
+    </Overlay>
+    <Overlay id="icecube-4-1" type="lines overlay">
+        <Property name="source">objs/icecube_b.obj</Property>
+        <Property name="xoffset">33</Property>
+        <Property name="yoffset">6</Property>
+        <Property name="zoffset">70</Property>
+        <Property name="scale">4</Property>
+        <Property name="yrot">5</Property>
+    </Overlay>
+    <Overlay id="icecube-4-2" type="lines overlay">
+        <Property name="source">objs/icecube_b.obj</Property>
+        <Property name="xoffset">42</Property>
+        <Property name="yoffset">6</Property>
+        <Property name="zoffset">66</Property>
+        <Property name="scale">4</Property>
+        <Property name="yrot">5</Property>
+    </Overlay>
+    <Overlay id="icecube-4-3" type="lines overlay">
+        <Property name="source">objs/icecube_b.obj</Property>
+        <Property name="xoffset">51</Property>
+        <Property name="yoffset">6</Property>
+        <Property name="zoffset">62</Property>
+        <Property name="scale">4</Property>
+        <Property name="yrot">5</Property>
+    </Overlay>
+    <Overlay id="icecube-4-4" type="lines overlay">
+        <Property name="source">objs/icecube_b.obj</Property>
+        <Property name="xoffset">35</Property>
+        <Property name="yoffset">6</Property>
+        <Property name="zoffset">56</Property>
+        <Property name="scale">4</Property>
+        <Property name="yrot">5</Property>
+        
+    </Overlay>
+    <Overlay id="icecube-4-5" type="lines overlay">
+        <Property name="source">objs/icecube_b.obj</Property>
+        <Property name="xoffset">37</Property>
+        <Property name="yoffset">6</Property>
+        <Property name="zoffset">42</Property>
+        <Property name="scale">4</Property>
+        <Property name="yrot">5</Property>
+    </Overlay>
+    <Overlay id="icecube-5-1" type="lines overlay">
+        <Property name="source">objs/icecube_b.obj</Property>
+        <Property name="xoffset">33</Property>
+        <Property name="yoffset">-2</Property>
+        <Property name="zoffset">70</Property>
+        <Property name="scale">4</Property>
+        <Property name="yrot">5</Property>
+    </Overlay>
+    <Overlay id="icecube-5-2" type="lines overlay">
+        <Property name="source">objs/icecube_b.obj</Property>
+        <Property name="xoffset">42</Property>
+        <Property name="yoffset">-2</Property>
+        <Property name="zoffset">66</Property>
+        <Property name="scale">4</Property>
+        <Property name="yrot">5</Property>
+    </Overlay>
+    <Overlay id="icecube-5-3" type="lines overlay">
+        <Property name="source">objs/icecube_b.obj</Property>
+        <Property name="xoffset">51</Property>
+        <Property name="yoffset">-2</Property>
+        <Property name="zoffset">62</Property>
+        <Property name="scale">4</Property>
+        <Property name="yrot">5</Property>
+    </Overlay>
+    <Overlay id="icecube-5-4" type="lines overlay">
+        <Property name="source">objs/icecube_b.obj</Property>
+        <Property name="xoffset">35</Property>
+        <Property name="yoffset">-2</Property>
+        <Property name="zoffset">56</Property>
+        <Property name="scale">4</Property>
+        <Property name="yrot">5</Property>
+        
+    </Overlay>
+    <Overlay id="icecube-5-5" type="lines overlay">
+        <Property name="source">objs/icecube_b.obj</Property>
+        <Property name="xoffset">37</Property>
+        <Property name="yoffset">-2</Property>
+        <Property name="zoffset">42</Property>
+        <Property name="scale">4</Property>
+        <Property name="yrot">5</Property>
+    </Overlay>
+    
+    
+    
+    <!-- Effect changes -->
+    <Overlay id="add icecube set 1" type="effect change">
+        <Property name="to add">icecube set 1,add icecube set 2</Property>
+        <Property name="to remove">add icecube set 1</Property>
+    </Overlay>
+    <Overlay id="add icecube set 2" type="effect change">
+        <Property name="to add">icecube set 2,add icecube set 3</Property>
+        <Property name="to remove">add icecube set 2</Property>
+    </Overlay>
+    <Overlay id="add icecube set 3" type="effect change">
+        <Property name="to add">icecube set 3,add icecube set 4</Property>
+        <Property name="to remove">add icecube set 3</Property>
+    </Overlay>
+    <Overlay id="add icecube set 4" type="effect change">
+        <Property name="to add">icecube set 4,add icecube set 5</Property>
+        <Property name="to remove">add icecube set 4</Property>
+    </Overlay>
+    <Overlay id="add icecube set 5" type="effect change">
+        <Property name="to add">icecube set 5</Property>
+        <Property name="to remove">add icecube set 5</Property>
+    </Overlay>
+    
+    <!-- Effects -->
+    <Effect id="icecube set 1">
+        <Sensor ref="stage" />
+        <Overlay ref="icecube-1-1" />
+        <Overlay ref="icecube-5-2" />
+        <Overlay ref="icecube-3-3" />
+        <Overlay ref="icecube-2-4" />
+        <Overlay ref="icecube-4-5" />
+    </Effect>
+    <Effect id="icecube set 2">
+        <Sensor ref="stage" />
+        <Overlay ref="icecube-3-1" />
+        <Overlay ref="icecube-2-2" />
+        <Overlay ref="icecube-4-3" />
+        <Overlay ref="icecube-1-4" />
+        <Overlay ref="icecube-5-5" />
+    </Effect>
+    <Effect id="icecube set 3">
+        <Sensor ref="stage" />
+        <Overlay ref="icecube-5-1" />
+        <Overlay ref="icecube-3-2" />
+        <Overlay ref="icecube-2-3" />
+        <Overlay ref="icecube-4-4" />
+        <Overlay ref="icecube-1-5" />
+    </Effect>
+    <Effect id="icecube set 4">
+        <Sensor ref="stage" />
+        <Overlay ref="icecube-4-1" />
+        <Overlay ref="icecube-1-2" />
+        <Overlay ref="icecube-5-3" />
+        <Overlay ref="icecube-3-4" />
+        <Overlay ref="icecube-2-5" />
+    </Effect>
+    <Effect id="icecube set 5">
+        <Sensor ref="stage" />
+        <Overlay ref="icecube-2-1" />
+        <Overlay ref="icecube-4-2" />
+        <Overlay ref="icecube-1-3" />
+        <Overlay ref="icecube-5-4" />
+        <Overlay ref="icecube-3-5" />
+    </Effect>
+    
+    <Effect id="add icecube set 1">
+        <Sensor ref="key-e" />
+        <Overlay ref="add icecube set 1" />
+    </Effect>
+    <Effect id="add icecube set 2">
+        <Sensor ref="key-o" />
+        <Overlay ref="add icecube set 2" />
+    </Effect>
+    <Effect id="add icecube set 3">
+        <Sensor ref="key-e" />
+        <Overlay ref="add icecube set 3" />
+    </Effect>
+    <Effect id="add icecube set 4">
+        <Sensor ref="key-o" />
+        <Overlay ref="add icecube set 4" />
+    </Effect>
+    <Effect id="add icecube set 5">
+        <Sensor ref="key-e" />
+        <Overlay ref="add icecube set 5" />
+    </Effect>
+    
+    
+    <!--------------------------------------------------------------
+     SCENE 7
+     
+     31
+     “
+     9:25
+     Teleportation out of prison (1)
+     32
+     9:29
+     Teleportation into prison (1)
+     33
+     9:35
+     Teleportation out of prison (2)
+     34
+     9:36
+     Teleportation into prison (2)
+     34.5
+     9:38-9:42
+     Previous clips played (4 in total)
+     35
+     9:38-9:50
+     Dancer and prison slowly fade
+     -->
+    
+</CueSheet>

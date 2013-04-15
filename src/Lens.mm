@@ -2,41 +2,45 @@
 
 #ifndef __MACOSX_CORE__
 
+#include "ThreadedNetwork.h"
+#include "PoseSensor.h"
+
 /**
  * Called once, when the app is opened
  */
-void Lens::setup(){	
+void Lens::setup(){
+    
+    //If you want a landscape oreintation
+	//iPhoneSetOrientation(OFXIPHONE_ORIENTATION_LANDSCAPE_RIGHT);
+	
 	// initialize the accelerometer (TODO: is we going to use this?)
 	ofxAccelerometer.setup();
 	
-	//If you want a landscape oreintation 
-	iPhoneSetOrientation(OFXIPHONE_ORIENTATION_LANDSCAPE_RIGHT);
+    ThreadedNetwork::instance = new ThreadedNetwork;
+    ThreadedNetwork::instance->start();
+    
 	
 	ofBackground(0,0,0);
     
-    streamWidth =  1280;
-    streamHeight =720;
+    //streamWidth =  1280;
+    //streamHeight =720;
+    streamHeight = 1280;
+    streamWidth = 720;
     
     // Request a camera/video.  May not be exactly the dimensions requested, so
     // update streamWidth and streamHeight with the correct data.
     //videoIn.allocateVideo(0,0, "fingers.m4v");
     //videoIn.allocateCamera(streamWidth, streamHeight);
+    videoIn.allocateCamera(streamHeight,streamWidth);
     //streamWidth = videoIn.getWidth();
     //streamHeight = videoIn.getHeight();
     
-    videoIn.allocateVideo(streamWidth, streamHeight, "walkabout.mov");
+    //videoIn.allocateVideo(streamWidth, streamHeight, "prison-hor.mov");
     
-    lensImage.allocate(streamWidth, streamHeight);
-    ofSetFrameRate(60);
-    
-    choreography.setOverlayLibrary(&overlayLibrary);
-    choreography.setSensorLibrary(&sensorLibrary);
-    std::vector<std::string> startEffects = choreography.loadCueSheet("cue-lines.xml");
-    
-    std::vector<std::string>::const_iterator startEffect = startEffects.begin();
-    for(;startEffect<startEffects.end(); ++startEffect)
-        choreography.activateEffect(*startEffect, streamWidth, streamHeight);
+    videoOverlayer.setVideoInput(&videoIn);
 
+    videoOverlayer.setChoreography("cue-everything.xml");
+    
 }
 
 /**
@@ -46,35 +50,25 @@ void Lens::setup(){
 void Lens::update(){
     
     ofBackground(0);
-    videoIn.update();
-    if (videoIn.isFrameNew())
-    {
-        if (videoIn.getPixels()) lensImage.setFromPixels(videoIn.getPixels(), streamWidth, streamHeight);
-        sensorLibrary.onEnterFrame(&lensImage);
-        overlayLibrary.update(&lensImage);
-    }
-    
+    videoOverlayer.update();
 }
 
 /**
  * Render the display
  */
 void Lens::draw(){
-	lensImage.draw(0,0);
-    overlayLibrary.draw();
-    
-	cam.begin();
-	ofScale(50, 50, 50);
+    videoOverlayer.draw();
 }
 
 //--------------------------------------------------------------
 void Lens::exit(){
     videoIn.stop();
+    ThreadedNetwork::instance->stop();
 }
 
 //--------------------------------------------------------------
 void Lens::touchDown(ofTouchEventArgs & touch){
-
+    PoseSensor::requiresRepositioning =true;
 }
 
 //--------------------------------------------------------------

@@ -9,10 +9,7 @@
 #include "ofxOpenCv.h"
 #include "ofxBlender.h"
 
-#include "VideoSource.h"
-#include "Choreography.h"
-#include "OverlayLibrary.h"
-#include "SensorLibrary.h"
+#include "VideoOverlayer.h"
 
 class Lens : public ofxiPhoneApp{
 	
@@ -44,15 +41,8 @@ private:
     /** The bitmap of the camera view, underneath any overlays */
     ofxCvColorImage lensImage;
     
-    /** The choreography that we are following */
-    Choreography choreography;
-    
-    /** The overlays in our possession */
-    OverlayLibrary overlayLibrary;
-    
-    /** The sensors being applied to the scene */
-    SensorLibrary sensorLibrary;
-    
+    /** The actual mechanism that does teh overlaying */
+    VideoOverlayer videoOverlayer;
     
     // Hack to add in a 3d model
     ofxBlender blendFile;

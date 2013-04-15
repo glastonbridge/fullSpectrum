@@ -21,6 +21,9 @@ public:
     virtual void setup(float width, float height);
     virtual std::string getName();
     EffectChangeOverlay();
+    
+private:
+    float _width, _height;
 };
 
 #endif

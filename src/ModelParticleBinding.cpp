@@ -55,7 +55,7 @@ ModelParticleBinding::ModelParticleBinding(ofxAssimpModelLoader& myModel, msa::p
 
 ofVec3f ModelParticleBinding::getModelTranslation()
 {
-    return particles[0]->getPosition() - originalPositions[0];
+    return particles[0]->getPosition() ;// - originalPositions[0];
 }
 
 ofVec3f ModelParticleBinding::getModelRotation()
@@ -68,13 +68,15 @@ void ModelParticleBinding::addToWorld(msa::physics::World3D& world)
     auto particle = particles.begin();
     for (; particle < particles.end(); ++particle)
     {
+        (*particle)->setBounce(0.2);
+        (*particle)->setRadius(1);
         world.addParticle(*particle);
         auto previousParticle = particles.begin();
         
         // mesh all particles together
         for (;previousParticle < particle; ++previousParticle)
         {
-            world.makeSpring(*particle, *previousParticle, 1, (*particle)->getPosition().distance((*previousParticle)->getPosition()));
+            world.makeSpring(*particle, *previousParticle, 1, (*particle)->getPosition().distance((*previousParticle)->getPosition()));//->setForceCap(0.01);
         }
     }
 }

@@ -9,4 +9,4 @@ Ks 0.010169 0.003135 0.002096
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd /home/digitalstages/Desktop/TEAMS/EPHEMERIS/Workfiles/Scene1&4/textures/door.jpg
+map_Kd ../textures/door.jpg

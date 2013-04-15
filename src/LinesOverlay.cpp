@@ -12,6 +12,8 @@
 // for debug
 #include <sstream>
 
+const bool debugging = false;
+
 const ofColor colorList[] = {
     ofColor(255,0,0),
     ofColor(255,255,0),
@@ -19,7 +21,7 @@ const ofColor colorList[] = {
     ofColor(0,255,255),
     ofColor(0,0,255),
     ofColor(255,0,255)};
-void renderCube(float size);
+//void renderCube(float size);
 const std::string LinesOverlay::NAME = "lines overlay";
 void LinesOverlay::update(ofxCvColorImage* input)
 {
@@ -35,26 +37,57 @@ void LinesOverlay::draw()
 	glEnable(GL_DEPTH_TEST);
 	glMatrixMode(GL_PROJECTION);
 	glLoadMatrixf( sensor->projectionMatrix );
-	glMatrixMode(GL_MODELVIEW);
+    glMatrixMode(GL_MODELVIEW);
     
 	//Draw the object with the estimated pose
 	glLoadIdentity();
 	glScalef( 1.0f, 1.0f, -1.0f);
+    
+    ofSetColor(255, 255, 255, 255);
+    
+	glEnable(GL_DEPTH_TEST);
+    
+    float scale = getFloatValue(4);
+    ofPoint modelCentre = model->getSceneCenter();
+    //model.setScale(scale, scale, scale);
+    
 	glMultMatrixf( sensor->posePOSIT );
+    
+    //glRotatef(-90,0,0,1);
+    ofPushMatrix();
+    
+    glTranslatef(getFloatValue(1), getFloatValue(2), getFloatValue(3));
+    
+    glRotatef (getFloatValue(6), 1.0f, 0,0);
+    glRotatef (getFloatValue(7), 0, 1.0f, 0);
+    glRotatef (getFloatValue(8), 0,0, 1.0f);
+    
+    ofTranslate(-modelCentre.x, -modelCentre.y, -modelCentre.z);
+    glScalef(scale, scale, scale);
+    ofTranslate(modelCentre);
+    
+    if (getBoolValue(9))
+        model->drawWireframe();
+    else
+        model->drawFaces();
+    //mesh.drawFaces();
+    ofPopMatrix();
+    
 	//glEnable( GL_LIGHTING );
 	//glEnable( GL_LIGHT0 );
     
-    StageObjectOverlay::draw();    
-	/*for (int i = 0; i < sensor->modelPoints.size(); ++i)
+    //StageObjectOverlay::draw();
+    if (debugging)
+	for (int i = 0; i < sensor->modelPoints.size(); ++i)
     {
         ofSetColor(colorList[i]);
         CvPoint3D32f& pt = sensor->modelPoints[i];
         glPushMatrix();
         glTranslatef(pt.x,pt.y,pt.z);
         ofBox(2);
-        renderCube(2);
+        //renderCube(2);
         glPopMatrix();
-    }*/
+    }
     
 	//renderCube( 10 );
 	//glDisable( GL_LIGHTING );
@@ -67,6 +100,7 @@ void LinesOverlay::draw()
     glDisable(GL_DEPTH_TEST);
     glLoadMatrixf(storeModelView);
     
+    if (debugging)
     for (int i = 0; i < sensor->points.size(); ++i)
     {
         ofSetColor(colorList[i]);
@@ -91,13 +125,13 @@ void LinesOverlay::setup(float width, float height)
 {
     StageObjectOverlay::setup(width,height);
 }
-std::string LinesOverlay::getName() {}
+std::string LinesOverlay::getName() {return NAME;}
 LinesOverlay::LinesOverlay() {}
 
 
 int LinesOverlay::getGeometry() {return ORTHO;}
 
-void renderCube(float size)
+/*void renderCube(float size)
 {
 	glBegin(GL_QUADS);
     // Front Face
@@ -137,4 +171,5 @@ void renderCube(float size)
     glVertex3f( 0.0f,  size, size);
     glVertex3f( 0.0f,  0.0f, size);
     glEnd();
-}
+}*/
+

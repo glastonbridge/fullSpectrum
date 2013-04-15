@@ -34,6 +34,7 @@ public:
     
     virtual void analyse(ofxCvColorImage*) = 0;
     
+    virtual bool isPersistent();
 };
 
 #endif
