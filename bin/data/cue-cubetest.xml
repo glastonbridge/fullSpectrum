@@ -1,0 +1,187 @@
+<CueSheet>
+    <!-- A test to see if we have a valid perspective transform that draws things sanely in space.
+     Try drawing all of our cubes in regular intervals and compare them to floor markings and other
+     reference points -->
+    
+    <Sensor id="stage" type="pose">
+        <Property name="threshold1">46</Property>
+        <Property name="threshold2">104</Property>
+        <Property name="min length">48</Property>
+        <Property name="max length">65</Property>
+        
+        <Property name="hue range">21</Property>
+        <Property name="hue offset">14</Property>
+        <Property name="sat threshold">38</Property>
+        <Property name="val threshold">174</Property>
+        <Property name="val invert">true</Property>
+        <Property name="max blob width">80</Property>
+        <Property name="min blob width">2</Property>
+        <Property name="num blobs">16</Property>
+    </Sensor>
+    
+    <Overlay id="0,0" type="lines overlay">
+        <Property name="source">objs/icecube_w.obj</Property>
+        <Property name="xoffset">0</Property>
+        <Property name="yoffset">30</Property>
+        <Property name="zoffset">0</Property>
+        <Property name="scale">0.75</Property>
+        <Property name="wireframe">false</Property>
+    </Overlay>
+    <Overlay id="0,1" type="lines overlay">
+        <Property name="source">objs/icecube_w.obj</Property>
+        <Property name="xoffset">15</Property>
+        <Property name="yoffset">30</Property>
+        <Property name="zoffset">0</Property>
+        <Property name="scale">0.75</Property>
+        <Property name="wireframe">false</Property>
+    </Overlay>
+    <Overlay id="0,2" type="lines overlay">
+        <Property name="source">objs/icecube_w.obj</Property>
+        <Property name="xoffset">30</Property>
+        <Property name="yoffset">30</Property>
+        <Property name="zoffset">0</Property>
+        <Property name="scale">0.75</Property>
+        <Property name="wireframe">false</Property>
+    </Overlay>
+    <Overlay id="0,3" type="lines overlay">
+        <Property name="source">objs/icecube_w.obj</Property>
+        <Property name="xoffset">45</Property>
+        <Property name="yoffset">30</Property>
+        <Property name="zoffset">0</Property>
+        <Property name="scale">0.75</Property>
+        <Property name="wireframe">false</Property>
+    </Overlay>
+    <Overlay id="0,4" type="lines overlay">
+        <Property name="source">objs/icecube_w.obj</Property>
+        <Property name="xoffset">60</Property>
+        <Property name="yoffset">30</Property>
+        <Property name="zoffset">0</Property>
+        <Property name="scale">0.75</Property>
+        <Property name="wireframe">false</Property>
+    </Overlay>
+    <Overlay id="0,5" type="lines overlay">
+        <Property name="source">objs/icecube_w.obj</Property>
+        <Property name="xoffset">75</Property>
+        <Property name="yoffset">30</Property>
+        <Property name="zoffset">0</Property>
+        <Property name="scale">0.75</Property>
+        <Property name="wireframe">false</Property>
+    </Overlay>
+    <Overlay id="1,5" type="lines overlay">
+        <Property name="source">objs/icecube_w.obj</Property>
+        <Property name="xoffset">75</Property>
+        <Property name="yoffset">30</Property>
+        <Property name="zoffset">0</Property>
+        <Property name="scale">0.75</Property>
+        <Property name="wireframe">false</Property>
+    </Overlay>
+    <Overlay id="2,5" type="lines overlay">
+        <Property name="source">objs/icecube_w.obj</Property>
+        <Property name="xoffset">75</Property>
+        <Property name="yoffset">30</Property>
+        <Property name="zoffset">15</Property>
+        <Property name="scale">0.75</Property>
+        <Property name="wireframe">false</Property>
+    </Overlay>
+    <Overlay id="3,5" type="lines overlay">
+        <Property name="source">objs/icecube_w.obj</Property>
+        <Property name="xoffset">75</Property>
+        <Property name="yoffset">30</Property>
+        <Property name="zoffset">30</Property>
+        <Property name="scale">0.75</Property>
+        <Property name="wireframe">false</Property>
+    </Overlay>
+    <Overlay id="4,5" type="lines overlay">
+        <Property name="source">objs/icecube_w.obj</Property>
+        <Property name="xoffset">75</Property>
+        <Property name="yoffset">30</Property>
+        <Property name="zoffset">45</Property>
+        <Property name="scale">0.75</Property>
+        <Property name="wireframe">false</Property>
+    </Overlay>
+    <Overlay id="5,5" type="lines overlay">
+        <Property name="source">objs/icecube_w.obj</Property>
+        <Property name="xoffset">75</Property>
+        <Property name="yoffset">30</Property>
+        <Property name="zoffset">60</Property>
+        <Property name="scale">0.75</Property>
+        <Property name="wireframe">false</Property>
+    </Overlay>
+    <Overlay id="6,5" type="lines overlay">
+        <Property name="source">objs/icecube_w.obj</Property>
+        <Property name="xoffset">75</Property>
+        <Property name="yoffset">30</Property>
+        <Property name="zoffset">75</Property>
+        <Property name="scale">0.75</Property>
+        <Property name="wireframe">false</Property>
+    </Overlay>
+    
+    <Effect id="0,0">
+        <Sensor ref="stage" />
+        <Overlay ref="0,0" />
+    </Effect>
+    <Effect id="0,1">
+        <Sensor ref="stage" />
+        <Overlay ref="0,1" />
+    </Effect>
+    <Effect id="0,2">
+        <Sensor ref="stage" />
+        <Overlay ref="0,2" />
+    </Effect>
+    <Effect id="0,3">
+        <Sensor ref="stage" />
+        <Overlay ref="0,3" />
+    </Effect>
+    <Effect id="0,4">
+        <Sensor ref="stage" />
+        <Overlay ref="0,4" />
+    </Effect>
+    <Effect id="0,5">
+        <Sensor ref="stage" />
+        <Overlay ref="0,5" />
+    </Effect>
+    
+    <Effect id="1,5">
+        <Sensor ref="stage" />
+        <Overlay ref="1,5" />
+    </Effect>
+    
+    <Effect id="2,5">
+        <Sensor ref="stage" />
+        <Overlay ref="2,5" />
+    </Effect>
+    
+    <Effect id="3,5">
+        <Sensor ref="stage" />
+        <Overlay ref="3,5" />
+    </Effect>
+    
+    <Effect id="4,5">
+        <Sensor ref="stage" />
+        <Overlay ref="4,5" />
+    </Effect>
+    
+    <Effect id="5,5">
+        <Sensor ref="stage" />
+        <Overlay ref="5,5" />
+    </Effect>
+    
+    <Effect id="6,5">
+        <Sensor ref="stage" />
+        <Overlay ref="6,5" />
+    </Effect>
+    
+    <InitialEffect ref="0,0" />
+    <InitialEffect ref="0,1" />
+    <InitialEffect ref="0,2" />
+    <InitialEffect ref="0,3" />
+    <InitialEffect ref="0,4" />
+    <InitialEffect ref="0,5" />
+    <InitialEffect ref="1,5" />
+    <InitialEffect ref="2,5" />
+    <InitialEffect ref="3,5" />
+    <InitialEffect ref="4,5" />
+    <InitialEffect ref="5,5" />
+    <InitialEffect ref="6,5" />
+    
+</CueSheet>

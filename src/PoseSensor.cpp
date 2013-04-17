@@ -8,6 +8,8 @@
 
 #include "PoseSensor.h"
 
+#include <sstream>
+#include <string>
 
  const std::string PoseSensor::NAME = "pose";
 
@@ -76,22 +78,12 @@ void createOpenGLProjectionMatrix( float* projectionMatrix, CvMat* intrinsics, c
     modelPoints.push_back(cvPoint3D32f(0.0f, 2*cubeSize, 2*cubeSize));
     modelPoints.push_back(cvPoint3D32f(cubeSize, 2*cubeSize, 2*cubeSize));
   
-    
-    /*modelPoints.push_back(cvPoint3D32f(0.0f, 0.0f, 0.0f));
-    modelPoints.push_back(cvPoint3D32f(cubeSize, 0.0f, 0.0f));
-    modelPoints.push_back(cvPoint3D32f(cubeSize,-cubeSize, 0.0f));
-    modelPoints.push_back(cvPoint3D32f( 0.0f, -cubeSize, 0.0f));
-    modelPoints.push_back(cvPoint3D32f(2*cubeSize, 0.0f, 2*cubeSize));
-    modelPoints.push_back(cvPoint3D32f(2*cubeSize, -cubeSize, 2*cubeSize));*/
-    
 	initializeIntrinsics( intrinsics, width, height );
 	createOpenGLProjectionMatrix(projectionMatrix, intrinsics, width, height, 1.0, 1000.0 );
-    //initializeIntrinsics( intrinsics, height, width );
-	//createOpenGLProjectionMatrix(projectionMatrix, intrinsics, height, width, 1.0, 1000.0 );
     
     positObject = cvCreatePOSITObject( &modelPoints[0], static_cast<int>(modelPoints.size()) );
     
-    /*extrinsicObject = cvCreateMat(3, 4, CV_32FC1);
+    extrinsicObject = cvCreateMat(3, 6, CV_32FC1);
 
     for(int i = 0; i < modelPoints.size(); ++i)
     {
@@ -100,14 +92,116 @@ void createOpenGLProjectionMatrix( float* projectionMatrix, CvMat* intrinsics, c
         cvSetReal2D(extrinsicObject,2,i, 0.0);
     }
     
-    for(int i=0; i < 3; ++i)
-        for (int j=0; j < 3; ++j)
-            cvSetReal2D(intrinsic_matrix,i,j,i==j?1.0:0);
-    */
+    
 }
+
+void PoseSensor::orientUsingECP(std::vector<CvPoint2D32f>& projectedPoints, CvMatr32f rotation_matrix, CvVect32f translation_vector_in)
+{
+    int i=0;
+    for (auto point = projectedPoints.begin(); point<projectedPoints.end(); ++point)
+    {
+        cvSetReal2D(projectedPointsF, i, 0, point->x);
+        cvSetReal2D(projectedPointsF, i, 1, point->y);
+        ++i;
+    }
+    for(i=0; i < 3; ++i)
+    {
+        cvSetReal1D(translation_vector2, i, translation_vector_in[i]);
+    }
+    
+    cvFindExtrinsicCameraParams2(extrinsicObject, projectedPointsF, intrinsics, NULL, rotation_vector, translation_vector2, 1);
+    
+    cvRodrigues2(rotation_vector, rot_mat, 0);
+    
+    for (i=0; i<3; ++i)
+        for (int j=0; j<3; ++j)
+            rotation_matrix[i+3*j] = cvGetReal2D(rot_mat, i, j);
+    
+    for (i=0; i<3; ++i)
+        translation_vector_in[i] = cvGetReal1D(translation_vector2,i);
+    
+}
+
+void dumpMat(const std::string& id, const cv::Mat& mat)
+{
+    std::stringstream st;
+    st << id << ": ";
+    for (auto hp = mat.begin<float>(); hp< mat.end<float>(); ++hp)
+    {
+        st << *hp;
+        st << ", ";
+    }
+    ofLog(OF_LOG_VERBOSE, st.str());
+}
+
+void cameraPoseFromHomography(std::vector<CvPoint3D32f>& srcPoints, std::vector<CvPoint2D32f>& dstPoints,  float* poseArray, cv::Mat& pose)
+{
+    std::vector<cv::Point2d> srcPoints2d;
+    
+    int count = 0;
+    for (auto srcPoint = srcPoints.begin(); srcPoint < srcPoints.end() && count++ < 4 ; ++srcPoint)
+        srcPoints2d.push_back(cv::Point2d(srcPoint->x, srcPoint->y));
+    
+    std::vector<cv::Point2d> dstPointsCpp;
+    
+    count=0;
+    for (auto dstPoint = dstPoints.begin(); dstPoint < dstPoints.end() && count++ < 4 ; ++dstPoint)
+        dstPointsCpp.push_back(cv::Point2d(dstPoint->x, dstPoint->y));
+    
+    cv::Mat H = cv::findHomography(srcPoints2d, dstPointsCpp);
+    
+    dumpMat("H",H);
+    
+    pose = cv::Mat::eye(3, 4, CV_64FC1);      // 3x4 matrix, the camera pose
+    float norm1 = (float)norm(H.col(0));
+    float norm2 = (float)norm(H.col(1));
+    float tnorm = (norm1 + norm2) / 2.0f; // Normalization value
+    
+    cv::Mat p1 = H.col(0);       // Pointer to first column of H
+    cv::Mat p2 = pose.col(0);    // Pointer to first column of pose (empty)
+    p2.at<float>(1)=5;
+    
+    cv::normalize(p1, p2);   // Normalize the rotation, and copies the column to pose
+    
+    //
+    //cv::Mat c0 = pose.col(0);
+    //p2.copyTo(c0);
+    
+    //dumpMat("pose", pose);
+    //dumpMat("p1",p1);
+    //dumpMat("p2",p2);
+    //dumpMat("c0",c0);
+    //dumpMat("pose", pose);
+    
+    
+    p1 = H.col(1);           // Pointer to second column of H
+    p2 = pose.col(1);        // Pointer to second column of pose (empty)
+    
+    cv::normalize(p1, p2);   // Normalize the rotation and copies the column to pose
+
+    //
+    //cv::Mat c1 = pose.col(1);
+    //p2.copyTo(c1);
+    
+    p1 = pose.col(0);
+    p2 = pose.col(1);
+    
+    cv::Mat p3 = p1.cross(p2);   // Computes the cross-product of p1 and p2
+    cv::Mat c2 = pose.col(2);    // Pointer to third column of pose
+    p3.copyTo(c2);       // Third column is the crossproduct of columns one and two
+    
+    pose.col(3) = H.col(2) / tnorm;  //vector t [R|t] is the last column of pose
+    dumpMat("h",H);
+    dumpMat("pose",pose);
+    
+    for (int i = 0; i < 3; ++i)
+        for (int j = 0; j < 4; ++j)
+            poseArray[i*4+j] = pose.at<float>(i,j);
+}
+
  void PoseSensor::analyse(ofxCvColorImage* input)
 {
-    if (!PoseSensor::requiresRepositioning) return;
+    //if (!PoseSensor::requiresRepositioning) return;
     LinesSensor::analyse(input);
     std::vector<CvPoint2D32f> projectedPoints;
     float halfWidth = _width/2;
@@ -117,21 +211,19 @@ void createOpenGLProjectionMatrix( float* projectionMatrix, CvMat* intrinsics, c
         // POSIT points originate from the centre of the screen and y is inverted, so shift (0,0) and invert the y axis
         CvPoint2D32f point;
         point.x = points[i].x -halfWidth;
-        point.y = -points[i].y +halfHeight;
+        point.y = -points[i].y  +halfHeight;
         projectedPoints.push_back(point);
     }
     
     if (projectedPoints.size() != modelPoints.size()) return;
     
     CvTermCriteria criteria = cvTermCriteria(CV_TERMCRIT_EPS | CV_TERMCRIT_ITER, 100, 1.0e-4f);
-    
-    
     cvPOSIT( positObject, &projectedPoints[0], FOCAL_LENGTH, criteria, rotation_matrix, translation_vector );
     
-    
-    //cvFindExtrinsicCameraParams2(extrinsicObject, projectedPointsF, intrinsic_matrix, NULL, rotation_vector, translation_vector);
-    
-    //cvRodrigues2(rotation_vector, rot_mat, 0);
+    //orientUsingECP(projectedPoints, rotation_matrix, translation_vector);
+    //cv::Mat pose(3,4,CV_32FC1);
+    //cameraPoseFromHomography(modelPoints, projectedPoints, posePOSIT, pose);
+    //return;
     
     for (int f=0; f<3; f++)
         for (int c=0; c<3; c++)
@@ -143,10 +235,6 @@ void createOpenGLProjectionMatrix( float* projectionMatrix, CvMat* intrinsics, c
     posePOSIT[13] = translation_vector[1];
     posePOSIT[14] = translation_vector[2];
     posePOSIT[15] = 1.0;
-
-    /*posePOSIT[12] = cvGetReal2D(translation_vector,0,0);
-    posePOSIT[13] = cvGetReal2D(translation_vector,0,1);
-     posePOSIT[14] = cvGetReal2D(translation_vector,0,2);*/
     
     if (posePOSIT[0]==posePOSIT[0]) // not NaN
     {
@@ -155,5 +243,6 @@ void createOpenGLProjectionMatrix( float* projectionMatrix, CvMat* intrinsics, c
     }
     
 }
+
 
 std::string PoseSensor::getName() {return NAME;}

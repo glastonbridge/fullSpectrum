@@ -12,7 +12,7 @@
 // for debug
 #include <sstream>
 
-const bool debugging = false;
+const bool debugging = true;//false;
 
 const ofColor colorList[] = {
     ofColor(255,0,0),

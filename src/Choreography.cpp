@@ -130,7 +130,10 @@ void Choreography::activateEffect(const std::string &effectName, float width, fl
     Effect* effect(effects[effectName]);
     for (int i = 0; i < activeEffects.size(); ++i) if (activeEffects[i]==effect) return;
     activeEffects.push_back(effect);
-    
+    if (!effect)
+    {
+        ofLog(OF_LOG_ERROR, std::string("Effect not found: ")+effectName);
+    }
     std::vector<std::string> sensors(effect->getSensors());
     for (int i = 0; i < sensors.size(); ++i)
     {
@@ -140,6 +143,11 @@ void Choreography::activateEffect(const std::string &effectName, float width, fl
     for (int i = 0; i < overlays.size(); ++i)
     {
         Overlay* overlay(_overlayLibrary->activate(overlays[i], width, height));
+        if (!overlay)
+        {
+            ofLog(OF_LOG_WARNING, std::string("Not adding overlay ")+overlays[i]+" as part of "+effectName+" as it is already in use");
+            continue;
+        }
         for (int j = 0; j < sensors.size(); ++j)
             overlay->attachSensor( (*_sensorLibrary)[sensors[j]]);
     }

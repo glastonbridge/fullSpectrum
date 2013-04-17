@@ -11,6 +11,8 @@
 
 #include "LinesSensor.h"
 
+//class CvMat;
+
 class PoseSensor : public LinesSensor
 {
 public:
@@ -35,20 +37,20 @@ public:
     virtual bool isPersistent();
 private:
     
-    /*CvMat *rot_mat = cvCreateMat( 3, 3, CV_32FC1);
-
-    CvMat *intrinsic_matrix = cvCreateMat( 3, 3, CV_32FC1);
-    CvMat* projectedPointsF = cvCreateMat(4, 2, CV_32FC1);
+    // Experimental FindExtrinsicCameraParams datatypes.  We just box and unbox into these as necessary
+    CvMat* extrinsicObject;
+    CvMat *rot_mat = cvCreateMat( 3, 3, CV_32FC1);
+    CvMat* projectedPointsF = cvCreateMat(6, 2, CV_32FC1);
     CvMat *rotation_vector = cvCreateMat( 1, 3, CV_32FC1);
-    CvMat *translation_vector = cvCreateMat( 1, 3, CV_32FC1);
-    */
+    CvMat *translation_vector2 = cvCreateMat( 1, 3, CV_32FC1);
     
     float _width, _height;
     
 	CvMat* intrinsics = cvCreateMat( 3, 3, CV_32F );
     
     CvPOSITObject *positObject;
-    CvMat* extrinsicObject;
+    
+    void orientUsingECP(std::vector<CvPoint2D32f>& projectedPoints, CvMatr32f rotation_matrix, CvVect32f translation_vector);
     
 };
 

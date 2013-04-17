@@ -65,6 +65,7 @@
 		FA578550170F3EF9006E9041 /* CurtainStageSensor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA578546170F3EF9006E9041 /* CurtainStageSensor.cpp */; };
 		FA578551170F3EF9006E9041 /* PerspectiveQuadSensor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA578548170F3EF9006E9041 /* PerspectiveQuadSensor.cpp */; };
 		FA578554170F4414006E9041 /* ImageUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA578552170F4414006E9041 /* ImageUtils.cpp */; };
+		FA733152171C68BB00A03171 /* cue-cubetest.xml in Resources */ = {isa = PBXBuildFile; fileRef = FA733151171C68BB00A03171 /* cue-cubetest.xml */; };
 		FA99296816A9A5C00048A2AA /* install.xml in Resources */ = {isa = PBXBuildFile; fileRef = FA99293516A9A5C00048A2AA /* install.xml */; };
 		FA99296916A9A5C00048A2AA /* aiColor4D.inl in Resources */ = {isa = PBXBuildFile; fileRef = FA99293D16A9A5C00048A2AA /* aiColor4D.inl */; };
 		FA99296A16A9A5C00048A2AA /* aiMaterial.inl in Resources */ = {isa = PBXBuildFile; fileRef = FA99294316A9A5C00048A2AA /* aiMaterial.inl */; };
@@ -308,6 +309,7 @@
 		FA57854A170F3EF9006E9041 /* PerspectiveQuadSensor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PerspectiveQuadSensor.h; sourceTree = "<group>"; };
 		FA578552170F4414006E9041 /* ImageUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageUtils.cpp; sourceTree = "<group>"; };
 		FA578553170F4414006E9041 /* ImageUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageUtils.h; sourceTree = "<group>"; };
+		FA733151171C68BB00A03171 /* cue-cubetest.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = "cue-cubetest.xml"; path = "bin/data/cue-cubetest.xml"; sourceTree = "<group>"; };
 		FA99293516A9A5C00048A2AA /* install.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = install.xml; sourceTree = "<group>"; };
 		FA99293916A9A5C00048A2AA /* aiAnim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aiAnim.h; sourceTree = "<group>"; };
 		FA99293A16A9A5C00048A2AA /* aiAssert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aiAssert.h; sourceTree = "<group>"; };
@@ -1186,6 +1188,7 @@
 			children = (
 				FAD9B84316A0702000BA162B /* beach.blend */,
 				FAD9B7A9169DD91D00BA162B /* smile.png */,
+				FA733151171C68BB00A03171 /* cue-cubetest.xml */,
 			);
 			name = assets;
 			sourceTree = "<group>";
@@ -1434,6 +1437,7 @@
 				FA35465E17185B9E000356BB /* .gitignore in Resources */,
 				FA35465F17185B9E000356BB /* license.md in Resources */,
 				FA35466017185B9E000356BB /* README.md in Resources */,
+				FA733152171C68BB00A03171 /* cue-cubetest.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

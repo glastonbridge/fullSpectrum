@@ -31,15 +31,15 @@ void Lens::setup(){
     // update streamWidth and streamHeight with the correct data.
     //videoIn.allocateVideo(0,0, "fingers.m4v");
     //videoIn.allocateCamera(streamWidth, streamHeight);
-    videoIn.allocateCamera(streamHeight,streamWidth);
+    //videoIn.allocateCamera(streamHeight,streamWidth);
     //streamWidth = videoIn.getWidth();
     //streamHeight = videoIn.getHeight();
     
-    //videoIn.allocateVideo(streamWidth, streamHeight, "prison-hor.mov");
+    videoIn.allocateVideo(streamWidth, streamHeight, "ipadstyle.mov");
     
     videoOverlayer.setVideoInput(&videoIn);
 
-    videoOverlayer.setChoreography("cue-everything.xml");
+    videoOverlayer.setChoreography("cue-cubetest.xml");
     
 }
 
