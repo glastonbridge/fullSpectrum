@@ -13,7 +13,7 @@
 
  const std::string PoseSensor::NAME = "pose";
 
-const float FOCAL_LENGTH = 760.0;
+const float FOCAL_LENGTH = 1160.0;
 
 bool PoseSensor::requiresRepositioning = true;
 

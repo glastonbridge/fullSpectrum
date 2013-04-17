@@ -21,47 +21,39 @@ static const int MAX_POINT_MOVEMENT =  25;// squared for happy math
 const std::string LinesSensor::NAME = "lines sensor";
 
 
-void getLinesUsingContours(ofxCvContourFinder& contours, std::vector<ofPoint>& points);
+void getRectsOfSize(ofxCvContourFinder& contours, ofxCvGrayscaleImage* in, std::vector<ofPoint>& points, unsigned int minSize, unsigned int maxSize);
 void getLinesUsingSquareFinder(ofxCvColorImage * input, std::vector<ofPoint>& points);
 
-
+enum Location {TOP_LEFT, BOTTOM_LEFT, TOP_RIGHT, BOTTOM_RIGHT, RIGHT};
 
 // y = mx + c
 // for bottom left, m=1 and y = -x + c
 // but "y" = -y in screen coords
 // -y = -x + c, y = x - c, x - y = c
 // minimising c means finding the least value of x - y
-std::vector<ofPoint> sortPoints(const std::vector<ofPoint> points)
-{/*
-  auto topLeft = points.begin();
-  auto pointIter = points.begin() ;
-  ++pointIter;
-  for (;pointIter < points.end(); ++pointIter)
-  {
-  if (pointIter->y + pointIter->x < topLeft->y + topLeft->x)
-  {
-  topLeft = pointIter;
-  }
-  }
-  std::vector<ofPoint> sortedPoints;
-  sortedPoints.insert(sortedPoints.begin(), topLeft, points.end());
-  sortedPoints.insert(sortedPoints.end(), points.begin(), topLeft);*/
-    
-    //iPad runs in portrait mode but looks landscape, so top left becomes bottom left
-    
-    auto bottomLeft = points.begin();
+
+//iPad runs in portrait mode but looks landscape, so top left becomes bottom left
+std::vector<ofPoint> sortPoints(const std::vector<ofPoint> points, Location l = BOTTOM_LEFT)
+{
+    std::vector<ofPoint> sortedPoints;
+    auto locatedAtLocation = points.begin();
     auto pointIter = points.begin() ;
     ++pointIter;
     for (;pointIter < points.end(); ++pointIter)
     {
-        if (-pointIter->y + pointIter->x < -bottomLeft->y + bottomLeft->x)
+        if ((l==TOP_LEFT    && ( pointIter->y + pointIter->x <  locatedAtLocation->y + locatedAtLocation->x)) ||
+            (l==BOTTOM_LEFT && (-pointIter->y + pointIter->x < -locatedAtLocation->y + locatedAtLocation->x)) ||
+            (l==BOTTOM_RIGHT&& ( pointIter->y + pointIter->x >  locatedAtLocation->y + locatedAtLocation->x)) ||
+            (l==TOP_RIGHT   && (-pointIter->y + pointIter->x > -locatedAtLocation->y + locatedAtLocation->x)) ||
+            (l==RIGHT       && (pointIter->y > locatedAtLocation->y ))
+            )
         {
-            bottomLeft = pointIter;
+            locatedAtLocation = pointIter;
         }
     }
-    std::vector<ofPoint> sortedPoints;
-    sortedPoints.insert(sortedPoints.begin(), bottomLeft, points.end());
-    sortedPoints.insert(sortedPoints.end(), points.begin(), bottomLeft);
+    sortedPoints.insert(sortedPoints.begin(), locatedAtLocation, points.end());
+    sortedPoints.insert(sortedPoints.end(), points.begin(), locatedAtLocation);
+    
     return sortedPoints;
 }
 
@@ -86,49 +78,61 @@ void LinesSensor::setup(float width, float height)
     storage = cvCreateMemStorage(0);
 }
 
+// 0 = a, 1 = b, 0.5 = in between
+ofPoint interpolate(ofPoint a, ofPoint b, float amount)
+{
+    ofPoint result(a.x*(1-amount)+b.x*amount, a.y*(1-amount) + b.y*amount);
+    return result;
+}
+
+ofPoint calculateAverageTranslate(const std::vector<ofPoint>& a, const std::vector<ofPoint>& b)
+{
+    ofPoint result;
+    int pointsConsidered=0;
+    while (a.size()>pointsConsidered && b.size()>pointsConsidered)
+    {
+        result += (b[pointsConsidered] - a[pointsConsidered]);
+        ++pointsConsidered;
+    }
+    result /= pointsConsidered;
+    return result;
+}
+
 void LinesSensor::analyse(ofxCvColorImage* input)
 {
-    //ColouredBlobSensor::analyse(input);
-    points.clear();
-    //getLinesUsingContours(contours,points);
-    //getLinesUsingSquareFinder(input, points);
-    //return;
+    //points.clear();
+    std::vector<ofPoint> newPoints;
+
     lines.set(0);
     hue = *input;
     
-    
     cvCanny(hue.getCvImage(), lines.getCvImage(), getFloatValue(11), getFloatValue(12));
-    
-    //lines.blurGaussian();
     
     int minBlob = getIntValue(4);
     int maxBlob = getIntValue(5);
-    int numBlobs = getIntValue(6);
     
-    // first get the squares
-    contours.findContours(lines, 80*40, 90*180, 1, false, true);
-    
-    getLinesUsingContours(contours,points);
-    points = sortPoints(points);
+    getRectsOfSize(contours, &lines, newPoints, minBlob, maxBlob);
     
     // then get the lines below
-    if (points.size()<4) return;
+    if (newPoints.size()<4) return;
     
     // Assumes points are ccw
-    float rectHeight = points[0].distance(points[1]);
-    float rectWidth = points[2].distance(points[1]);
+    float rectHeight = newPoints[0].distance(newPoints[1]);
+    float rectWidth = newPoints[2].distance(newPoints[1]);
     
     //float roiOffsetX = points[0].x-(rectWidth/2);
     //float roiOffsetY = points[2].y +rectHeight;
     //float roiWidth = rectWidth * 2;
     //float roiHeight = rectHeight;
     // iPad constraints
-    float roiOffsetX = points[2].x +rectHeight;
-    float roiOffsetY = points[2].y-(rectWidth/2);
+    float roiOffsetX = newPoints[2].x +rectHeight;
+    float roiOffsetY = newPoints[2].y-(rectWidth/2);
     float roiWidth = rectHeight;
     float roiHeight = rectWidth * 2;
     
     lines.setROI(roiOffsetX, roiOffsetY, roiWidth, roiHeight);
+    //
+    // TODO: if we could get a clearer rect for the bottom marker, our recogniser would be better
     contours.findContours(lines, 1, 64, 2, false);
     lines.resetROI();
     
@@ -136,30 +140,60 @@ void LinesSensor::analyse(ofxCvColorImage* input)
     for (auto contIter = contours.blobs.begin();contIter < contours.blobs.end(); ++contIter)
     {
         // remove the offset caused by constraining the ROI
-        
-        //ofPoint unRoiedPoint(contIter->boundingRect.getBottomRight());
-//ipad
-        ofPoint unRoiedPoint(contIter->boundingRect.getTopRight());
+
+        // iPad rotated coords, look for the rightest = find the bottomest
+        ofPoint unRoiedPoint = sortPoints(contIter->pts, RIGHT)[0];
         unRoiedPoint.x += roiOffsetX;
         unRoiedPoint.y += roiOffsetY;
         basePoints.push_back(unRoiedPoint);
     }
     
+    
+    ofPoint tx = calculateAverageTranslate(points, newPoints);
+    if (basePoints.size()==0 && points.size() == 6) // we have a valid point set and a
+    {
+        basePoints.push_back(points[4]+tx);
+        basePoints.push_back(points[5]+tx);
+    }
+    else if (basePoints.size()==1 && points.size()==6)
+    {
+        if (basePoints[0].distance(points[2]) > basePoints[0].distance(points[3])) // on de left hand side
+        {
+            basePoints.push_back(points[4]+tx);
+        }
+        else
+        {
+            basePoints.push_back(points[5]+tx);
+        }
+    }
+    
     basePoints = sortPoints(basePoints);
-    points.insert(points.end(), basePoints.begin(), basePoints.end());
+    newPoints.insert(newPoints.end(), basePoints.begin(), basePoints.end());
     
-    /*CvSeq* foundLines = cvHoughLines2( lines.getCvImage(),
-     storage,
-     CV_HOUGH_PROBABILISTIC,
-     1,
-     CV_PI/180,
-     10,
-     getFloatValue(getParamId("min length")),
-     getFloatValue(getParamId("max length")));*/
+    // experimental average-forcing.  any really unusual points get replaced with where, on average, they might be
     
+    if (points.size() == 6)
+    for (int i = 0; i < newPoints.size(); ++i)
+    {
+        if (abs(newPoints[i].distance(points[i]+tx))>10)
+        {
+            newPoints[i] = points[i]+tx;
+        }
+    }
     
+    if (newPoints.size()!=6) return;
     
-    
+    if (points.size()==newPoints.size())
+    {
+        for (int i = 0; i < newPoints.size(); ++i)
+        {
+            points[i] = interpolate(points[i], newPoints[i], 0.5);
+        }
+    }
+    else
+    {
+        points = newPoints;
+    }
 }
 
 void getLinesUsingSquareFinder(ofxCvColorImage * input, std::vector<ofPoint>& points)
@@ -190,9 +224,11 @@ void getLinesUsingSquareFinder(ofxCvColorImage * input, std::vector<ofPoint>& po
     }
 }
 
-void getLinesUsingContours(ofxCvContourFinder& contours, std::vector<ofPoint>& points)
+void getRectsOfSize(ofxCvContourFinder& contours, ofxCvGrayscaleImage* in, std::vector<ofPoint>& points, unsigned int minSize, unsigned int maxSize)
 {
-    std::vector<ofPoint> smoothedLines;
+    
+    // first get the squares
+    contours.findContours(*in, minSize*minSize, maxSize*maxSize, 1, false, true);
     
     for (int i = 0; i < contours.blobs.size() ;++i)
     {
@@ -213,56 +249,15 @@ void getLinesUsingContours(ofxCvContourFinder& contours, std::vector<ofPoint>& p
         {
             for (int j=0; j<approx.size(); ++j)
             {
-                //ofPoint a; a.x = approx[j-1].x; a.y=approx[j-1].y;
                 ofPoint b; b.x = approx[j].x; b.y=approx[j].y;
-                //points.push_back(a);
                 points.push_back(b);
                 
             }
-            //ofPoint a; a.x = approx[approx.size()-1].x; a.y=approx[approx.size()-1].y;
-            //ofPoint b; b.x = approx[0].x; b.y=approx[0].y;
-            
-            //points.push_back(a);
-            //points.push_back(b);
         }
-        // the two little blobs
-        /*else if (contours.blobs[i].area < 25)
-         {
-         for (int j = 1; j < contours.blobs[i].pts.size() ; ++j)
-         {
-         points.push_back(contours.blobs[i].pts[j-1]);
-         points.push_back(contours.blobs[i].pts[j]);
-         }
-         }*/
-        
-        /*ofxCvBlob& blob = contours.blobs[i];
-         
-         smoothedLines.push_back(blob.pts[0]); // assumes that the start point is nicely aligned on a corner :/
-         
-         float oldTrajectory = atan((blob.pts[1].x - blob.pts[0].x)/(blob.pts[1].y - blob.pts[0].y));
-         for (int j = 1; j < blob.pts.size(); ++j)
-         {
-         // if the angle of trajectory changes too much, start a new line
-         float trajectory = (blob.pts[j].x - blob.pts[j-1].x)>0 ? PI/2: -PI/2; // div0 safety
-         if (blob.pts[j].y != blob.pts[j-1].y)
-         trajectory = atan((float)(blob.pts[j].x - blob.pts[j-1].x)/(float)(blob.pts[j].y - blob.pts[j-1].y));
-         if (abs(trajectory-oldTrajectory)>MAX_ANGLE_CHANGE &&
-         pow(blob.pts[j].x-blob.pts[j-1].x,2)+pow(blob.pts[j].y-blob.pts[j-1].y,2)> MAX_POINT_MOVEMENT
-         )
-         {
-         smoothedLines.push_back(blob.pts[j-1]);
-         }
-         oldTrajectory = trajectory;
-         }
-         if (smoothedLines[smoothedLines.size()-1] != blob.pts[blob.pts.size()-1]) smoothedLines.push_back(blob.pts[blob.pts.size()-1]);
-         //blob.pts = smoothedLines;
-         
-         for (int k = 1; k < smoothedLines.size(); ++k)
-         {
-         points.push_back(smoothedLines[k-1]);
-         points.push_back(smoothedLines[k]);
-         }*/
     }
+    
+    
+    points = sortPoints(points);
     
 }
 
