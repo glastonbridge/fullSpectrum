@@ -1,9 +1,9 @@
 #include "ofMain.h"
 #include "Lens.h"
-#include "ofxiPhone.h"
 
 #ifndef __MACOSX_CORE__
 
+#include "ofxiPhone.h"
 int main(){
 	
     ofSetLogLevel(OF_LOG_VERBOSE);
