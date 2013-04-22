@@ -1612,7 +1612,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Glastonbridge Software Limited";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				GCC_C_LANGUAGE_STANDARD = c99;
@@ -1671,6 +1671,7 @@
 					../of_v0073_ios_release/addons/ofxOpenCv/libs/opencv/lib/ios/zlib.a,
 				);
 				PREBINDING = NO;
+				PROVISIONING_PROFILE = "428B9CFD-2EBD-497F-BD82-1EE1D2EC3C83";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1684,7 +1685,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Glastonbridge Software Limited";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				GCC_C_LANGUAGE_STANDARD = c99;
@@ -1741,6 +1742,7 @@
 					../of_v0073_ios_release/addons/ofxOpenCv/libs/opencv/lib/ios/zlib.a,
 				);
 				PREBINDING = NO;
+				PROVISIONING_PROFILE = "428B9CFD-2EBD-497F-BD82-1EE1D2EC3C83";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				WARNING_LDFLAGS = "-no_arch_warnings";

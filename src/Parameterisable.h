@@ -34,6 +34,7 @@ public:
     float getFloatMin(int index);
     void setFloatValue(int index, float value);
     int getIntValue(int index);
+    int getIntValue(const std::string& name);
     int getIntMax(int index);
     int getIntMin(int index);
     void setIntValue(int index, int value);

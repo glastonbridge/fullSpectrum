@@ -125,6 +125,11 @@ int Parameterisable::getIntValue(int index)
     return ((IntParam *) paramValues[index])->intVal;
 }
 
+int Parameterisable::getIntValue(const std::string& name)
+{
+    return getIntValue(getParamId(name));
+}
+
 int Parameterisable::getIntMax(int index)
 {
     return ((IntParam *) paramValues[index])->intMax;

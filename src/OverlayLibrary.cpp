@@ -24,6 +24,8 @@
 #include "LinesOverlay.h"
 #include "GravityStageOverlay.h"
 #include "PerspectiveVideoOverlay.h"
+#include "StutterOverlay.h"
+#include "RandomStuttersOverlay.h"
 
 Overlay* OverlayLibrary::addOverlay(const std::string& name, const std::string& type)
 {
@@ -87,6 +89,14 @@ Overlay* OverlayLibrary::addOverlay(const std::string& name, const std::string& 
     else if (type.compare(PerspectiveVideoOverlay::NAME) ==0)
     {
         newOverlay = new PerspectiveVideoOverlay;
+    }
+    else if (type.compare(StutterOverlay::NAME) ==0)
+    {
+        newOverlay = new StutterOverlay;
+    }
+    else if (type.compare(RandomStuttersOverlay::NAME) ==0)
+    {
+        newOverlay = new RandomStuttersOverlay;
     }
     if (!newOverlay) return 0; // TODO: exceptions!
     newOverlay->setInstanceName(name);

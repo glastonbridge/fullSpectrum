@@ -1,0 +1,48 @@
+<CueSheet>
+        
+    <Sensor id="stage" type="pose">
+        <Property name="threshold1">46</Property>
+        <Property name="threshold2">104</Property>
+        <Property name="min length">48</Property>
+        <Property name="max length">65</Property>
+        
+        <Property name="hue range">21</Property>
+        <Property name="hue offset">14</Property>
+        <Property name="sat threshold">38</Property>
+        <Property name="val threshold">174</Property>
+        <Property name="val invert">true</Property>
+        <Property name="max blob width">127</Property>
+        <Property name="min blob width">56</Property>
+        <Property name="num blobs">16</Property>
+    </Sensor>
+    
+    <Overlay id="watcher1" type="perspective video">
+        <Property name="video file">Watcher1.m4v</Property>
+        <Property name="scale">0.14</Property>
+        <Property name="xoffset">39.43</Property>
+        <Property name="yoffset">-1.14</Property>
+        
+    </Overlay>
+    
+    <Overlay id="watcher2" type="perspective video">
+        <Property name="video file">Watcher2.m4v</Property>
+        <Property name="scale">0.14</Property>
+        <Property name="xoffset">-55.43</Property>
+        <Property name="yoffset">-1.14</Property>
+        
+    </Overlay>
+    
+    <Effect id="watcher1">
+        <Sensor ref="stage" />
+        <Overlay ref="watcher1" />
+    </Effect>
+    
+    <Effect id="watcher2">
+        <Sensor ref="stage" />
+        <Overlay ref="watcher2" />
+    </Effect>
+    
+    
+    <InitialEffect ref="watcher" />
+    
+</CueSheet>
