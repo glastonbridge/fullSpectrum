@@ -66,6 +66,9 @@
 		FA578551170F3EF9006E9041 /* PerspectiveQuadSensor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA578548170F3EF9006E9041 /* PerspectiveQuadSensor.cpp */; };
 		FA578554170F4414006E9041 /* ImageUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA578552170F4414006E9041 /* ImageUtils.cpp */; };
 		FA733152171C68BB00A03171 /* cue-cubetest.xml in Resources */ = {isa = PBXBuildFile; fileRef = FA733151171C68BB00A03171 /* cue-cubetest.xml */; };
+		FA7331571721555000A03171 /* cue-everything.xml in Resources */ = {isa = PBXBuildFile; fileRef = FA7331561721555000A03171 /* cue-everything.xml */; };
+		FA94758E17240B66006C209B /* cue-dancer1.xml in Resources */ = {isa = PBXBuildFile; fileRef = FA94758D17240B66006C209B /* cue-dancer1.xml */; };
+		FA94759117241E19006C209B /* PerspectiveVideoOverlay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA94759017241E19006C209B /* PerspectiveVideoOverlay.cpp */; };
 		FA99296816A9A5C00048A2AA /* install.xml in Resources */ = {isa = PBXBuildFile; fileRef = FA99293516A9A5C00048A2AA /* install.xml */; };
 		FA99296916A9A5C00048A2AA /* aiColor4D.inl in Resources */ = {isa = PBXBuildFile; fileRef = FA99293D16A9A5C00048A2AA /* aiColor4D.inl */; };
 		FA99296A16A9A5C00048A2AA /* aiMaterial.inl in Resources */ = {isa = PBXBuildFile; fileRef = FA99294316A9A5C00048A2AA /* aiMaterial.inl */; };
@@ -310,6 +313,10 @@
 		FA578552170F4414006E9041 /* ImageUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageUtils.cpp; sourceTree = "<group>"; };
 		FA578553170F4414006E9041 /* ImageUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageUtils.h; sourceTree = "<group>"; };
 		FA733151171C68BB00A03171 /* cue-cubetest.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = "cue-cubetest.xml"; path = "bin/data/cue-cubetest.xml"; sourceTree = "<group>"; };
+		FA7331561721555000A03171 /* cue-everything.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = "cue-everything.xml"; path = "bin/data/cue-everything.xml"; sourceTree = "<group>"; };
+		FA94758D17240B66006C209B /* cue-dancer1.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = "cue-dancer1.xml"; path = "bin/data/cue-dancer1.xml"; sourceTree = "<group>"; };
+		FA94758F17241C71006C209B /* PerspectiveVideoOverlay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PerspectiveVideoOverlay.h; sourceTree = "<group>"; };
+		FA94759017241E19006C209B /* PerspectiveVideoOverlay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PerspectiveVideoOverlay.cpp; sourceTree = "<group>"; };
 		FA99293516A9A5C00048A2AA /* install.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = install.xml; sourceTree = "<group>"; };
 		FA99293916A9A5C00048A2AA /* aiAnim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aiAnim.h; sourceTree = "<group>"; };
 		FA99293A16A9A5C00048A2AA /* aiAssert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aiAssert.h; sourceTree = "<group>"; };
@@ -1186,9 +1193,11 @@
 		FAF62C8E169AFDE000F3CD2D /* assets */ = {
 			isa = PBXGroup;
 			children = (
+				FA7331561721555000A03171 /* cue-everything.xml */,
 				FAD9B84316A0702000BA162B /* beach.blend */,
 				FAD9B7A9169DD91D00BA162B /* smile.png */,
 				FA733151171C68BB00A03171 /* cue-cubetest.xml */,
+				FA94758D17240B66006C209B /* cue-dancer1.xml */,
 			);
 			name = assets;
 			sourceTree = "<group>";
@@ -1228,6 +1237,8 @@
 				FAD683E3169D7F41002FDCFC /* BlobOverlay.h */,
 				FAD683E4169D7FA8002FDCFC /* BlobOverlay.cpp */,
 				FAD683E6169D8FA7002FDCFC /* Overlay.cpp */,
+				FA94758F17241C71006C209B /* PerspectiveVideoOverlay.h */,
+				FA94759017241E19006C209B /* PerspectiveVideoOverlay.cpp */,
 			);
 			name = Overlay;
 			sourceTree = "<group>";
@@ -1438,6 +1449,8 @@
 				FA35465F17185B9E000356BB /* license.md in Resources */,
 				FA35466017185B9E000356BB /* README.md in Resources */,
 				FA733152171C68BB00A03171 /* cue-cubetest.xml in Resources */,
+				FA7331571721555000A03171 /* cue-everything.xml in Resources */,
+				FA94758E17240B66006C209B /* cue-dancer1.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1537,6 +1550,7 @@
 				FA35467517185D10000356BB /* MSAObjCPointer.cpp in Sources */,
 				FABBCD9317194E87000E662D /* VideoOverlayer.cpp in Sources */,
 				FABBCD951719969B000E662D /* Sensor.cpp in Sources */,
+				FA94759117241E19006C209B /* PerspectiveVideoOverlay.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1558,6 +1572,7 @@
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = iPhone_Prefix.pch;
+				GENERATE_PROFILING_CODE = YES;
 				INFOPLIST_FILE = "ofxiphone-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
@@ -1577,6 +1592,7 @@
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = iPhone_Prefix.pch;
+				GENERATE_PROFILING_CODE = NO;
 				INFOPLIST_FILE = "ofxiphone-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (

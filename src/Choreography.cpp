@@ -125,6 +125,11 @@ std::vector<std::string> Choreography::loadCueSheet(std::string path)
     return startEffectNames;
 }
 
+std::vector<Effect*> Choreography::getActiveEffects()
+{
+    return activeEffects;
+}
+
 void Choreography::activateEffect(const std::string &effectName, float width, float height)
 {
     Effect* effect(effects[effectName]);

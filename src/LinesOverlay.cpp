@@ -12,7 +12,7 @@
 // for debug
 #include <sstream>
 
-const bool debugging = true;//false;
+const bool debugging = false;
 
 const ofColor colorList[] = {
     ofColor(255,0,0),
@@ -47,8 +47,6 @@ void LinesOverlay::draw()
     
 	glEnable(GL_DEPTH_TEST);
     
-    float scale = getFloatValue(4);
-    ofPoint modelCentre = model->getSceneCenter();
     //model.setScale(scale, scale, scale);
     
 	glMultMatrixf( sensor->posePOSIT );
@@ -56,20 +54,7 @@ void LinesOverlay::draw()
     //glRotatef(-90,0,0,1);
     ofPushMatrix();
     
-    glTranslatef(getFloatValue(1), getFloatValue(2), getFloatValue(3));
-    
-    glRotatef (getFloatValue(6), 1.0f, 0,0);
-    glRotatef (getFloatValue(7), 0, 1.0f, 0);
-    glRotatef (getFloatValue(8), 0,0, 1.0f);
-    
-    ofTranslate(-modelCentre.x, -modelCentre.y, -modelCentre.z);
-    glScalef(scale, scale, scale);
-    ofTranslate(modelCentre);
-    
-    if (getBoolValue(9))
-        model->drawWireframe();
-    else
-        model->drawFaces();
+    drawModel();
     //mesh.drawFaces();
     ofPopMatrix();
     
@@ -77,17 +62,7 @@ void LinesOverlay::draw()
 	//glEnable( GL_LIGHT0 );
     
     //StageObjectOverlay::draw();
-    if (debugging)
-	for (int i = 0; i < sensor->modelPoints.size(); ++i)
-    {
-        ofSetColor(colorList[i]);
-        CvPoint3D32f& pt = sensor->modelPoints[i];
-        glPushMatrix();
-        glTranslatef(pt.x,pt.y,pt.z);
-        ofBox(2);
-        //renderCube(2);
-        glPopMatrix();
-    }
+
     
 	//renderCube( 10 );
 	//glDisable( GL_LIGHTING );
@@ -128,6 +103,43 @@ void LinesOverlay::setup(float width, float height)
 std::string LinesOverlay::getName() {return NAME;}
 LinesOverlay::LinesOverlay() {}
 
+
+void LinesOverlay::drawModel()
+{
+    float scale = getFloatValue(4);
+    ofPoint modelCentre = model->getSceneCenter();
+    glTranslatef(getFloatValue(1), getFloatValue(2), getFloatValue(3));
+    
+    glRotatef (getFloatValue(6), 1.0f, 0,0);
+    glRotatef (getFloatValue(7), 0, 1.0f, 0);
+    glRotatef (getFloatValue(8), 0,0, 1.0f);
+    
+    ofTranslate(-modelCentre.x, -modelCentre.y, -modelCentre.z);
+    glScalef(scale, scale, scale);
+    ofTranslate(modelCentre);
+    
+    if (getBoolValue(9))
+        model->drawWireframe();
+    else
+        model->drawFaces();
+    
+    if (debugging)
+    {
+        
+        PoseSensor * sensor = dynamic_cast<PoseSensor *>(sensors[0]);
+
+        for (int i = 0; i < sensor->modelPoints.size(); ++i)
+        {
+            ofSetColor(colorList[i]);
+            CvPoint3D32f& pt = sensor->modelPoints[i];
+            glPushMatrix();
+            glTranslatef(pt.x,pt.y,pt.z);
+            ofBox(2);
+            //renderCube(2);
+            glPopMatrix();
+        }
+    }
+}
 
 int LinesOverlay::getGeometry() {return ORTHO;}
 

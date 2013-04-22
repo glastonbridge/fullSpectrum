@@ -5,6 +5,8 @@
 #include "ThreadedNetwork.h"
 #include "PoseSensor.h"
 
+const bool fakeNetworkButton = true;
+
 /**
  * Called once, when the app is opened
  */
@@ -12,7 +14,6 @@ void Lens::setup(){
     
     //If you want a landscape oreintation
 	//iPhoneSetOrientation(OFXIPHONE_ORIENTATION_LANDSCAPE_RIGHT);
-	
 	// initialize the accelerometer (TODO: is we going to use this?)
 	ofxAccelerometer.setup();
 	
@@ -31,15 +32,17 @@ void Lens::setup(){
     // update streamWidth and streamHeight with the correct data.
     //videoIn.allocateVideo(0,0, "fingers.m4v");
     //videoIn.allocateCamera(streamWidth, streamHeight);
-    //videoIn.allocateCamera(streamHeight,streamWidth);
+    videoIn.allocateCamera(streamHeight,streamWidth);
     //streamWidth = videoIn.getWidth();
     //streamHeight = videoIn.getHeight();
     
-    videoIn.allocateVideo(streamWidth, streamHeight, "ipadstyle.mov");
+    //videoIn.allocateVideo(streamWidth, streamHeight, "infrontofmarker.mov");
+    //videoIn.allocateVideo(streamWidth, streamHeight, "watcher1.mov");
     
     videoOverlayer.setVideoInput(&videoIn);
 
-    videoOverlayer.setChoreography("cue-cubetest.xml");
+    //videoOverlayer.setChoreography("cue-everything.xml");
+    videoOverlayer.setChoreography("cue-everything.xml");
     
 }
 
@@ -53,12 +56,31 @@ void Lens::update(){
     videoOverlayer.update();
 }
 
+
 /**
  * Render the display
  */
 void Lens::draw(){
     videoOverlayer.draw();
+    
+    if (fakeNetworkButton)
+    {
+        std::string nextButtonPress;
+        std::vector<Effect *> activeEffects = videoOverlayer.getActiveEffects();
+        for (auto e = activeEffects.begin(); e < activeEffects.end(); ++e)
+        {
+            if (videoOverlayer.getNamedOverlay((*e)->getOverlays()[0])->getName()=="effect change")
+            {
+                nextButtonPress = (*e)->getOverlays()[0];
+                continue;
+            }
+        }
+        ofSetColor(255,0,255);
+        ofDrawBitmapString(std::string("tap to do: ") + nextButtonPress, 20, 20);
+        ofSetColor(255,255,255);
+    }
 }
+
 
 //--------------------------------------------------------------
 void Lens::exit(){
@@ -68,7 +90,19 @@ void Lens::exit(){
 
 //--------------------------------------------------------------
 void Lens::touchDown(ofTouchEventArgs & touch){
-    PoseSensor::requiresRepositioning =true;
+    //PoseSensor::requiresRepositioning =true;
+    if (fakeNetworkButton)
+    {
+        std::vector<Effect *> activeEffects = videoOverlayer.getActiveEffects();
+        for (auto e = activeEffects.begin(); e < activeEffects.end(); ++e)
+        {
+            if (videoOverlayer.getNamedOverlay((*e)->getOverlays()[0])->getName()=="effect change")
+            {
+                std::string pressKey = videoOverlayer.getNamedSensor((*e)->getSensors()[0])->getStringValue("key");
+                ofNotifyEvent(ThreadedNetwork::networkKeypressEvent, pressKey);
+            }
+        }
+    }
 }
 
 //--------------------------------------------------------------

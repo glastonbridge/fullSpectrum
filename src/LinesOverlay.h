@@ -23,6 +23,9 @@ public:
     virtual int getGeometry();
     LinesOverlay();
     
+protected:
+    virtual void drawModel();
+    
 };
 
 #endif

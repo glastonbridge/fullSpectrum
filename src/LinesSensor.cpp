@@ -157,9 +157,9 @@ void LinesSensor::analyse(ofxCvColorImage* input)
     }
     else if (basePoints.size()==1 && points.size()==6)
     {
-        if (basePoints[0].distance(points[2]) > basePoints[0].distance(points[3])) // on de left hand side
+        if (basePoints[0].distance(points[1]) > basePoints[0].distance(points[2])) // on de left hand side
         {
-            basePoints.push_back(points[4]+tx);
+            basePoints.insert(basePoints.begin(), points[4]+tx);
         }
         else
         {
@@ -189,10 +189,13 @@ void LinesSensor::analyse(ofxCvColorImage* input)
         {
             points[i] = interpolate(points[i], newPoints[i], 0.5);
         }
+        averageDistanceShift = ofPoint::zero().distanceSquared(tx);
     }
     else
     {
+        // only called if points has been cleared
         points = newPoints;
+        averageDistanceShift = MAXFLOAT;
     }
 }
 

@@ -99,6 +99,11 @@ float Parameterisable::getFloatValue(int index)
     return ((FloatParam *) paramValues[index])->floatVal;
 }
 
+float Parameterisable::getFloatValue(const std::string& name)
+{
+    return ((FloatParam *) paramValues[getParamId(name)])->floatVal;
+}
+
 float Parameterisable::getFloatMax(int index)
 {
     return ((FloatParam *) paramValues[index])->floatMax;
@@ -150,6 +155,11 @@ void Parameterisable::setBoolValue(int index, bool value)
 std::string Parameterisable::getStringValue(int index)
 {
     return ((StringParam *) paramValues[index])->stringVal;
+}
+
+std::string Parameterisable::getStringValue(const std::string& name)
+{
+    return getStringValue(getParamId(name));
 }
 
 void Parameterisable::setStringValue(int index, const std::string& value)

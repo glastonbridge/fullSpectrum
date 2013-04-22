@@ -7,7 +7,7 @@
 //
 
 #include "CutOutOverlay.h"
-#include "ColouredBlobSensor.h"
+#include "DancerBlobSensor.h"
 
 #include "ImageUtils.h"
 
@@ -21,7 +21,8 @@ CutOutOverlay::CutOutOverlay()
 
 void CutOutOverlay::update(ofxCvColorImage* input)
 {
-    ColouredBlobSensor* blobSensor = dynamic_cast<ColouredBlobSensor*> (sensors[0]);
+    
+    DancerBlobSensor* blobSensor = dynamic_cast<DancerBlobSensor*> (sensors[0]);
     
     if (!displayImage.isAllocated())
     {
@@ -29,28 +30,43 @@ void CutOutOverlay::update(ofxCvColorImage* input)
         displayImage.allocate(width, height ,OF_IMAGE_COLOR_ALPHA);
         pixels = new unsigned char[width*height*4];
     }
-    setAlphaImage(displayImage, *input, blobSensor->val, pixels);
+    setAlphaImage(displayImage, *input, blobSensor->dancerArea, pixels);
+    
+    //darnser = *input; uncomment to do GL alphaing
 }
 
 void CutOutOverlay::draw()
 {
-    /*
-    ColouredBlobSensor* blobSensor = dynamic_cast<ColouredBlobSensor*> (sensors[0]);
-    glDisable(GL_BLEND);
-    glColorMask(0, 0, 0, 1);
-    blobSensor->hue.draw(0,0);
+    DancerBlobSensor* blobSensor = dynamic_cast<DancerBlobSensor*> (sensors[0]);
     
-    glColorMask(1,1,1,0);
-    glEnable(GL_BLEND);
-    glBlendFunc( GL_DST_ALPHA, GL_ONE_MINUS_DST_ALPHA );
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glEnable( GL_BLEND );
     
-    displayImage->draw(0,0);
-     */
-
+    
+    glDisable( GL_DEPTH_TEST );
     displayImage.draw(0,0);
+    glDisable(GL_BLEND);
+    glEnable( GL_DEPTH_TEST );
+    
+    return;
+    // Attempt to use GL to process alpha channel...
+    
+    glEnable ( GL_BLEND);
+    glDisable (GL_DEPTH_TEST);
+    
+//    glBlendFunc(GL_DST_COLOR, GL_ZERO);
+   // glBlendFuncSeparateOES(GL_ZERO, GL_ONE, GL_SRC_COLOR, GL_ZERO);
+    //blobSensor->dancerArea.invert();
+    blobSensor->dancerArea.draw(0,0);
+    
+
+    glBlendFunc(GL_DST_ALPHA, GL_ONE_MINUS_DST_ALPHA);
+    darnser.draw(0,0);
+    glEnable(GL_DEPTH_TEST);
+    glDisable (GL_BLEND);
 }
 
 void CutOutOverlay::setup(float width, float height)
 {
-    
+    darnser.allocate(width, height);
 }

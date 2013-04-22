@@ -27,6 +27,8 @@ public:
 private:
     ofImage displayImage;
     
+    ofxCvColorImage darnser;
+    
 	unsigned char * pixels ;
 };
 

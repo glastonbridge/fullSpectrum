@@ -21,6 +21,13 @@ public:
     virtual void setup(float width, float height);
     virtual void analyse(ofxCvColorImage* input);
     virtual std::string getName();
+    
+    ofxCvGrayscaleImage dancerArea;
+    ofxCvGrayscaleImage lines;
+    ofRectangle lastKnownGood;
+private:
+    ofxCvBlob dancerBlob;
+    int timeout =0;
 };
 
 #endif

@@ -28,6 +28,7 @@ public:
     
     std::vector<Overlay*> getActiveOverlays();
     std::vector<Sensor*> getActiveSensors();
+    std::vector<Effect*> getActiveEffects();
     Overlay* getNamedOverlay(const std::string& name);
     Sensor* getNamedSensor(const std::string& name);
     

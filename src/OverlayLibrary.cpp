@@ -23,6 +23,7 @@
 #include "TeleportOverlay.h"
 #include "LinesOverlay.h"
 #include "GravityStageOverlay.h"
+#include "PerspectiveVideoOverlay.h"
 
 Overlay* OverlayLibrary::addOverlay(const std::string& name, const std::string& type)
 {
@@ -82,6 +83,10 @@ Overlay* OverlayLibrary::addOverlay(const std::string& name, const std::string& 
     else if (type.compare(GravityStageOverlay::NAME) ==0)
     {
         newOverlay = new GravityStageOverlay;
+    }
+    else if (type.compare(PerspectiveVideoOverlay::NAME) ==0)
+    {
+        newOverlay = new PerspectiveVideoOverlay;
     }
     if (!newOverlay) return 0; // TODO: exceptions!
     newOverlay->setInstanceName(name);

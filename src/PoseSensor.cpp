@@ -203,6 +203,7 @@ void cameraPoseFromHomography(std::vector<CvPoint3D32f>& srcPoints, std::vector<
 {
     //if (!PoseSensor::requiresRepositioning) return;
     LinesSensor::analyse(input);
+    if (averageDistanceShift<60) return;
     std::vector<CvPoint2D32f> projectedPoints;
     float halfWidth = _width/2;
     float halfHeight = _height/2;

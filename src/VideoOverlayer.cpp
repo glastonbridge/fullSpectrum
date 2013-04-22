@@ -51,6 +51,11 @@ void VideoOverlayer::update()
     }
 }
 
+std::vector<Effect*> VideoOverlayer::getActiveEffects()
+{
+    return choreography.getActiveEffects();
+}
+
 void VideoOverlayer::draw()
 {
     

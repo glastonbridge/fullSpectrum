@@ -12,15 +12,25 @@
         <Property name="sat threshold">38</Property>
         <Property name="val threshold">174</Property>
         <Property name="val invert">true</Property>
-        <Property name="max blob width">80</Property>
-        <Property name="min blob width">2</Property>
+        <Property name="max blob width">127</Property>
+        <Property name="min blob width">56</Property>
         <Property name="num blobs">16</Property>
     </Sensor>
     
     <Sensor id="dancer" type="dancer blob sensor">
-        <Property name="val threshold">110</Property>
-        <Property name="val invert">true</Property>
+        <Property name="hue range">12</Property>
+        <Property name="hue offset">106</Property>
+        <Property name="sat threshold">0</Property>
+        <Property name="val threshold">45</Property>
+        <Property name="val invert">false</Property>
+        <Property name="min blob width">72</Property>
+        <Property name="max blob width">277</Property>
+        <Property name="num blobs">5</Property>
+        <Property name="threshold1">43</Property>
+        <Property name="threshold2">202</Property>
+        
     </Sensor>
+    
     
     <Sensor id="key-a" type="keypress">
         <Property name="key">a</Property>
@@ -130,7 +140,7 @@
     </Overlay>
     <Overlay id="end scene 1" type="effect change">
         <Property name="to remove">fireplace-cube-fall,fireplace,table,chair,end scene 1</Property>
-        <Property name="to add">start scene 3</Property>
+        <Property name="to add">start scene 2</Property>
     </Overlay>
     
     
@@ -187,8 +197,8 @@
     <InitialEffect ref="drop cube" />
     <InitialEffect ref="table" />
     <!--<InitialEffect ref="person in front of table" />-->
-    <InitialEffect ref="trigger move to back" />
     <InitialEffect ref="chair" />
+    <InitialEffect ref="drop cube" />
     
     <!--------------------------------------------------------------
      SCENE 2
@@ -215,6 +225,75 @@
      3:06
      Cine space grows on one side
      -->
+    <Overlay id="watcher1" type="perspective video">
+        <Property name="video file">Watcher1.m4v</Property>
+        <Property name="scale">0.14</Property>
+        <Property name="xoffset">39.43</Property>
+        <Property name="yoffset">-1.14</Property>
+        
+    </Overlay>
+    
+    <Overlay id="watcher2" type="perspective video">
+        <Property name="video file">Watcher2.m4v</Property>
+        <Property name="scale">0.14</Property>
+        <Property name="xoffset">-55.43</Property>
+        <Property name="yoffset">-1.14</Property>
+        
+    </Overlay>
+    
+    <!-- Effect changes -->
+    <Overlay id="start scene 2" type="effect change">
+        <Property name="to remove">start scene 2</Property>
+        <Property name="to add">add watcher 1</Property>
+    </Overlay>
+    <Overlay id="add watcher 1" type="effect change">
+        <Property name="to remove">add watcher 1</Property>
+        <Property name="to add">remove watcher 1,watcher1</Property>
+    </Overlay>
+    <Overlay id="remove watcher 1" type="effect change">
+        <Property name="to remove">remove watcher 1,watcher1</Property>
+        <Property name="to add">add watcher 2</Property>
+    </Overlay>
+    <Overlay id="add watcher 2" type="effect change">
+        <Property name="to remove">add watcher 2</Property>
+        <Property name="to add">remove watcher 2,watcher2</Property>
+    </Overlay>
+    <Overlay id="remove watcher 2" type="effect change">
+        <Property name="to remove">remove watcher 2,watcher2</Property>
+        <Property name="to add">start scene 3</Property>
+    </Overlay>
+    
+    <Effect id="start scene 2">
+        <Sensor ref="key-a" />
+        <Overlay ref="start scene 2" />
+    </Effect>
+    
+    <Effect id="add watcher 1">
+        <Sensor ref="key-a" />
+        <Overlay ref="add watcher 1" />
+    </Effect>
+    <Effect id="remove watcher 1">
+        <Sensor ref="key-o" />
+        <Overlay ref="remove watcher 1" />
+    </Effect>
+    
+    <Effect id="add watcher 2">
+        <Sensor ref="key-a" />
+        <Overlay ref="add watcher 2" />
+    </Effect>
+    <Effect id="remove watcher 2">
+        <Sensor ref="key-o" />
+        <Overlay ref="remove watcher 2" />
+    </Effect>
+    
+    <Effect id="watcher1">
+        <Sensor ref="stage" />
+        <Overlay ref="watcher1" />
+    </Effect>
+    <Effect id="watcher2">
+        <Sensor ref="stage" />
+        <Overlay ref="watcher2" />
+    </Effect>
     
     
     <!--------------------------------------------------------------
@@ -349,7 +428,7 @@
         <Property name="xoffset">33</Property>
         <Property name="yoffset">30</Property>
         <Property name="zoffset">70</Property>
-        <Property name="scale">4</Property>
+        <Property name="scale">4.2</Property>
         <Property name="yrot">5</Property>
     </Overlay>
     <Overlay id="icecube-1-2" type="lines overlay">
@@ -357,7 +436,7 @@
         <Property name="xoffset">42</Property>
         <Property name="yoffset">30</Property>
         <Property name="zoffset">66</Property>
-        <Property name="scale">4</Property>
+        <Property name="scale">4.2</Property>
         <Property name="yrot">5</Property>
     </Overlay>
     <Overlay id="icecube-1-3" type="lines overlay">
@@ -365,7 +444,7 @@
         <Property name="xoffset">51</Property>
         <Property name="yoffset">30</Property>
         <Property name="zoffset">62</Property>
-        <Property name="scale">4</Property>
+        <Property name="scale">4.2</Property>
         <Property name="yrot">5</Property>
     </Overlay>
     <Overlay id="icecube-1-4" type="lines overlay">
@@ -373,7 +452,7 @@
         <Property name="xoffset">35</Property>
         <Property name="yoffset">30</Property>
         <Property name="zoffset">56</Property>
-        <Property name="scale">4</Property>
+        <Property name="scale">4.2</Property>
         <Property name="yrot">5</Property>
         
     </Overlay>
@@ -382,7 +461,7 @@
         <Property name="xoffset">37</Property>
         <Property name="yoffset">30</Property>
         <Property name="zoffset">42</Property>
-        <Property name="scale">4</Property>
+        <Property name="scale">4.2</Property>
         <Property name="yrot">5</Property>
     </Overlay>
     
@@ -391,7 +470,7 @@
         <Property name="xoffset">33</Property>
         <Property name="yoffset">22</Property>
         <Property name="zoffset">70</Property>
-        <Property name="scale">4</Property>
+        <Property name="scale">4.2</Property>
         <Property name="yrot">5</Property>
     </Overlay>
     <Overlay id="icecube-2-2" type="lines overlay">
@@ -399,7 +478,7 @@
         <Property name="xoffset">42</Property>
         <Property name="yoffset">22</Property>
         <Property name="zoffset">66</Property>
-        <Property name="scale">4</Property>
+        <Property name="scale">4.2</Property>
         <Property name="yrot">5</Property>
     </Overlay>
     <Overlay id="icecube-2-3" type="lines overlay">
@@ -407,7 +486,7 @@
         <Property name="xoffset">51</Property>
         <Property name="yoffset">22</Property>
         <Property name="zoffset">62</Property>
-        <Property name="scale">4</Property>
+        <Property name="scale">4.2</Property>
         <Property name="yrot">5</Property>
     </Overlay>
     <Overlay id="icecube-2-4" type="lines overlay">
@@ -415,7 +494,7 @@
         <Property name="xoffset">35</Property>
         <Property name="yoffset">22</Property>
         <Property name="zoffset">56</Property>
-        <Property name="scale">4</Property>
+        <Property name="scale">4.2</Property>
         <Property name="yrot">5</Property>
         
     </Overlay>
@@ -424,7 +503,7 @@
         <Property name="xoffset">37</Property>
         <Property name="yoffset">22</Property>
         <Property name="zoffset">42</Property>
-        <Property name="scale">4</Property>
+        <Property name="scale">4.2</Property>
         <Property name="yrot">5</Property>
     </Overlay>
     <Overlay id="icecube-3-1" type="lines overlay">
@@ -432,7 +511,7 @@
         <Property name="xoffset">33</Property>
         <Property name="yoffset">14</Property>
         <Property name="zoffset">70</Property>
-        <Property name="scale">4</Property>
+        <Property name="scale">4.2</Property>
         <Property name="yrot">5</Property>
     </Overlay>
     <Overlay id="icecube-3-2" type="lines overlay">
@@ -440,7 +519,7 @@
         <Property name="xoffset">42</Property>
         <Property name="yoffset">14</Property>
         <Property name="zoffset">66</Property>
-        <Property name="scale">4</Property>
+        <Property name="scale">4.2</Property>
         <Property name="yrot">5</Property>
     </Overlay>
     <Overlay id="icecube-3-3" type="lines overlay">
@@ -448,7 +527,7 @@
         <Property name="xoffset">51</Property>
         <Property name="yoffset">14</Property>
         <Property name="zoffset">62</Property>
-        <Property name="scale">4</Property>
+        <Property name="scale">4.2</Property>
         <Property name="yrot">5</Property>
     </Overlay>
     <Overlay id="icecube-3-4" type="lines overlay">
@@ -456,7 +535,7 @@
         <Property name="xoffset">35</Property>
         <Property name="yoffset">14</Property>
         <Property name="zoffset">56</Property>
-        <Property name="scale">4</Property>
+        <Property name="scale">4.2</Property>
         <Property name="yrot">5</Property>
         
     </Overlay>
@@ -465,7 +544,7 @@
         <Property name="xoffset">37</Property>
         <Property name="yoffset">14</Property>
         <Property name="zoffset">42</Property>
-        <Property name="scale">4</Property>
+        <Property name="scale">4.2</Property>
         <Property name="yrot">5</Property>
     </Overlay>
     <Overlay id="icecube-4-1" type="lines overlay">
@@ -473,7 +552,7 @@
         <Property name="xoffset">33</Property>
         <Property name="yoffset">6</Property>
         <Property name="zoffset">70</Property>
-        <Property name="scale">4</Property>
+        <Property name="scale">4.2</Property>
         <Property name="yrot">5</Property>
     </Overlay>
     <Overlay id="icecube-4-2" type="lines overlay">
@@ -481,7 +560,7 @@
         <Property name="xoffset">42</Property>
         <Property name="yoffset">6</Property>
         <Property name="zoffset">66</Property>
-        <Property name="scale">4</Property>
+        <Property name="scale">4.2</Property>
         <Property name="yrot">5</Property>
     </Overlay>
     <Overlay id="icecube-4-3" type="lines overlay">
@@ -489,7 +568,7 @@
         <Property name="xoffset">51</Property>
         <Property name="yoffset">6</Property>
         <Property name="zoffset">62</Property>
-        <Property name="scale">4</Property>
+        <Property name="scale">4.2</Property>
         <Property name="yrot">5</Property>
     </Overlay>
     <Overlay id="icecube-4-4" type="lines overlay">
@@ -497,7 +576,7 @@
         <Property name="xoffset">35</Property>
         <Property name="yoffset">6</Property>
         <Property name="zoffset">56</Property>
-        <Property name="scale">4</Property>
+        <Property name="scale">4.2</Property>
         <Property name="yrot">5</Property>
         
     </Overlay>
@@ -506,7 +585,7 @@
         <Property name="xoffset">37</Property>
         <Property name="yoffset">6</Property>
         <Property name="zoffset">42</Property>
-        <Property name="scale">4</Property>
+        <Property name="scale">4.2</Property>
         <Property name="yrot">5</Property>
     </Overlay>
     <Overlay id="icecube-5-1" type="lines overlay">
@@ -514,7 +593,7 @@
         <Property name="xoffset">33</Property>
         <Property name="yoffset">-2</Property>
         <Property name="zoffset">70</Property>
-        <Property name="scale">4</Property>
+        <Property name="scale">4.2</Property>
         <Property name="yrot">5</Property>
     </Overlay>
     <Overlay id="icecube-5-2" type="lines overlay">
@@ -522,7 +601,7 @@
         <Property name="xoffset">42</Property>
         <Property name="yoffset">-2</Property>
         <Property name="zoffset">66</Property>
-        <Property name="scale">4</Property>
+        <Property name="scale">4.2</Property>
         <Property name="yrot">5</Property>
     </Overlay>
     <Overlay id="icecube-5-3" type="lines overlay">
@@ -530,7 +609,7 @@
         <Property name="xoffset">51</Property>
         <Property name="yoffset">-2</Property>
         <Property name="zoffset">62</Property>
-        <Property name="scale">4</Property>
+        <Property name="scale">4.2</Property>
         <Property name="yrot">5</Property>
     </Overlay>
     <Overlay id="icecube-5-4" type="lines overlay">
@@ -538,7 +617,7 @@
         <Property name="xoffset">35</Property>
         <Property name="yoffset">-2</Property>
         <Property name="zoffset">56</Property>
-        <Property name="scale">4</Property>
+        <Property name="scale">4.2</Property>
         <Property name="yrot">5</Property>
         
     </Overlay>
@@ -547,7 +626,7 @@
         <Property name="xoffset">37</Property>
         <Property name="yoffset">-2</Property>
         <Property name="zoffset">42</Property>
-        <Property name="scale">4</Property>
+        <Property name="scale">4.2</Property>
         <Property name="yrot">5</Property>
     </Overlay>
     

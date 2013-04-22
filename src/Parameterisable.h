@@ -29,6 +29,7 @@ public:
     std::string getParamName(int index);
     int getParamType(int index);
     float getFloatValue(int index);
+    float getFloatValue(const std::string& name);
     float getFloatMax(int index);
     float getFloatMin(int index);
     void setFloatValue(int index, float value);
@@ -39,6 +40,7 @@ public:
     bool getBoolValue(int index);
     void setBoolValue(int index, bool value);
     std::string getStringValue(int index);
+    std::string getStringValue(const std::string& name);
     void setStringValue(int index, const std::string& value);
     
     int getParamId(const std::string& name);

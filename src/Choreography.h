@@ -26,6 +26,7 @@ public:
     std::vector<std::string> loadCueSheet(std::string path);
     void activateEffect(const std::string& effect, float width, float height);
     void removeEffect(const std::string& effect);
+    std::vector<Effect*> getActiveEffects();
 private:
     OverlayLibrary* _overlayLibrary;
     SensorLibrary* _sensorLibrary;

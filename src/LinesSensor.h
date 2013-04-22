@@ -28,6 +28,8 @@ public:
     ofxCvGrayscaleImage lines;
     
     std::vector<ofPoint> points;
+    
+    float averageDistanceShift;
 private:
     ofxCvGrayscaleImage h,s,v;
     ofxCvColorImage hsv;
