@@ -107,13 +107,13 @@ LinesOverlay::LinesOverlay() {}
 void LinesOverlay::drawModel()
 {
     float scale = getFloatValue(4);
-    ofPoint modelCentre = model->getSceneCenter();
     glTranslatef(getFloatValue(1), getFloatValue(2), getFloatValue(3));
     
     glRotatef (getFloatValue(6), 1.0f, 0,0);
     glRotatef (getFloatValue(7), 0, 1.0f, 0);
     glRotatef (getFloatValue(8), 0,0, 1.0f);
     
+    ofPoint modelCentre = model->getSceneCenter();
     ofTranslate(-modelCentre.x, -modelCentre.y, -modelCentre.z);
     glScalef(scale, scale, scale);
     ofTranslate(modelCentre);

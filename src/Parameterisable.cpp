@@ -225,29 +225,30 @@ Parameterisable::~Parameterisable()
 
 void Parameterisable::copyParameters(Parameterisable &dest)
 {
-    std::vector<Param*>::const_iterator myParam = paramValues.begin();
-    for (; myParam < paramValues.end(); ++myParam)
+    for (int i = 0; i < paramValues.size(); ++i)
     {
-        if ((*myParam)->type==PARAM_BOOL)
+        Param* myParam = paramValues[i];
+        if ((myParam)->type==PARAM_BOOL)
         {
-            BoolParam* myBoolParam = dynamic_cast<BoolParam*>(*myParam);
-            dest.paramValues.push_back(new BoolParam(*myBoolParam));
+            BoolParam* myBoolParam = dynamic_cast<BoolParam*>(myParam);
+            dest.paramValues[i] = new BoolParam(*myBoolParam);
         }
-        else if ((*myParam)->type==PARAM_INT)
+        else if ((myParam)->type==PARAM_INT)
         {
-            IntParam* myIntParam = dynamic_cast<IntParam*>(*myParam);
-            dest.paramValues.push_back(new IntParam(*myIntParam));
+            IntParam* myIntParam = dynamic_cast<IntParam*>(myParam);
+            dest.paramValues[i] = new IntParam(*myIntParam);
         }
-        else if ((*myParam)->type==PARAM_FLOAT)
+        else if ((myParam)->type==PARAM_FLOAT)
         {
-            FloatParam* myFloatParam = dynamic_cast<FloatParam*>(*myParam);
-            dest.paramValues.push_back(new FloatParam(*myFloatParam));
+            FloatParam* myFloatParam = dynamic_cast<FloatParam*>(myParam);
+            dest.paramValues[i] = new FloatParam(*myFloatParam);
         }
-        else if ((*myParam)->type==PARAM_FLOAT)
+        else if ((myParam)->type==PARAM_STRING)
         {
-            StringParam* myStringParam = dynamic_cast<StringParam*>(*myParam);
-            dest.paramValues.push_back(new StringParam(*myStringParam));
+            StringParam* myStringParam = dynamic_cast<StringParam*>(myParam);
+            dest.paramValues[i] = new StringParam(*myStringParam);
         }
+        dest.paramChanged(i);
     }
 }
 

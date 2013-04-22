@@ -46,13 +46,13 @@ public:
     int getParamId(const std::string& name);
     
     virtual ~Parameterisable();
+    void copyParameters(Parameterisable& dest);
 protected:
     void addFloatParam(std::string name, float defaultValue, float min, float max);
     void addIntParam(std::string name, int defaultValue, int min, int max);
     void addBoolParam(std::string name, bool defaultValue);
     void addStringParam(const std::string& name, const std::string& defaultValue);
     
-    void copyParameters(Parameterisable& dest);
     
     /** Override this if you want to be notified when a parameter changes */
     virtual void paramChanged(int id);

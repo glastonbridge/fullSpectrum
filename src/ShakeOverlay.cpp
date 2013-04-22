@@ -8,7 +8,7 @@
 
 #include "ShakeOverlay.h"
 
-const std::string ShakeOverlay::NAME = "shake overlay";
+const std::string ShakeOverlay::NAME = "shake object";
 
 std::string ShakeOverlay::getName()
 {
@@ -17,36 +17,65 @@ std::string ShakeOverlay::getName()
 
 ShakeOverlay::ShakeOverlay()
 {
-    addFloatParam("xtension",1,0,4);
-    addFloatParam("xdamping",0.02,0,4);
-    addFloatParam("xoffset",0,-100,100);
-    addFloatParam("xvelocity", 0, -10,10);
-    addFloatParam("xscale",1,0,10);
+    addFloatParam("k", 10, 0, 10);
+    addFloatParam("m",1,0,10);
+    addFloatParam("damping",0,0,1);
+    addFloatParam("tick size",1.0/24.0,0,1);
+    addFloatParam("initial acceleration", 1,0,10);
 }
 
 void ShakeOverlay::setup(float width, float height)
 {
-    
+    LinesOverlay::setup(width, height);
+    displacement.set(0,0,0);
+    velocity.set(0,0,0);
+    acceleration = getFloatValue("initial acceleration");
 }
 
+// F = -kx
+// a = F/m
+// a = -kx/m
+// x = -ma/k
+// x/a = -m/k
 void ShakeOverlay::update(ofxCvColorImage *input)
 {
-    overlayImage = input;
-    float xtension = getFloatValue(0), xdamping = getFloatValue(1),
-    xoffset = getFloatValue(2), xvelocity = getFloatValue(3);
+    LinesOverlay::update(input);
     
-    xtension *= xoffset * xdamping;
-    xvelocity -= xtension;
-    xoffset += xvelocity;
-    float xscale = 1 + 2 * abs(xoffset) / input->getWidth();
+    float tickSize = 0.2;//getFloatValue("tick size");
+    float dv = acceleration*tickSize;
+    for (int i = 0; i < 3; ++i)
+    {
+        if (displacement[i]<0) displacement[i] += ofRandom(dv);
+        else displacement[i] -= ofRandom(dv);
+    }
     
-    setFloatValue(2, xoffset);
-    setFloatValue(3, xvelocity);
-    setFloatValue(4, xscale);
+    /*
+    // update the position based on the velocity, then update the velocity,
+    // finally update acceleration
+    
+    float tickSize = getFloatValue("tick size");
+    ofPoint dx = velocity * tickSize * (1 - getFloatValue("damping"));
+    displacement += dx;
+    
+    float dv = acceleration*tickSize;
+    for (int i = 0; i < 3; ++i)
+    {
+        if (displacement[i]>0) velocity[i] += dv;
+        else velocity[i] -= dv;
+    }
+    
+    // because x is calculated as a positive displacement and k, m, are positive, a is always negative by a = -kx/m
+    float k = getFloatValue("k");
+    float m = getFloatValue("m");
+    float x = abs(displacement.distance(ofPoint(0,0,0)));
+    acceleration = -k*x/m;*/
 }
 
-void ShakeOverlay::draw()
+void ShakeOverlay::drawModel()
 {
-    ofScale(getFloatValue(4), 1);
-    overlayImage->draw(getFloatValue(2),0);
+    ofPushMatrix();
+    ofTranslate(displacement);
+    LinesOverlay::drawModel();
+    ofPopMatrix();
 }
+

@@ -93,9 +93,16 @@ std::vector<std::string> Choreography::loadCueSheet(std::string path)
     {
         std::string overlayType = settings.getAttribute("Overlay", "type", "bad type",i);
         std::string overlayName = settings.getAttribute("Overlay", "id", "bad id",i);
+        std::string overlayInherits = settings.getAttribute("Overlay", "inherits", "",i);
         Overlay* overlay = _overlayLibrary->addOverlay(overlayName, overlayType);
         if (!overlay) ofLog(OF_LOG_ERROR, std::string("could not create overlay of type ") + overlayType);
         settings.pushTag("Overlay",i);
+        if (!overlayInherits.empty())
+        {
+            Overlay* parent = (*_overlayLibrary)[overlayInherits];
+            if (!parent) ofLog(OF_LOG_ERROR, std::string("Cannot inherit non-existent overlay: ")+overlayInherits);
+            parent->copyParameters(*overlay);
+        }
         choreographyLoadValues(settings, overlay);
         settings.popTag();
     }

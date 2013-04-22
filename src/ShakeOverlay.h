@@ -9,9 +9,9 @@
 #ifndef fullSpectrumAnalyser_ShakeOverlay_h
 #define fullSpectrumAnalyser_ShakeOverlay_h
 
-#include "Overlay.h"
+#include "LinesOverlay.h"
 
-class ShakeOverlay : public Overlay
+class ShakeOverlay : public LinesOverlay
 {
 public:
     static const std::string NAME;
@@ -19,10 +19,15 @@ public:
 
     ShakeOverlay();
     virtual void update(ofxCvColorImage* input);
-    virtual void draw();
     virtual void setup(float width, float height);
+    
+    virtual void drawModel();
+    
 private:
-    ofxCvColorImage* overlayImage;
+    ofPoint displacement;
+    ofPoint velocity;
+    float acceleration;
+    float damping;
 };
 
 #endif
