@@ -24,6 +24,11 @@ public:
     LinesOverlay();
     
 protected:
+    /**
+     * In subclasses that use pose estimation from this class, override
+     * drawModel instead of draw, to draw straight into the prepared perspective
+     * geometry
+     */
     virtual void drawModel();
     
 };

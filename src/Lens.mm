@@ -32,11 +32,11 @@ void Lens::setup(){
     // update streamWidth and streamHeight with the correct data.
     //videoIn.allocateVideo(0,0, "fingers.m4v");
     //videoIn.allocateCamera(streamWidth, streamHeight);
-    videoIn.allocateCamera(streamHeight,streamWidth);
+    videoIn.allocateCamera(streamHeight,streamWidth); // 3 ipad
     //streamWidth = videoIn.getWidth();
     //streamHeight = videoIn.getHeight();
     
-    //videoIn.allocateVideo(streamWidth, streamHeight, "infrontofmarker.mov");
+    videoIn.allocateVideo(streamWidth, streamHeight, "infrontofmarker.mov");
     //videoIn.allocateVideo(streamWidth, streamHeight, "watcher1.mov");
     
     videoOverlayer.setVideoInput(&videoIn);

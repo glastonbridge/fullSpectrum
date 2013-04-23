@@ -28,7 +28,10 @@ void StutterOverlay::update(ofxCvColorImage* input)
             state=STATE_STUTTERING;
         }
     }
+    if (state==STATE_STUTTERING)
+        *input = loopImages[frame % numLoopImages];
     ++frame;
+    
 }
 
 void StutterOverlay::startAStutter(int numImages, float width, float height)

@@ -32,6 +32,8 @@
 		E4D8936E11527B74007E1F53 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4D8936B11527B74007E1F53 /* main.mm */; };
 		E4D8936F11527B74007E1F53 /* Lens.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4D8936D11527B74007E1F53 /* Lens.mm */; };
 		FA2036C1169D76F900DECBB8 /* SensorLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA2036C0169D76F900DECBB8 /* SensorLibrary.cpp */; };
+		FA2EB8E31725CEE50082FFED /* RandomStuttersOverlay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA2EB8DF1725CEE50082FFED /* RandomStuttersOverlay.cpp */; };
+		FA2EB8E41725CEE50082FFED /* StutterOverlay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA2EB8E11725CEE50082FFED /* StutterOverlay.cpp */; };
 		FA35465E17185B9E000356BB /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = FA35464217185B9E000356BB /* .gitignore */; };
 		FA35465F17185B9E000356BB /* license.md in Resources */ = {isa = PBXBuildFile; fileRef = FA35464317185B9E000356BB /* license.md */; };
 		FA35466017185B9E000356BB /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FA35464417185B9E000356BB /* README.md */; };
@@ -232,6 +234,10 @@
 		E4D8936D11527B74007E1F53 /* Lens.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Lens.mm; path = src/Lens.mm; sourceTree = SOURCE_ROOT; };
 		FA2036BE169D76A400DECBB8 /* SensorLibrary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SensorLibrary.h; sourceTree = "<group>"; };
 		FA2036C0169D76F900DECBB8 /* SensorLibrary.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SensorLibrary.cpp; sourceTree = "<group>"; };
+		FA2EB8DF1725CEE50082FFED /* RandomStuttersOverlay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RandomStuttersOverlay.cpp; sourceTree = "<group>"; };
+		FA2EB8E01725CEE50082FFED /* RandomStuttersOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RandomStuttersOverlay.h; sourceTree = "<group>"; };
+		FA2EB8E11725CEE50082FFED /* StutterOverlay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StutterOverlay.cpp; sourceTree = "<group>"; };
+		FA2EB8E21725CEE50082FFED /* StutterOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StutterOverlay.h; sourceTree = "<group>"; };
 		FA35463317185B69000356BB /* MSAPhysics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSAPhysics.h; sourceTree = "<group>"; };
 		FA35463417185B69000356BB /* MSAPhysics2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSAPhysics2D.h; sourceTree = "<group>"; };
 		FA35463517185B69000356BB /* MSAPhysics3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSAPhysics3D.h; sourceTree = "<group>"; };
@@ -1205,6 +1211,10 @@
 		FAF62C91169B178D00F3CD2D /* Overlay */ = {
 			isa = PBXGroup;
 			children = (
+				FA2EB8DF1725CEE50082FFED /* RandomStuttersOverlay.cpp */,
+				FA2EB8E01725CEE50082FFED /* RandomStuttersOverlay.h */,
+				FA2EB8E11725CEE50082FFED /* StutterOverlay.cpp */,
+				FA2EB8E21725CEE50082FFED /* StutterOverlay.h */,
 				FA35466C17185C55000356BB /* GravityStageOverlay.cpp */,
 				FA35466D17185C55000356BB /* GravityStageOverlay.h */,
 				FA57851C170F3EA9006E9041 /* LinesOverlay.cpp */,
@@ -1551,6 +1561,8 @@
 				FABBCD9317194E87000E662D /* VideoOverlayer.cpp in Sources */,
 				FABBCD951719969B000E662D /* Sensor.cpp in Sources */,
 				FA94759117241E19006C209B /* PerspectiveVideoOverlay.cpp in Sources */,
+				FA2EB8E31725CEE50082FFED /* RandomStuttersOverlay.cpp in Sources */,
+				FA2EB8E41725CEE50082FFED /* StutterOverlay.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

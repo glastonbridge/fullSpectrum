@@ -27,14 +27,17 @@ class GravityStageOverlay : public LinesOverlay
 public:
     static const std::string NAME;
     virtual void update(ofxCvColorImage* input);
-    virtual void draw();
+    //virtual void draw();
     virtual void setup(float width, float height);
     virtual std::string getName();
     
     GravityStageOverlay();
-private:
+    ~GravityStageOverlay();
+protected:
     msa::physics::World3D world;
-    std::auto_ptr<ModelParticleBinding> binding;
+    virtual void drawModel();
+    std::vector<ModelParticleBinding*> bindings;
+    void addACube(const ofVec3f& position);
 };
 
 #endif

@@ -11,6 +11,13 @@
 ModelParticleBinding::ModelParticleBinding(ofxAssimpModelLoader& myModel, msa::physics::World3D& myWorld, const ofVec3f& initialPosition) : model(myModel), world(myWorld)
 {
     
+    ofVec3f centre = model.getSceneCenter();
+    particles.push_back(new msa::physics::Particle3D(initialPosition+centre));
+    addToWorld(world);
+    
+    /* The previous way of doing it modeled the corners of the cube.  For simplicity we're ignoring this.
+     It's actually quite unclear how to link the corners together in a rigid cube arrangement anyway
+     
     // This top/right/front nomenclature is arbitrary for the sake of traversing a cube.
     // x = height, y=span, z=depth
     // We create a cube from the outer bounds of the object and make physics particles from them.
@@ -50,6 +57,7 @@ ModelParticleBinding::ModelParticleBinding(ofxAssimpModelLoader& myModel, msa::p
     originalPositions.push_back(nodeTopRightFront+initialPosition);
     
     addToWorld(world);
+     */
 
 }
 
@@ -69,14 +77,23 @@ void ModelParticleBinding::addToWorld(msa::physics::World3D& world)
     for (; particle < particles.end(); ++particle)
     {
         (*particle)->setBounce(0.2);
-        (*particle)->setRadius(1);
+        (*particle)->setRadius(5);
         world.addParticle(*particle);
-        auto previousParticle = particles.begin();
+        //auto previousParticle = particles.begin();
         
         // mesh all particles together
-        for (;previousParticle < particle; ++previousParticle)
-        {
-            world.makeSpring(*particle, *previousParticle, 1, (*particle)->getPosition().distance((*previousParticle)->getPosition()));//->setForceCap(0.01);
-        }
+        //for (;previousParticle < particle; ++previousParticle)
+        //{
+            //world.makeSpring(*particle, *previousParticle, 1, (*particle)->getPosition().distance((*previousParticle)->getPosition()));//->setForceCap(0.01);
+        //}
     }
 }
+
+ModelParticleBinding::~ModelParticleBinding()
+{
+    for (auto particle = particles.begin(); particle < particles.end(); ++particle)
+    {
+        (*particle)->kill();
+    }
+}
+

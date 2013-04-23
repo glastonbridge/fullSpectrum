@@ -119,13 +119,9 @@
         <Property name="scale">2.64</Property>
         <Property name="wireframe">false</Property>
     </Overlay>
-    <Overlay id="fireplace-cube-fall" type="gravity object">
-        <Property name="source">objs/icecube_w.obj</Property>
-        <Property name="xoffset">37.14</Property>
-        <Property name="yoffset">4.5</Property>
-        <Property name="zoffset">14.8</Property>
-        <Property name="scale">2.64</Property>
-        <Property name="wireframe">false</Property>
+    <Overlay id="fireplace-cube-shake" type="shake object" inherits="fireplace-cube" />
+    <Overlay id="fireplace-cube-fall" type="gravity object" inherits="fireplace-cube">
+        <Property name="zoffset">16.8</Property>
     </Overlay>
     <Overlay id="personplacer" type="cut out overlay">
     </Overlay>
@@ -134,9 +130,13 @@
     <Overlay id="putpersonbehind" type="effect change">
         <Property name="to remove">person in front of table,trigger move to back</Property>
     </Overlay>
+    <Overlay id="shake cube" type="effect change">
+        <Property name="to remove">fireplace-cube,shake cube</Property>
+        <Property name="to add">fireplace-cube-shake,drop cube</Property>
+    </Overlay>
     <Overlay id="drop cube" type="effect change">
-        <Property name="to remove">fireplace-cube,drop cube</Property>
-        <Property name="to add">fireplace-cube-fall,end scene 1 </Property>
+        <Property name="to remove">fireplace-cube-shake,drop cube</Property>
+        <Property name="to add">fireplace-cube-fall,end scene 1</Property>
     </Overlay>
     <Overlay id="end scene 1" type="effect change">
         <Property name="to remove">fireplace-cube-fall,fireplace,table,chair,end scene 1</Property>
@@ -165,6 +165,10 @@
         <Sensor ref="stage" />
         <Overlay ref="fireplace-cube" />
     </Effect>
+    <Effect id="fireplace-cube-shake">
+        <Sensor ref="stage" />
+        <Overlay ref="fireplace-cube-shake" />
+    </Effect>
     <Effect id="fireplace-cube-fall">
         <Sensor ref="stage" />
         <Overlay ref="fireplace-cube-fall" />
@@ -182,6 +186,10 @@
         <Sensor ref="key-a" />
         <Overlay ref="putpersonbehind" />
     </Effect>
+    <Effect id="shake cube">
+        <Sensor ref="key-e" />
+        <Overlay ref="shake cube" />
+    </Effect>
     <Effect id="drop cube">
         <Sensor ref="key-o" />
         <Overlay ref="drop cube" />
@@ -194,11 +202,10 @@
     <!--<InitialEffect ref="floor" />-->
     <InitialEffect ref="fireplace" />
     <InitialEffect ref="fireplace-cube" />
-    <InitialEffect ref="drop cube" />
+    <InitialEffect ref="shake cube" />
     <InitialEffect ref="table" />
     <!--<InitialEffect ref="person in front of table" />-->
     <InitialEffect ref="chair" />
-    <InitialEffect ref="drop cube" />
     
     <!--------------------------------------------------------------
      SCENE 2
@@ -322,14 +329,28 @@
     <!-- Overlays -->
     <Overlay id="cine" type="cine overlay">
     </Overlay>
+    <Overlay id="stutter1" type="random stutters" />
+    <Overlay id="stutter2" type="random stutters">
+        <Property name="max wait frames">5</Property>
+        <Property name="max stutter length">10</Property>
+    </Overlay>
+    
     
     <!-- Effect changes -->
     <Overlay id="start scene 3" type="effect change">
         <Property name="to remove">start scene 3</Property>
-        <Property name="to add">cine,end scene 3</Property>
+        <Property name="to add">cine,start stutter</Property>
+    </Overlay>
+    <Overlay id="start stutter" type="effect change">
+        <Property name="to remove">start stutter</Property>
+        <Property name="to add">more stutter,stutter1</Property>
+    </Overlay>
+    <Overlay id="more stutter" type="effect change">
+        <Property name="to remove">more stutter,stutter1</Property>
+        <Property name="to add">stutter2,end scene 3</Property>
     </Overlay>
     <Overlay id="end scene 3" type="effect change">
-        <Property name="to remove">cine,end scene 3</Property>
+        <Property name="to remove">cine,end scene 3,stutter2</Property>
         <Property name="to add">table,chair,fireplace,end scene 4</Property>
     </Overlay>
     
@@ -345,6 +366,22 @@
     <Effect id="cine">
         <Sensor ref="dumb" />
         <Overlay ref="cine" />
+    </Effect>
+    <Effect id="start stutter">
+        <Sensor ref="key-o" />
+        <Overlay ref="start stutter" />
+    </Effect>
+    <Effect id="more stutter">
+        <Sensor ref="key-a" />
+        <Overlay ref="more stutter" />
+    </Effect>
+    <Effect id="stutter1">
+        <Sensor ref="dumb" />
+        <Overlay ref="stutter1" />
+    </Effect>
+    <Effect id="stutter2">
+        <Sensor ref="dumb" />
+        <Overlay ref="stutter2" />
     </Effect>
     
     <!--------------------------------------------------------------

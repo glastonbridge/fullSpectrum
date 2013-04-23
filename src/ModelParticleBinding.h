@@ -21,6 +21,7 @@ class ModelParticleBinding
 {
 public:
     ModelParticleBinding(ofxAssimpModelLoader& myModel, msa::physics::World3D& myWorld, const ofVec3f& initialPosition);
+    ~ModelParticleBinding();
     ofVec3f getModelTranslation();
     ofVec3f getModelRotation();
 private:
