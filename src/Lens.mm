@@ -15,7 +15,7 @@ void Lens::setup(){
     //If you want a landscape oreintation
 	//iPhoneSetOrientation(OFXIPHONE_ORIENTATION_LANDSCAPE_RIGHT);
 	// initialize the accelerometer (TODO: is we going to use this?)
-	ofxAccelerometer.setup();
+	//ofxAccelerometer.setup();
 	
     ThreadedNetwork::instance = new ThreadedNetwork;
     ThreadedNetwork::instance->start();
@@ -28,20 +28,13 @@ void Lens::setup(){
     streamHeight = 1280;
     streamWidth = 720;
     
-    // Request a camera/video.  May not be exactly the dimensions requested, so
-    // update streamWidth and streamHeight with the correct data.
-    //videoIn.allocateVideo(0,0, "fingers.m4v");
-    //videoIn.allocateCamera(streamWidth, streamHeight);
-    videoIn.allocateCamera(streamHeight,streamWidth); // 3 ipad
-    //streamWidth = videoIn.getWidth();
-    //streamHeight = videoIn.getHeight();
+    // Request a camera/video.
+    videoIn.allocateCamera(streamHeight,streamWidth); //  ipad camera needs to be allocated in landscape, regardless of screen
     
-    videoIn.allocateVideo(streamWidth, streamHeight, "infrontofmarker.mov");
-    //videoIn.allocateVideo(streamWidth, streamHeight, "watcher1.mov");
+    //videoIn.allocateVideo(streamWidth, streamHeight, "infrontofmarker.mov");
     
     videoOverlayer.setVideoInput(&videoIn);
 
-    //videoOverlayer.setChoreography("cue-everything.xml");
     videoOverlayer.setChoreography("cue-everything.xml");
     
 }

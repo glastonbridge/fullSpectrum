@@ -10,6 +10,7 @@
 #define fullSpectrumAnalyser_CineOverlay_h
 
 #include "Overlay.h"
+#include "CineFilter.h"
 
 class CineOverlay : public Overlay
 {
@@ -21,10 +22,7 @@ public:
     virtual std::string getName();
 protected:
     
-    ofFbo cineFbo;
-
-private:
-    ofxCvGrayscaleImage cineImage;
+    CineFilter cineFilter;
 };
 
 #endif

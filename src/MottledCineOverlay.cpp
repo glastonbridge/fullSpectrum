@@ -14,17 +14,14 @@ const std::string MottledCineOverlay::NAME = "mottled cine";
 void MottledCineOverlay::update(ofxCvColorImage* input)
 {
     CineOverlay::update(input);
-    cineFbo.readToPixels(pixelBuffer);
-    ofxCvColorImage cineImageWithFlickers;
-    cineImageWithFlickers.allocate(input->getWidth(), input->getHeight());
-    cineImageWithFlickers.setFromPixels(pixelBuffer);
-    setAlphaImage(alphaImage, cineImageWithFlickers, maskImage, tempPixelSpace);
+    setAlphaImage(alphaImage, cineFilter.getImage(), maskImage, tempPixelSpace);
 }
 
 void MottledCineOverlay::draw()
 {
     ofEnableAlphaBlending();
     alphaImage.draw(0,0);
+    //cineFilter.draw();
     //ofImage toast;
     //toast.allocate(alphaImage.getWidth(), alphaImage.getHeight(), OF_IMAGE_GRAYSCALE);
     //toast.setFromPixels(alphaMask.getPixels(), alphaImage.getWidth(), alphaImage.getHeight(), OF_IMAGE_GRAYSCALE);
@@ -36,7 +33,7 @@ void MottledCineOverlay::setup(float width, float height)
 {
     CineOverlay::setup(width, height);
     
-    alphaImage.allocate(width,height,OF_IMAGE_COLOR_ALPHA);
+    alphaImage.allocate(width,height,OF_IMAGE_COLOR_ALPHA); // sohuld be rgbaimage
     alphaMask.allocate(width, height, 1);
     pixelBuffer.allocate(width, height, 3);
     tempPixelSpace = new unsigned char[(int)(4*width*height)];

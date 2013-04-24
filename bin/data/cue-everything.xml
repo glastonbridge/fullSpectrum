@@ -247,6 +247,8 @@
         <Property name="yoffset">-1.14</Property>
         
     </Overlay>
+    <Overlay id="patchy cine" type="mottled cine" />
+    <Overlay id="half cine" type="divided cine" />
     
     <!-- Effect changes -->
     <Overlay id="start scene 2" type="effect change">
@@ -267,7 +269,15 @@
     </Overlay>
     <Overlay id="remove watcher 2" type="effect change">
         <Property name="to remove">remove watcher 2,watcher2</Property>
-        <Property name="to add">start scene 3</Property>
+        <Property name="to add">add patchy cine</Property>
+    </Overlay>
+    <Overlay id="add patchy cine" type="effect change">
+        <Property name="to remove">add patchy cine</Property>
+        <Property name="to add">patchy cine,add half cine</Property>
+    </Overlay>
+    <Overlay id="add half cine" type="effect change">
+        <Property name="to remove">patchy cine,add half cine</Property>
+        <Property name="to add">half cine,start scene 3</Property>
     </Overlay>
     
     <Effect id="start scene 2">
@@ -300,6 +310,24 @@
     <Effect id="watcher2">
         <Sensor ref="stage" />
         <Overlay ref="watcher2" />
+    </Effect>
+    
+    
+    <Effect id="add patchy cine">
+        <Sensor ref="key-a" />
+        <Overlay ref="add patchy cine" />
+    </Effect>
+    <Effect id="add half cine">
+        <Sensor ref="key-o" />
+        <Overlay ref="add half cine" />
+    </Effect>
+    <Effect id="patchy cine">
+        <Sensor ref="dumb" />
+        <Overlay ref="patchy cine" />
+    </Effect>
+    <Effect id="half cine">
+        <Sensor ref="stage" />
+        <Overlay ref="half cine" />
     </Effect>
     
     
@@ -338,7 +366,7 @@
     
     <!-- Effect changes -->
     <Overlay id="start scene 3" type="effect change">
-        <Property name="to remove">start scene 3</Property>
+        <Property name="to remove">half cine,start scene 3</Property>
         <Property name="to add">cine,start stutter</Property>
     </Overlay>
     <Overlay id="start stutter" type="effect change">
@@ -411,7 +439,7 @@
     
     <Overlay id="end scene 4" type="effect change">
         <Property name="to remove">table,chair,fireplace,end scene 4</Property>
-        <Property name="to add">add icecube set 1</Property>
+        <Property name="to add">start cube rain</Property>
     </Overlay>
     
     <Effect id="end scene 4">
@@ -457,6 +485,37 @@
      Prison starts to build
      -->
     
+    <!-- Overlays -->
+    <Overlay id="rain" type="cube rain">
+        <Property name="source">objs/icecube_b.obj</Property>
+    </Overlay>
+    
+    <!-- Effect changes -->
+    <Overlay id="start cube rain" type="effect change">
+        <Property name="to add">rain,stop cube rain</Property>
+        <Property name="to remove">start cube rain</Property>
+    </Overlay>
+    <Overlay id="stop cube rain" type="effect change">
+        <Property name="to add">add icecube set 1</Property>
+        <Property name="to remove">rain,stop cube rain</Property>
+    </Overlay>
+    
+    <!-- Effects -->
+    
+    <Effect id="rain">
+        <Sensor ref="stage" />
+        <Overlay ref="rain" />
+    </Effect>
+    
+    
+    <Effect id="start cube rain">
+        <Sensor ref="key-o" />
+        <Overlay ref="start cube rain" />
+    </Effect>
+    <Effect id="stop cube rain">
+        <Sensor ref="key-e" />
+        <Overlay ref="stop cube rain" />
+    </Effect>
     
     <!-- Overlays -->
     

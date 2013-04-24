@@ -35,22 +35,22 @@ public:
     static bool requiresRepositioning;
     
     virtual bool isPersistent();
+	CvMat* intrinsics = cvCreateMat( 3, 3, CV_32F );
 private:
     
     // Experimental FindExtrinsicCameraParams datatypes.  We just box and unbox into these as necessary
-    CvMat* extrinsicObject;
+    /*CvMat* extrinsicObject;
     CvMat *rot_mat = cvCreateMat( 3, 3, CV_32FC1);
     CvMat* projectedPointsF = cvCreateMat(6, 2, CV_32FC1);
     CvMat *rotation_vector = cvCreateMat( 1, 3, CV_32FC1);
-    CvMat *translation_vector2 = cvCreateMat( 1, 3, CV_32FC1);
+    CvMat *translation_vector2 = cvCreateMat( 1, 3, CV_32FC1);*/
     
     float _width, _height;
     
-	CvMat* intrinsics = cvCreateMat( 3, 3, CV_32F );
     
     CvPOSITObject *positObject;
     
-    void orientUsingECP(std::vector<CvPoint2D32f>& projectedPoints, CvMatr32f rotation_matrix, CvVect32f translation_vector);
+    //void orientUsingECP(std::vector<CvPoint2D32f>& projectedPoints, CvMatr32f rotation_matrix, CvVect32f translation_vector);
     
 };
 

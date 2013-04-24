@@ -11,6 +11,12 @@
 
 #include "StageObjectOverlay.h"
 
+/**
+ * The amazingly badly-named LinesOverlay is the base class for using a PoseSensor to create
+ * a posited view in 3D
+ *
+ * Rather than overriding draw(), you should override drawModel() to draw your models in the camera space
+ */
 class LinesOverlay : public StageObjectOverlay
 {
 public:

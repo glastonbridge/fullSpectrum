@@ -83,18 +83,18 @@ void createOpenGLProjectionMatrix( float* projectionMatrix, CvMat* intrinsics, c
     
     positObject = cvCreatePOSITObject( &modelPoints[0], static_cast<int>(modelPoints.size()) );
     
-    extrinsicObject = cvCreateMat(3, 6, CV_32FC1);
+    /*extrinsicObject = cvCreateMat(3, 6, CV_32FC1);
 
     for(int i = 0; i < modelPoints.size(); ++i)
     {
         cvSetReal2D(extrinsicObject,0,i, modelPoints[i].x);
         cvSetReal2D(extrinsicObject,1,i, modelPoints[i].y);
         cvSetReal2D(extrinsicObject,2,i, 0.0);
-    }
+    }*/
     
     
 }
-
+/*
 void PoseSensor::orientUsingECP(std::vector<CvPoint2D32f>& projectedPoints, CvMatr32f rotation_matrix, CvVect32f translation_vector_in)
 {
     int i=0;
@@ -197,7 +197,7 @@ void cameraPoseFromHomography(std::vector<CvPoint3D32f>& srcPoints, std::vector<
     for (int i = 0; i < 3; ++i)
         for (int j = 0; j < 4; ++j)
             poseArray[i*4+j] = pose.at<float>(i,j);
-}
+}*/
 
  void PoseSensor::analyse(ofxCvColorImage* input)
 {

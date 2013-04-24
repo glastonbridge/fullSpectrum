@@ -45,15 +45,17 @@ void GravityStageOverlay::drawModel()
 
 void GravityStageOverlay::setup(float width, float height)
 {
+    
     LinesOverlay::setup(width,height);
     world.clear();
-    world.setGravity(ofVec3f(0,1,0));
-    world.setWorldMin(ofVec3f(-100,-30,-100)); // -30 = the location of the floor according to our marker.
-    world.setWorldMax(ofVec3f(100,200,100));
-    world.setTimeStep(1.0f/30);
+    world.clear();
+    world.setGravity(ofVec3f(0,-0.1,0));
+    world.setWorldMin(ofVec3f(-100,-60,-100));
+    world.setWorldMax(ofVec3f(100,100,100));
+    world.setTimeStep(1.0f/20);
     world.enableCollision();
     ofVec3f translate(getFloatValue(1), getFloatValue(2), getFloatValue(3));
-    bindings.push_back( new ModelParticleBinding(*model,world,translate));
+    bindings.push_back( new ModelParticleBinding(*model,world,ofVec3f()-translate));
 }
 
 std::string GravityStageOverlay::getName() {return NAME;}

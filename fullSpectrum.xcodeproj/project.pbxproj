@@ -35,6 +35,9 @@
 		FA2EB8E31725CEE50082FFED /* RandomStuttersOverlay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA2EB8DF1725CEE50082FFED /* RandomStuttersOverlay.cpp */; };
 		FA2EB8E41725CEE50082FFED /* StutterOverlay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA2EB8E11725CEE50082FFED /* StutterOverlay.cpp */; };
 		FA2EB8EC1726DE550082FFED /* MottledCineOverlay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA2EB8EA1726DE550082FFED /* MottledCineOverlay.cpp */; };
+		FA2EB8FA1727FA910082FFED /* CineFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA2EB8F61727FA900082FFED /* CineFilter.cpp */; };
+		FA2EB8FB1727FA910082FFED /* DividedCine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA2EB8F81727FA900082FFED /* DividedCine.cpp */; };
+		FA2EB8FE1727FB750082FFED /* CubeRainOverlay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA2EB8FC1727FB750082FFED /* CubeRainOverlay.cpp */; };
 		FA35465E17185B9E000356BB /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = FA35464217185B9E000356BB /* .gitignore */; };
 		FA35465F17185B9E000356BB /* license.md in Resources */ = {isa = PBXBuildFile; fileRef = FA35464317185B9E000356BB /* license.md */; };
 		FA35466017185B9E000356BB /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FA35464417185B9E000356BB /* README.md */; };
@@ -241,6 +244,12 @@
 		FA2EB8E21725CEE50082FFED /* StutterOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StutterOverlay.h; sourceTree = "<group>"; };
 		FA2EB8EA1726DE550082FFED /* MottledCineOverlay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MottledCineOverlay.cpp; sourceTree = "<group>"; };
 		FA2EB8EB1726DE550082FFED /* MottledCineOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MottledCineOverlay.h; sourceTree = "<group>"; };
+		FA2EB8F61727FA900082FFED /* CineFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CineFilter.cpp; sourceTree = "<group>"; };
+		FA2EB8F71727FA900082FFED /* CineFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CineFilter.h; sourceTree = "<group>"; };
+		FA2EB8F81727FA900082FFED /* DividedCine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DividedCine.cpp; sourceTree = "<group>"; };
+		FA2EB8F91727FA900082FFED /* DividedCine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DividedCine.h; sourceTree = "<group>"; };
+		FA2EB8FC1727FB750082FFED /* CubeRainOverlay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CubeRainOverlay.cpp; sourceTree = "<group>"; };
+		FA2EB8FD1727FB750082FFED /* CubeRainOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CubeRainOverlay.h; sourceTree = "<group>"; };
 		FA35463317185B69000356BB /* MSAPhysics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSAPhysics.h; sourceTree = "<group>"; };
 		FA35463417185B69000356BB /* MSAPhysics2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSAPhysics2D.h; sourceTree = "<group>"; };
 		FA35463517185B69000356BB /* MSAPhysics3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSAPhysics3D.h; sourceTree = "<group>"; };
@@ -1214,6 +1223,12 @@
 		FAF62C91169B178D00F3CD2D /* Overlay */ = {
 			isa = PBXGroup;
 			children = (
+				FA2EB8FC1727FB750082FFED /* CubeRainOverlay.cpp */,
+				FA2EB8FD1727FB750082FFED /* CubeRainOverlay.h */,
+				FA2EB8F61727FA900082FFED /* CineFilter.cpp */,
+				FA2EB8F71727FA900082FFED /* CineFilter.h */,
+				FA2EB8F81727FA900082FFED /* DividedCine.cpp */,
+				FA2EB8F91727FA900082FFED /* DividedCine.h */,
 				FA2EB8EA1726DE550082FFED /* MottledCineOverlay.cpp */,
 				FA2EB8EB1726DE550082FFED /* MottledCineOverlay.h */,
 				FA2EB8DF1725CEE50082FFED /* RandomStuttersOverlay.cpp */,
@@ -1569,6 +1584,9 @@
 				FA2EB8E31725CEE50082FFED /* RandomStuttersOverlay.cpp in Sources */,
 				FA2EB8E41725CEE50082FFED /* StutterOverlay.cpp in Sources */,
 				FA2EB8EC1726DE550082FFED /* MottledCineOverlay.cpp in Sources */,
+				FA2EB8FA1727FA910082FFED /* CineFilter.cpp in Sources */,
+				FA2EB8FB1727FA910082FFED /* DividedCine.cpp in Sources */,
+				FA2EB8FE1727FB750082FFED /* CubeRainOverlay.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
