@@ -13,14 +13,13 @@ const std::string CineOverlay::NAME = "cine overlay";
 void CineOverlay::update(ofxCvColorImage* input)
 {
     cineImage = *input;
-}
-void CineOverlay::draw()
-{
-    //cineImage.setROI(cineImage.width/2, 0,cineImage.width/2, cineImage.height);
+    
+    cineFbo.begin();
+    ofClear(0,0,0,255);
+    
     int cineImageHeight = 0;
     if ((random() & 7) ==0) cineImageHeight -= random() % 5;
     cineImage.draw(0,0);
-//    cineImage.setROI(0, 0,cineImage.width, cineImage.height);
     
     ofSetColor(10,10,10);
     for (int i = 0; i < 5; ++i)
@@ -32,9 +31,20 @@ void CineOverlay::draw()
         ofLine(speckStartX, speckStartY, speckEndX, speckEndY);
     }
     ofSetColor(0xFF, 0xFF, 0xFF);
+    
+    cineFbo.end();
+    
+}
+void CineOverlay::draw()
+{
+    cineFbo.draw(0,0);
 }
 void CineOverlay::setup(float width, float height)
 {
     cineImage.allocate(width,height);
+    cineFbo.allocate(width,height,GL_RGB);
+    cineFbo.begin();
+    ofClear(0,0,0,255);
+    cineFbo.end();
 }
 std::string CineOverlay::getName() { return NAME; }

@@ -19,6 +19,10 @@ public:
     virtual void draw();
     virtual void setup(float width, float height);
     virtual std::string getName();
+protected:
+    
+    ofFbo cineFbo;
+
 private:
     ofxCvGrayscaleImage cineImage;
 };

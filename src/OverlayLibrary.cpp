@@ -27,6 +27,7 @@
 #include "StutterOverlay.h"
 #include "RandomStuttersOverlay.h"
 #include "CubeRainOverlay.h"
+#include "MottledCineOverlay.h"
 
 Overlay* OverlayLibrary::addOverlay(const std::string& name, const std::string& type)
 {
@@ -102,6 +103,10 @@ Overlay* OverlayLibrary::addOverlay(const std::string& name, const std::string& 
     else if (type.compare(CubeRainOverlay::NAME) ==0)
     {
         newOverlay = new CubeRainOverlay;
+    }
+    else if (type.compare(MottledCineOverlay::NAME) ==0)
+    {
+        newOverlay = new MottledCineOverlay;
     }
     if (!newOverlay) return 0; // TODO: exceptions!
     newOverlay->setInstanceName(name);
