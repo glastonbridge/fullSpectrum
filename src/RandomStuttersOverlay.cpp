@@ -37,7 +37,9 @@ RandomStuttersOverlay::RandomStuttersOverlay()
 
  void RandomStuttersOverlay::setup(float width, float height)
 {
-    // don't call through to super, as that just triggers a stutter
+    CineOverlay::setup(width, height);
+    // don't call through to stutteroverlay, as that just triggers a stutter
+    // call cineoverlay as that still needs setting up
     nextEventCountdown = getIntValue("max wait frames");
 }
 
