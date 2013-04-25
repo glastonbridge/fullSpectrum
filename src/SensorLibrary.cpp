@@ -15,6 +15,7 @@
 #include "KeypressSensor.h"
 #include "LinesSensor.h"
 #include "PoseSensor.h"
+#include "Pose2Sensor.h"
 
 #include <algorithm>
 
@@ -80,6 +81,10 @@ Sensor* SensorLibrary::addSensor(const std::string& id, const std::string& type)
     else if (type == PoseSensor::NAME)
     {
         newSensor = new PoseSensor;
+    }
+    else if (type == Pose2Sensor::NAME)
+    {
+        newSensor = new Pose2Sensor;
     }
     newSensor->setInstanceName(id);
     sensors[id] = newSensor;
