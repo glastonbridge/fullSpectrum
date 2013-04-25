@@ -9,9 +9,9 @@
 #ifndef fullSpectrumAnalyser_StutterOverlay_h
 #define fullSpectrumAnalyser_StutterOverlay_h
 
-#include "Overlay.h"
+#include "CineOverlay.h"
 
-class StutterOverlay : public Overlay
+class StutterOverlay : public CineOverlay
 {
 public: 
     static const std::string NAME;

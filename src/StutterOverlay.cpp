@@ -19,9 +19,10 @@ StutterOverlay::StutterOverlay() : state(STATE_OFF)
 
 void StutterOverlay::update(ofxCvColorImage* input)
 {
+    CineOverlay::update(input);
     if (state==STATE_FILLING)
     {
-        loopImages[frame] = *input;
+        loopImages[frame] = cineFilter.getImage();
         
         if (frame + 1>=numLoopImages)
         {
@@ -52,6 +53,7 @@ void StutterOverlay::stopStuttering()
 
 void StutterOverlay::setup(float width, float height)
 {
+    CineOverlay::setup(width, height);
     startAStutter(getIntValue("loop length"), width, height);
 }
 
@@ -60,6 +62,10 @@ void StutterOverlay::draw()
     if (state==STATE_STUTTERING)
     {
         loopImages[frame % numLoopImages].draw(0,0);
+    }
+    else
+    {
+        CineOverlay::draw();
     }
 }
 
