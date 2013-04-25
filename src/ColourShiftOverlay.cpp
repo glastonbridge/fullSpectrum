@@ -35,21 +35,21 @@ void ColourShiftOverlay::update(ofxCvColorImage *input)
     h.set( getIntValue(0));
     shiftImage.setFromGrayscalePlanarImages(h,s,v);
     shiftImage.convertHsvToRgb();
-    v.threshold(getIntValue(1));
-    v.invert();
-    setAlphaImage(outImage, shiftImage, v, pixels);
+    //v.threshold(getIntValue(1));
+    //v.invert();
+    //setAlphaImage(outImage, shiftImage, v, pixels);
     
-    outImage.setFromPixels(pixels,(int)input->width, (int)input->height, OF_IMAGE_COLOR_ALPHA);
-    int imageShiftValue = getIntValue(0);
-    imageShiftValue += 2;
-    imageShiftValue %= 255;
-    setIntValue(0, imageShiftValue);
+    //outImage.setFromPixels(pixels,(int)input->width, (int)input->height, OF_IMAGE_COLOR_ALPHA);
+    //int imageShiftValue = getIntValue(0);
+    //imageShiftValue += 2;
+    //imageShiftValue %= 255;
+    //setIntValue(0, imageShiftValue);
 }
 
 void ColourShiftOverlay::draw()
 {
     ofColor(0,255,0);
-    outImage.draw(0,0);
+    shiftImage.draw(0,0);
     //v.draw(0,0);
 }
 
