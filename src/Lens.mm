@@ -35,7 +35,7 @@ void Lens::setup(){
     
     videoOverlayer.setVideoInput(&videoIn);
 
-    videoOverlayer.setChoreography("cue-cine.xml");
+    videoOverlayer.setChoreography("cue-everything.xml");
     
 }
 

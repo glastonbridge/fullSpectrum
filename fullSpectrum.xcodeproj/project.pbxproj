@@ -39,6 +39,7 @@
 		FA2EB8FB1727FA910082FFED /* DividedCine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA2EB8F81727FA900082FFED /* DividedCine.cpp */; };
 		FA2EB8FE1727FB750082FFED /* CubeRainOverlay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA2EB8FC1727FB750082FFED /* CubeRainOverlay.cpp */; };
 		FA2EB9031729498D0082FFED /* cue-cine.xml in Resources */ = {isa = PBXBuildFile; fileRef = FA2EB9021729498D0082FFED /* cue-cine.xml */; };
+		FA2EB90A172964140082FFED /* Pose2Sensor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA2EB908172964140082FFED /* Pose2Sensor.cpp */; };
 		FA35465E17185B9E000356BB /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = FA35464217185B9E000356BB /* .gitignore */; };
 		FA35465F17185B9E000356BB /* license.md in Resources */ = {isa = PBXBuildFile; fileRef = FA35464317185B9E000356BB /* license.md */; };
 		FA35466017185B9E000356BB /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FA35464417185B9E000356BB /* README.md */; };
@@ -252,6 +253,8 @@
 		FA2EB8FC1727FB750082FFED /* CubeRainOverlay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CubeRainOverlay.cpp; sourceTree = "<group>"; };
 		FA2EB8FD1727FB750082FFED /* CubeRainOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CubeRainOverlay.h; sourceTree = "<group>"; };
 		FA2EB9021729498D0082FFED /* cue-cine.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = "cue-cine.xml"; path = "bin/data/cue-cine.xml"; sourceTree = "<group>"; };
+		FA2EB908172964140082FFED /* Pose2Sensor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Pose2Sensor.cpp; sourceTree = "<group>"; };
+		FA2EB909172964140082FFED /* Pose2Sensor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pose2Sensor.h; sourceTree = "<group>"; };
 		FA35463317185B69000356BB /* MSAPhysics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSAPhysics.h; sourceTree = "<group>"; };
 		FA35463417185B69000356BB /* MSAPhysics2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSAPhysics2D.h; sourceTree = "<group>"; };
 		FA35463517185B69000356BB /* MSAPhysics3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSAPhysics3D.h; sourceTree = "<group>"; };
@@ -1279,6 +1282,8 @@
 		FAF62C9C169B49E300F3CD2D /* Sensor */ = {
 			isa = PBXGroup;
 			children = (
+				FA2EB908172964140082FFED /* Pose2Sensor.cpp */,
+				FA2EB909172964140082FFED /* Pose2Sensor.h */,
 				FA57853D170F3EF9006E9041 /* LinesSensor.cpp */,
 				FA57853E170F3EF9006E9041 /* PoseSensor.h */,
 				FA57853F170F3EF9006E9041 /* PoseSensor.cpp */,
@@ -1591,6 +1596,7 @@
 				FA2EB8FA1727FA910082FFED /* CineFilter.cpp in Sources */,
 				FA2EB8FB1727FA910082FFED /* DividedCine.cpp in Sources */,
 				FA2EB8FE1727FB750082FFED /* CubeRainOverlay.cpp in Sources */,
+				FA2EB90A172964140082FFED /* Pose2Sensor.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
