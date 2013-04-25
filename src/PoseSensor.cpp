@@ -67,7 +67,7 @@ void createOpenGLProjectionMatrix( float* projectionMatrix, CvMat* intrinsics, c
 
  void PoseSensor::setup(float width, float height)
 {
-    LinesSensor::setup(width, height);
+    Pose2Sensor::setup(width, height);
     _width = width; _height = height;
     
     float cubeSize = 15.0;
@@ -202,7 +202,7 @@ void cameraPoseFromHomography(std::vector<CvPoint3D32f>& srcPoints, std::vector<
  void PoseSensor::analyse(ofxCvColorImage* input)
 {
     //if (!PoseSensor::requiresRepositioning) return;
-    LinesSensor::analyse(input);
+    Pose2Sensor::analyse(input);
     if (averageDistanceShift<60) return;
     std::vector<CvPoint2D32f> projectedPoints;
     float halfWidth = _width/2;

@@ -9,11 +9,12 @@
 #ifndef fullSpectrumAnalyser_PoseSensor_h
 #define fullSpectrumAnalyser_PoseSensor_h
 
-#include "LinesSensor.h"
+//#include "LinesSensor.h"
+#include "Pose2Sensor.h"
 
 //class CvMat;
 
-class PoseSensor : public LinesSensor
+class PoseSensor : public Pose2Sensor
 {
 public:
     static const std::string NAME;
