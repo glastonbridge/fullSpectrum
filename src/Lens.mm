@@ -29,13 +29,13 @@ void Lens::setup(){
     streamWidth = 720;
     
     // Request a camera/video.
-    videoIn.allocateCamera(streamHeight,streamWidth); //  ipad camera needs to be allocated in landscape, regardless of screen
+    //videoIn.allocateCamera(streamHeight,streamWidth); //  ipad camera needs to be allocated in landscape, regardless of screen
     
-    //videoIn.allocateVideo(streamWidth, streamHeight, "infrontofmarker.mov");
+    videoIn.allocateVideo(streamWidth, streamHeight, "infrontofmarker.mov");
     
     videoOverlayer.setVideoInput(&videoIn);
 
-    videoOverlayer.setChoreography("cue-everything.xml");
+    videoOverlayer.setChoreography("cue-cine.xml");
     
 }
 

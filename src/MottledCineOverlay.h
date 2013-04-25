@@ -10,6 +10,7 @@
 #define fullSpectrumAnalyser_MottledCineOverlay_h
 
 #include "CineOverlay.h"
+#include "CineFilter.h"
 
 class MottledCineOverlay : public CineOverlay
 {
@@ -19,14 +20,6 @@ public:
     virtual void draw();
     virtual void setup(float width, float height);
     virtual std::string getName();
-private:
-    ofImage     alphaImage;
-    ofPixels     alphaMask;
-    ofPixels    pixelBuffer;
-    unsigned char* tempPixelSpace;
-    
-    ofxCvGrayscaleImage maskImage;
-
 };
 
 #endif

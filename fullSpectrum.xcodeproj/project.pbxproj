@@ -38,6 +38,7 @@
 		FA2EB8FA1727FA910082FFED /* CineFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA2EB8F61727FA900082FFED /* CineFilter.cpp */; };
 		FA2EB8FB1727FA910082FFED /* DividedCine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA2EB8F81727FA900082FFED /* DividedCine.cpp */; };
 		FA2EB8FE1727FB750082FFED /* CubeRainOverlay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA2EB8FC1727FB750082FFED /* CubeRainOverlay.cpp */; };
+		FA2EB9031729498D0082FFED /* cue-cine.xml in Resources */ = {isa = PBXBuildFile; fileRef = FA2EB9021729498D0082FFED /* cue-cine.xml */; };
 		FA35465E17185B9E000356BB /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = FA35464217185B9E000356BB /* .gitignore */; };
 		FA35465F17185B9E000356BB /* license.md in Resources */ = {isa = PBXBuildFile; fileRef = FA35464317185B9E000356BB /* license.md */; };
 		FA35466017185B9E000356BB /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FA35464417185B9E000356BB /* README.md */; };
@@ -250,6 +251,7 @@
 		FA2EB8F91727FA900082FFED /* DividedCine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DividedCine.h; sourceTree = "<group>"; };
 		FA2EB8FC1727FB750082FFED /* CubeRainOverlay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CubeRainOverlay.cpp; sourceTree = "<group>"; };
 		FA2EB8FD1727FB750082FFED /* CubeRainOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CubeRainOverlay.h; sourceTree = "<group>"; };
+		FA2EB9021729498D0082FFED /* cue-cine.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = "cue-cine.xml"; path = "bin/data/cue-cine.xml"; sourceTree = "<group>"; };
 		FA35463317185B69000356BB /* MSAPhysics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSAPhysics.h; sourceTree = "<group>"; };
 		FA35463417185B69000356BB /* MSAPhysics2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSAPhysics2D.h; sourceTree = "<group>"; };
 		FA35463517185B69000356BB /* MSAPhysics3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSAPhysics3D.h; sourceTree = "<group>"; };
@@ -1211,6 +1213,7 @@
 		FAF62C8E169AFDE000F3CD2D /* assets */ = {
 			isa = PBXGroup;
 			children = (
+				FA2EB9021729498D0082FFED /* cue-cine.xml */,
 				FA7331561721555000A03171 /* cue-everything.xml */,
 				FAD9B84316A0702000BA162B /* beach.blend */,
 				FAD9B7A9169DD91D00BA162B /* smile.png */,
@@ -1481,6 +1484,7 @@
 				FA733152171C68BB00A03171 /* cue-cubetest.xml in Resources */,
 				FA7331571721555000A03171 /* cue-everything.xml in Resources */,
 				FA94758E17240B66006C209B /* cue-dancer1.xml in Resources */,
+				FA2EB9031729498D0082FFED /* cue-cine.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
