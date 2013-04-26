@@ -46,6 +46,8 @@ void LinesOverlay::draw()
     ofSetColor(255, 255, 255, 255);
     
 	glEnable(GL_DEPTH_TEST);
+    glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHT0);
     
     //model.setScale(scale, scale, scale);
     
@@ -57,6 +59,8 @@ void LinesOverlay::draw()
     drawModel();
     //mesh.drawFaces();
     ofPopMatrix();
+    glDisable(GL_LIGHT0);
+    glDisable(GL_LIGHTING);
     
 	//glEnable( GL_LIGHTING );
 	//glEnable( GL_LIGHT0 );
@@ -76,12 +80,14 @@ void LinesOverlay::draw()
     glLoadMatrixf(storeModelView);
     
     if (debugging)
-    for (int i = 0; i < sensor->points.size(); ++i)
     {
-        ofSetColor(colorList[i]);
-        ofCircle(sensor->points[i], 2);
+        std::vector<ofPoint> points = sensor->getPoints();
+        for (int i = 0; i < points.size(); ++i)
+        {
+            ofSetColor(colorList[i]);
+            ofCircle(points[i], 2);
+        }
     }
-    
     //ofRect(0,0,100,100);
     
     //sensor->lines.draw(0,0);
