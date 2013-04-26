@@ -75,8 +75,8 @@ void createOpenGLProjectionMatrix( float* projectionMatrix, CvMat* intrinsics, c
     modelPoints.push_back(cvPoint3D32f(0.0f, cubeSize, 0.0f));
     modelPoints.push_back(cvPoint3D32f(cubeSize,cubeSize, 0.0f));
     modelPoints.push_back(cvPoint3D32f(cubeSize, 0.0f, 0.0f));
-    modelPoints.push_back(cvPoint3D32f(0.0f, 2*cubeSize, 2*cubeSize));
-    modelPoints.push_back(cvPoint3D32f(cubeSize, 2*cubeSize, 2*cubeSize));
+    modelPoints.push_back(cvPoint3D32f(0.0f, 2*cubeSize, 1.5*cubeSize));
+    modelPoints.push_back(cvPoint3D32f(cubeSize, 2*cubeSize, 1.5*cubeSize));
   
 	initializeIntrinsics( intrinsics, width, height );
 	createOpenGLProjectionMatrix(projectionMatrix, intrinsics, width, height, 1.0, 1000.0 );
@@ -203,10 +203,11 @@ void cameraPoseFromHomography(std::vector<CvPoint3D32f>& srcPoints, std::vector<
 {
     //if (!PoseSensor::requiresRepositioning) return;
     Pose2Sensor::analyse(input);
-    if (averageDistanceShift<60) return;
+    //if (averageDistanceShift<5) return;
     std::vector<CvPoint2D32f> projectedPoints;
     float halfWidth = _width/2;
     float halfHeight = _height/2;
+    std::vector<ofPoint> points = getPoints();
     for (int i=0; i<points.size(); ++i)
     {
         // POSIT points originate from the centre of the screen and y is inverted, so shift (0,0) and invert the y axis

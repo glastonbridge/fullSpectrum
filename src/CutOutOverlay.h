@@ -10,6 +10,7 @@
 #define fullSpectrumAnalyser_CutOutOverlay_h
 
 #include "Overlay.h"
+#include "CineFilter.h"
 
 class CutOutOverlay : public Overlay
 {
@@ -25,11 +26,8 @@ public:
     virtual void setup(float width, float height);
     
 private:
-    ofImage displayImage;
-    
+    ofFbo dancerFbo;
     ofxCvColorImage darnser;
-    
-	unsigned char * pixels ;
 };
 
 #endif

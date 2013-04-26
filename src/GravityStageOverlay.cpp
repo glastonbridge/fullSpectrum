@@ -50,7 +50,7 @@ void GravityStageOverlay::setup(float width, float height)
     world.clear();
     world.clear();
     world.setGravity(ofVec3f(0,-0.1,0));
-    world.setWorldMin(ofVec3f(-100,-60,-100));
+    world.setWorldMin(ofVec3f(-100,-30,-100));
     world.setWorldMax(ofVec3f(100,100,100));
     world.setTimeStep(1.0f/20);
     world.enableCollision();

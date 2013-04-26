@@ -30,9 +30,6 @@ void MottledCineOverlay::update(ofxCvColorImage* input)
     
     ofSetColor(0,0,0,255);
     
-    
-    
-    
     glColorMask(1, 1, 1, 1);
     ofSetColor(255,255,255,255);
     cineFilter.getFbo().end();

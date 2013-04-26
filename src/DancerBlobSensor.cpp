@@ -129,24 +129,26 @@ void DancerBlobSensor::analyse(ofxCvColorImage* input)
     
     if (dancerBlob.nPts)
     {
-        dancerArea.set(0);
-        CvPoint* points = new CvPoint[dancerBlob.nPts];
+        //dancerArea.set(0);
+        //CvPoint* points = new CvPoint[dancerBlob.nPts];
+        dancerVector.clear();
         for (int i = 0; i < dancerBlob.nPts; ++i)
         {
-            points[i].x = dancerBlob.pts[i].x*2;
-            points[i].y = dancerBlob.pts[i].y*2;
+            //points[i].x = dancerBlob.pts[i].x*2;
+            //points[i].y = dancerBlob.pts[i].y*2;
+            dancerVector.push_back(dancerBlob.pts[i]*2);
         }
-        CvPoint* pointSet[1] = {points};
-        int numPts[1] = {dancerBlob.nPts};
-        cvFillPoly(dancerArea.getCvImage(), pointSet, numPts, 1, cvScalar(255,255,255));
-        delete points;
+        //ssCvPoint* pointSet[1] = {points};
+        //ssint numPts[1] = {dancerBlob.nPts};
+        //cvFillPoly(dancerArea.getCvImage(), pointSet, numPts, 1, cvScalar(255,255,255));
+        //delete points;
         //dancerArea.erode();
         //dancerArea.blur();
-        /*lastKnownGood.x = dancerBlob.boundingRect.x;
-        lastKnownGood.y = dancerBlob.boundingRect.y;
+        /*lastKnownGood.x += dancerBlob.boundingRect.x;
+        lastKnownGood.y += dancerBlob.boundingRect.y;
         lastKnownGood.width = dancerBlob.boundingRect.width;
         lastKnownGood.height = dancerBlob.boundingRect.height;
-        timeout=24;*/
+        if (timeout<=0) timeout=3;*/
     }
     else
     {

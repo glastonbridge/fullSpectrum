@@ -15,7 +15,8 @@ Pose2Sensor::Pose2Sensor() {}
 
 void Pose2Sensor::setup(float width, float height)
 {
-    ColouredBlobSensor::setup(width,height);
+    ColouredBlobSensor::setup(width/2,height/2);
+    halfInput.allocate(width/2, height/2);
 }
 
 
@@ -99,7 +100,27 @@ static ofPoint calculateAverageTranslate(const std::vector<ofPoint>& a, const st
 
 void Pose2Sensor::analyse(ofxCvColorImage* input)
 {
-    ColouredBlobSensor::analyse(input);
+    halfInput.scaleIntoMe(*input);
+    
+    
+    
+    ////////////////////////////////
+    
+    
+    val = halfInput;
+    
+    int valVal = getIntValue(3);
+    val.threshold(valVal);
+    bool valInv = getBoolValue(7);
+    if (valInv) val.invert();
+    
+    int minBlob = getIntValue(4);
+    int maxBlob = getIntValue(5);
+    int numBlobs = getIntValue(6);
+    contours.findContours(val, minBlob*minBlob, maxBlob * maxBlob, numBlobs, false, true);
+    
+    ////////////////////////////////
+    //ColouredBlobSensor::analyse(&halfInput);
     
     //points.clear();
     std::vector<ofPoint> newPoints;
@@ -123,11 +144,12 @@ void Pose2Sensor::analyse(ofxCvColorImage* input)
     float roiWidth = rectHeight;
     float roiHeight = rectWidth * 2;
     
-    hue.setROI(roiOffsetX, roiOffsetY, roiWidth, roiHeight);
+    val.setROI(roiOffsetX, roiOffsetY, roiWidth, roiHeight);
+    val.blur();
     //
     // TODO: if we could get a clearer rect for the bottom marker, our recogniser would be better
-    contours.findContours(hue, 1, 32*32, 2, false);
-    hue.resetROI();
+    contours.findContours(val, 1, 8*8, 2, false);
+    val.resetROI();
     
     std::vector<ofPoint> basePoints;
     for (auto contIter = contours.blobs.begin();contIter < contours.blobs.end(); ++contIter)
@@ -135,7 +157,8 @@ void Pose2Sensor::analyse(ofxCvColorImage* input)
         // remove the offset caused by constraining the ROI
         
         // iPad rotated coords, look for the rightest = find the bottomest
-        ofPoint unRoiedPoint = sortPoints(contIter->pts, RIGHT)[0];
+        //ofPoint unRoiedPoint = sortPoints(contIter->pts, RIGHT)[0];
+        ofPoint unRoiedPoint = contIter->centroid;
         unRoiedPoint.x += roiOffsetX;
         unRoiedPoint.y += roiOffsetY;
         basePoints.push_back(unRoiedPoint);
@@ -196,4 +219,12 @@ std::string Pose2Sensor::getName()
     return NAME;
 }
 
-
+std::vector<ofPoint> Pose2Sensor::getPoints()
+{
+    std::vector<ofPoint> doubledPoints;
+    for (auto point = points.begin(); point < points.end(); ++point)
+    {
+        doubledPoints.push_back((*point)*2);
+    }
+    return doubledPoints;
+}

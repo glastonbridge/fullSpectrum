@@ -25,6 +25,8 @@ public:
     ofxCvGrayscaleImage dancerArea;
     ofxCvGrayscaleImage lines;
     ofRectangle lastKnownGood;
+    
+    std::vector<ofPoint> dancerVector;
 private:
     ofxCvBlob dancerBlob;
     int timeout =0;

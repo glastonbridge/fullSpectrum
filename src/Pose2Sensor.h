@@ -22,10 +22,16 @@ public:
     virtual void setup(float width, float height);
     virtual void analyse(ofxCvColorImage* input);
     virtual std::string getName();
-    
-    std::vector<ofPoint> points;
+
+    std::vector<ofPoint> getPoints();
 
     float averageDistanceShift;
+
+private:
+
+    std::vector<ofPoint> points;
+
+    ofxCvColorImage halfInput;
 };
 
 #endif

@@ -12,9 +12,10 @@
         <Property name="sat threshold">5</Property>
         <Property name="val threshold">125</Property>
         <Property name="val invert">true</Property>
-        <Property name="max blob width">110</Property>
-        <Property name="min blob width">80</Property>
-        <Property name="num blobs">4</Property>
+        <Property name="max blob width">60</Property>
+        <Property name="min blob width">40</Property>
+        <Property name="num blobs">16</Property>
+        <Property name="contour on val">true</Property>
     </Sensor>
     
     <Sensor id="dancer" type="dancer blob sensor">
@@ -232,6 +233,18 @@
      3:06
      Cine space grows on one side
      -->
+    
+    
+    <Overlay id="colour shift 1" type="colour shift overlay">
+        <Property name="shift amount">170</Property>
+    </Overlay>
+    <Overlay id="colour shift 2" type="colour shift overlay">
+        <Property name="shift amount">40</Property>
+    </Overlay>
+    <Overlay id="colour shift 3" type="colour shift overlay">
+        <Property name="shift amount">140</Property>
+    </Overlay>
+    
     <Overlay id="watcher1" type="perspective video">
         <Property name="video file">Watcher1.m4v</Property>
         <Property name="scale">0.14</Property>
@@ -297,6 +310,8 @@
     <Effect id="add watcher 2">
         <Sensor ref="key-a" />
         <Overlay ref="add watcher 2" />
+        
+        <Overlay ref="colour shift 1" />
     </Effect>
     <Effect id="remove watcher 2">
         <Sensor ref="key-o" />
@@ -306,10 +321,12 @@
     <Effect id="watcher1">
         <Sensor ref="stage" />
         <Overlay ref="watcher1" />
+        <Overlay ref="colour shift 2" />
     </Effect>
     <Effect id="watcher2">
         <Sensor ref="stage" />
         <Overlay ref="watcher2" />
+        <Overlay ref="colour shift 3" />
     </Effect>
     
     
