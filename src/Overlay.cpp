@@ -18,6 +18,8 @@ int Overlay::getGeometry()
     return ORTHO;
 }
 
+void Overlay::teardown() {}
+
 void Overlay::setChoreography(Choreography* newChoreography)
 {
     choreography = newChoreography;

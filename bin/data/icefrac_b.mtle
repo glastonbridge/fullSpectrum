@@ -1,0 +1,13 @@
+# Blender MTL File: 'icecube_onetex.blend'
+# Material Count: 1
+
+newmtl MemoryCubeB
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.143910 0.273543 0.500000
+Ni 1.000000
+d 0.393701
+illum 2
+map_Kd /home/digitalstages/Desktop/TEAMS/EPHEMERIS/Workfiles/IceCubes/tex/Ice0002_1_L.png
+map_d /home/digitalstages/Desktop/TEAMS/EPHEMERIS/Workfiles/IceCubes/tex/Ice0002_1_L.png

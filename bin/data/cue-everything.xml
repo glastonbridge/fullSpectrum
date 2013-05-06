@@ -88,21 +88,39 @@
     </Overlay>
     <Overlay id="table" type="lines overlay">
         <Property name="source">objs/table.obj</Property>
-        <Property name="xoffset">3.71</Property>
+        <Property name="xoffset">-17.71</Property>
         <Property name="yoffset">27.57</Property>
-        <Property name="zoffset">20</Property>
+        <Property name="zoffset">6</Property>
         <Property name="scale">7</Property>
         <Property name="wireframe">false</Property>
         <Property name="yrot">25</Property>
     </Overlay>
     <Overlay id="chair" type="lines overlay">
         <Property name="source">objs/chair.obj</Property>
-        <Property name="xoffset">37.14</Property>
+        <Property name="xoffset">42.14</Property>
         <Property name="yoffset">25.57</Property>
         <Property name="zoffset">28</Property>
         <Property name="scale">7</Property>
         <Property name="wireframe">false</Property>
         <Property name="yrot">-30</Property>
+    </Overlay>
+    <Overlay id="pictureframe" type="lines overlay">
+        <Property name="source">objs/ImageFrame.obj</Property>
+        <Property name="xoffset">30</Property>
+        <Property name="yoffset">3.43</Property>
+        <Property name="zoffset">13.21</Property>
+        <Property name="scale">30</Property>
+        <Property name="wireframe">false</Property>
+    </Overlay>
+    <Overlay id="pictureframe-vid" type="perspective video" inherits="pictureframe">
+        
+        <Property name="scale">0.022</Property>
+        <Property name="xoffset">28.4</Property>
+        <Property name="yoffset">0</Property>
+        <Property name="zoffset">14.2</Property>
+
+
+        <Property name="video file">Birthday video.m4v</Property>
     </Overlay>
     <Overlay id="fireplace" type="lines overlay">
         <Property name="source">objs/fireplace.obj</Property>
@@ -118,6 +136,24 @@
         <Property name="yoffset">4.5</Property>
         <Property name="zoffset">11.8</Property>
         <Property name="scale">2.64</Property>
+        <Property name="wireframe">false</Property>
+    </Overlay>
+    <Overlay id="floor-cube-1" type="lines overlay">
+        <Property name="source">objs/icecube_w.obj</Property>
+        <Property name="xoffset">26</Property>
+        <Property name="yoffset">30</Property>
+        <Property name="zoffset">45</Property>
+        <Property name="scale">2.64</Property>
+        <Property name="yrot">21</Property>
+        <Property name="wireframe">false</Property>
+    </Overlay>
+    <Overlay id="floor-cube-2" type="lines overlay">
+        <Property name="source">objs/icecube_w.obj</Property>
+        <Property name="xoffset">11</Property>
+        <Property name="yoffset">30</Property>
+        <Property name="zoffset">3</Property>
+        <Property name="scale">2.64</Property>
+        <Property name="yrot">43</Property>
         <Property name="wireframe">false</Property>
     </Overlay>
     <Overlay id="fireplace-cube-shake" type="shake object" inherits="fireplace-cube" />
@@ -136,11 +172,11 @@
         <Property name="to add">fireplace-cube-shake,drop cube</Property>
     </Overlay>
     <Overlay id="drop cube" type="effect change">
-        <Property name="to remove">fireplace-cube-shake,drop cube</Property>
+        <Property name="to remove">fireplace-cube-shake,drop cube,pictureframe-vid</Property>
         <Property name="to add">fireplace-cube-fall,end scene 1</Property>
     </Overlay>
     <Overlay id="end scene 1" type="effect change">
-        <Property name="to remove">fireplace-cube-fall,fireplace,table,chair,end scene 1</Property>
+        <Property name="to remove">fireplace-cube-fall,fireplace,pictureframe,floor-cube-1,table,floor-cube-2,chair,end scene 1</Property>
         <Property name="to add">start scene 2</Property>
     </Overlay>
     
@@ -162,9 +198,29 @@
         <Sensor ref="stage" />
         <Overlay ref="fireplace" />
     </Effect>
+    <Effect id="pictureframe">
+        <Sensor ref="stage" />
+        <Overlay ref="pictureframe" />
+    </Effect>
+    <Effect id="pictureframe-vid">
+        <Sensor ref="stage" />
+        <Overlay ref="pictureframe-vid" />
+    </Effect>
     <Effect id="fireplace-cube">
         <Sensor ref="stage" />
         <Overlay ref="fireplace-cube" />
+    </Effect>
+    <Effect id="floor-cube-1">
+        <Sensor ref="stage" />
+        <Overlay ref="floor-cube-1" />
+    </Effect>
+    <Effect id="floor-cube-2">
+        <Sensor ref="stage" />
+        <Overlay ref="floor-cube-2" />
+    </Effect>
+    <Effect id="pictureframe">
+        <Sensor ref="stage" />
+        <Overlay ref="pictureframe" />
     </Effect>
     <Effect id="fireplace-cube-shake">
         <Sensor ref="stage" />
@@ -203,9 +259,13 @@
     <!--<InitialEffect ref="floor" />-->
     <InitialEffect ref="fireplace" />
     <InitialEffect ref="fireplace-cube" />
+    <InitialEffect ref="floor-cube-1" />
+    <InitialEffect ref="floor-cube-2" />
+    <InitialEffect ref="pictureframe" />
+    <InitialEffect ref="pictureframe-vid" />
     <InitialEffect ref="shake cube" />
     <InitialEffect ref="table" />
-    <!--<InitialEffect ref="person in front of table" />-->
+    <InitialEffect ref="person in front of table" />
     <InitialEffect ref="chair" />
     
     <!--------------------------------------------------------------
@@ -299,7 +359,7 @@
     </Effect>
     
     <Effect id="add watcher 1">
-        <Sensor ref="key-a" />
+        <Sensor ref="key-e" />
         <Overlay ref="add watcher 1" />
     </Effect>
     <Effect id="remove watcher 1">
@@ -311,7 +371,7 @@
         <Sensor ref="key-a" />
         <Overlay ref="add watcher 2" />
         
-        <Overlay ref="colour shift 1" />
+        <!--<Overlay ref="colour shift 1" />-->
     </Effect>
     <Effect id="remove watcher 2">
         <Sensor ref="key-o" />
@@ -321,12 +381,12 @@
     <Effect id="watcher1">
         <Sensor ref="stage" />
         <Overlay ref="watcher1" />
-        <Overlay ref="colour shift 2" />
+        <!--<Overlay ref="colour shift 2" />-->
     </Effect>
     <Effect id="watcher2">
         <Sensor ref="stage" />
         <Overlay ref="watcher2" />
-        <Overlay ref="colour shift 3" />
+        <!--<Overlay ref="colour shift 3" />-->
     </Effect>
     
     
@@ -374,7 +434,7 @@
     <!-- Overlays -->
     <Overlay id="cine" type="cine overlay">
     </Overlay>
-    <Overlay id="stutter1" type="random stutters" />
+    <Overlay id="stutter1" type="stutter" />
     <Overlay id="stutter2" type="random stutters">
         <Property name="max wait frames">5</Property>
         <Property name="max stutter length">10</Property>
@@ -384,19 +444,23 @@
     <!-- Effect changes -->
     <Overlay id="start scene 3" type="effect change">
         <Property name="to remove">half cine,start scene 3</Property>
-        <Property name="to add">cine,start stutter</Property>
+        <Property name="to add">cine,end scene 3</Property>
     </Overlay>
     <Overlay id="start stutter" type="effect change">
         <Property name="to remove">start stutter</Property>
-        <Property name="to add">more stutter,stutter1</Property>
+        <!--<Property name="to add">more stutter,stutter1</Property>-->
+        <Property name="to add">more stutter</Property>
     </Overlay>
     <Overlay id="more stutter" type="effect change">
-        <Property name="to remove">more stutter,stutter1</Property>
-        <Property name="to add">stutter2,end scene 3</Property>
+        <!--<Property name="to remove">more stutter,stutter1</Property>
+        <Property name="to add">stutter2,end scene 3</Property>-->
+        <Property name="to remove">more stutter</Property>
+        <Property name="to add">end scene 3</Property>
     </Overlay>
     <Overlay id="end scene 3" type="effect change">
-        <Property name="to remove">cine,end scene 3,stutter2</Property>
-        <Property name="to add">table,chair,fireplace,end scene 4</Property>
+        <Property name="to remove">cine,end scene 3</Property>
+        <!--<Property name="to remove">cine,end scene 3,stutter2</Property>-->
+        <Property name="to add">start scene 4</Property>
     </Overlay>
     
     <!-- Effects -->
@@ -454,13 +518,103 @@
      Scene 2 flickers in and out
     -->
     
+    <Overlay id="table-centred" type="lines overlay" inherits="table">
+        
+        <Property name="xoffset">2.86</Property>
+        <Property name="yoffset">27.57</Property>
+        <Property name="zoffset">22.5</Property>
+        <Property name="scale">7</Property>
+        <Property name="yrot">0</Property>
+        <Property name="wireframe">false</Property>
+    </Overlay>
+    <Overlay id="balloon-blue" type="lines overlay">
+        <Property name="source">objs/BallonBlue.obj</Property>
+        <Property name="xoffset">42</Property>
+        <Property name="yoffset">-4.57</Property>
+        <Property name="zoffset">32.71</Property>
+        <Property name="scale">3</Property>
+        <Property name="wireframe">false</Property>
+        <Property name="yrot">-30</Property>
+    </Overlay>
+    <Overlay id="balloon-green" type="lines overlay">
+        <Property name="source">objs/BallonGreen.obj</Property>
+        <Property name="xoffset">37.14</Property>
+        <Property name="yoffset">25.57</Property>
+        <Property name="zoffset">28</Property>
+        <Property name="scale">7</Property>
+        <Property name="wireframe">false</Property>
+        <Property name="yrot">-30</Property>
+    </Overlay>
+    <Overlay id="balloon-pink" type="lines overlay">
+        <Property name="source">objs/BallonPinky.obj</Property>
+        <Property name="xoffset">37.14</Property>
+        <Property name="yoffset">25.57</Property>
+        <Property name="zoffset">28</Property>
+        <Property name="scale">7</Property>
+        <Property name="wireframe">false</Property>
+        <Property name="yrot">-30</Property>
+    </Overlay>
+    <Overlay id="cake" type="lines overlay">
+        <Property name="source">objs/cake.obj</Property>
+        <Property name="xoffset">6.29</Property>
+        <Property name="yoffset">15.43</Property>
+        <Property name="zoffset">16.79</Property>
+        <Property name="scale">7</Property>
+        <Property name="wireframe">false</Property>
+        <Property name="yrot">-30</Property>
+    </Overlay>
+    <Overlay id="candle" type="lines overlay">
+        <Property name="source">objs/candle.obj</Property>
+        <Property name="xoffset">6.29</Property>
+        <Property name="yoffset">15.43</Property>
+        <Property name="zoffset">13.93</Property>
+        <Property name="scale">15</Property>
+        <Property name="wireframe">false</Property>
+        <Property name="yrot">-30</Property>
+    </Overlay>
+    <!-- Effect changes -->
+    <Overlay id="start scene 4" type="effect change">
+        <Property name="to add">fireplace,balloon-blue,pictureframe,person in front of table,table-centred,cake,candle,end scene 4</Property>
+        <Property name="to remove">start scene 4</Property>
+    </Overlay>
     <Overlay id="end scene 4" type="effect change">
-        <Property name="to remove">table,chair,fireplace,end scene 4</Property>
+        <Property name="to remove">fireplace,balloon-blue,pictureframe,person in front of table,table-centred,cake,candle,end scene 4</Property>
         <Property name="to add">start cube rain</Property>
     </Overlay>
     
-    <Effect id="end scene 4">
+    <Effect id="start scene 4">
         <Sensor ref="key-a" />
+        <Overlay ref="start scene 4" />
+    </Effect>
+    <Effect id="balloon-blue">
+        <Sensor ref="stage" />
+        <Overlay ref="balloon-blue" />
+    </Effect>
+    
+    <Effect id="balloon-green">
+        <Sensor ref="stage" />
+        <Overlay ref="balloon-green" />
+    </Effect>
+    
+    <Effect id="balloon-pink">
+        <Sensor ref="stage" />
+        <Overlay ref="balloon-pink" />
+    </Effect>
+    <Effect id="table-centred">
+        <Sensor ref="stage" />
+        <Overlay ref="table-centred" />
+    </Effect>
+    <Effect id="cake">
+        <Sensor ref="stage" />
+        <Overlay ref="cake" />
+    </Effect>
+    <Effect id="candle">
+        <Sensor ref="stage" />
+        <Overlay ref="candle" />
+    </Effect>
+    
+    <Effect id="end scene 4">
+        <Sensor ref="key-e" />
         <Overlay ref="end scene 4" />
     </Effect>
     
@@ -513,7 +667,7 @@
         <Property name="to remove">start cube rain</Property>
     </Overlay>
     <Overlay id="stop cube rain" type="effect change">
-        <Property name="to add">add icecube set 1</Property>
+        <Property name="to add">start scene 6</Property>
         <Property name="to remove">rain,stop cube rain</Property>
     </Overlay>
     
@@ -746,6 +900,10 @@
     
     
     <!-- Effect changes -->
+    <Overlay id="start scene 6" type="effect change">
+        <Property name="to add">add icecube set 1</Property>
+        <Property name="to remove">start scene 6</Property>
+    </Overlay>
     <Overlay id="add icecube set 1" type="effect change">
         <Property name="to add">icecube set 1,add icecube set 2</Property>
         <Property name="to remove">add icecube set 1</Property>
@@ -768,6 +926,14 @@
     </Overlay>
     
     <!-- Effects -->
+    <Effect id="start scene 6">
+        <Sensor ref="key-e" />
+        <Overlay ref="start scene 6" />
+    </Effect>
+    <Effect id="add icecube set 1">
+        <Sensor ref="key-o" />
+        <Overlay ref="add icecube set 1" />
+    </Effect>
     <Effect id="icecube set 1">
         <Sensor ref="stage" />
         <Overlay ref="icecube-1-1" />
@@ -810,7 +976,7 @@
     </Effect>
     
     <Effect id="add icecube set 1">
-        <Sensor ref="key-e" />
+        <Sensor ref="key-a" />
         <Overlay ref="add icecube set 1" />
     </Effect>
     <Effect id="add icecube set 2">

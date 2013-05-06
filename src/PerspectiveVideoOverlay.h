@@ -20,11 +20,12 @@ public:
     //virtual void draw();
     virtual void setup(float width, float height);
     virtual std::string getName();
+    virtual void teardown();
     
     PerspectiveVideoOverlay();
 protected:
     virtual void drawModel();
-    
+    bool isPlaying;
 private:
     ofVideoPlayer video;
     ofImage frame;

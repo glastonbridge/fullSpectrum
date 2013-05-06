@@ -1,0 +1,31 @@
+<CueSheet>
+    <!-- Sensors -->
+    <Sensor id="dumb" type="coloured blob sensor" />
+    <Sensor id="stage" type="pose">
+        <Property name="threshold1">46</Property>
+        <Property name="threshold2">104</Property>
+        <Property name="min length">48</Property>
+        <Property name="max length">65</Property>
+        
+        <Property name="hue range">21</Property>
+        <Property name="hue offset">14</Property>
+        <Property name="sat threshold">38</Property>
+        <Property name="val threshold">174</Property>
+        <Property name="val invert">true</Property>
+        <Property name="max blob width">127</Property>
+        <Property name="min blob width">56</Property>
+        <Property name="num blobs">16</Property>
+    </Sensor>
+    <!-- Overlays -->
+    <Overlay id="cine" type="mottled cine">
+    </Overlay>
+    
+    <!-- Effects -->
+    
+    <Effect id="cinestage">
+        <Sensor ref="stage" />
+        <Overlay ref="cine" />
+    </Effect>
+    
+    <InitialEffect ref="cinestage" />
+</CueSheet>

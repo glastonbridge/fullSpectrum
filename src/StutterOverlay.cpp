@@ -29,18 +29,19 @@ void StutterOverlay::update(ofxCvColorImage* input)
             state=STATE_STUTTERING;
         }
     }
-    if (state==STATE_STUTTERING)
-        *input = loopImages[frame % numLoopImages];
+    //if (state==STATE_STUTTERING)
+    //    *input = loopImages[frame % numLoopImages];
     ++frame;
     
 }
 
 void StutterOverlay::startAStutter(int numImages, float width, float height)
 {
+    
     numLoopImages = numImages+1;
-    loopImages = new ofxCvColorImage[numLoopImages];
+    loopImages = new ofImage[numLoopImages];
     for (int i = 0; i < numLoopImages; ++i)
-        loopImages[i].allocate(width, height);
+        loopImages[i].allocate(width, height, OF_IMAGE_COLOR_ALPHA);
     state=STATE_FILLING;
     frame = 0;
 }
@@ -59,6 +60,8 @@ void StutterOverlay::setup(float width, float height)
 
 void StutterOverlay::draw()
 {
+    cineFilter.getImage().draw(0,0);
+    return;
     if (state==STATE_STUTTERING)
     {
         loopImages[frame % numLoopImages].draw(0,0);

@@ -28,7 +28,7 @@ protected:
     void startAStutter(int numFrames, float width, float height);
     void stopStuttering();
 private:
-    ofxCvColorImage* loopImages;
+    ofImage* loopImages;
     unsigned int numLoopImages;
     unsigned int frame;
 };

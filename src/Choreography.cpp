@@ -233,6 +233,7 @@ void Choreography::removeEffect(const std::string& effectName)
     
     for (int i = 0; i < overlaysToRemove.size(); ++i)
     {
+        (*_overlayLibrary)[overlaysToRemove[i]]->teardown();
         _overlayLibrary->removeOverlay(overlaysToRemove[i]);
     }
     for (int i = 0; i < sensorsToRemove.size(); ++i)

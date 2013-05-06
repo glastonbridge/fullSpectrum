@@ -13,6 +13,7 @@
 
  void PerspectiveVideoOverlay::setup(float width, float height)
 {
+    isPlaying = false;
     video.loadMovie(getStringValue("video file"));
     video.setLoopState(OF_LOOP_NORMAL);
     video.setUseTexture(true);
@@ -33,12 +34,14 @@ void PerspectiveVideoOverlay::update(ofxCvColorImage *input)
     video.update();
     if (video.isFrameNew())
     {
+        isPlaying = true;
         frame.setFromPixels(video.getPixels(), video.getWidth(), video.getHeight(), OF_IMAGE_COLOR);
     }
 }
 
  void PerspectiveVideoOverlay::drawModel()
 {
+    if (!isPlaying) return;
     ofSetHexColor(0xffffff);
     ofPushMatrix();
     float scale = getFloatValue(4);
@@ -60,3 +63,10 @@ void PerspectiveVideoOverlay::update(ofxCvColorImage *input)
     }
     ofPopMatrix();
 }
+
+void PerspectiveVideoOverlay::teardown()
+{
+    video.stop();
+    //video.close();
+}
+

@@ -52,7 +52,7 @@ void GravityStageOverlay::setup(float width, float height)
     world.setGravity(ofVec3f(0,-0.1,0));
     world.setWorldMin(ofVec3f(-100,-30,-100));
     world.setWorldMax(ofVec3f(100,100,100));
-    world.setTimeStep(1.0f/20);
+    world.setTimeStep(1.0f/7);
     world.enableCollision();
     ofVec3f translate(getFloatValue(1), getFloatValue(2), getFloatValue(3));
     bindings.push_back( new ModelParticleBinding(*model,world,ofVec3f()-translate));

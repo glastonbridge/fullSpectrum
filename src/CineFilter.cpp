@@ -13,13 +13,14 @@ void CineFilter::allocate(float width, float height)
     cineImage.allocate(width,height);
     cineFbo.allocate(width,height,GL_RGBA);
     pixelBuffer.allocate(width, height, 4);
-    cineImageWithFlickers.allocate(width, height);
+    cineImageWithFlickers.allocate(width, height, OF_IMAGE_COLOR_ALPHA);
 }
 
 CineFilter::CineFilter() {}
 
 void CineFilter::update(ofxCvColorImage* input)
 {
+    if (!cineFbo.isAllocated()) return;
     cineImage = *input;
     ofEnableAlphaBlending();
     cineFbo.begin();
@@ -46,13 +47,17 @@ void CineFilter::update(ofxCvColorImage* input)
 
 void CineFilter::draw()
 {
+    if (!cineFbo.isAllocated()) return;
     cineFbo.draw(0,0);
 }
 
-ofxCvColorImage& CineFilter::getImage()
+ofImage& CineFilter::getImage()
 {
-    cineFbo.readToPixels(pixelBuffer);
-    cineImageWithFlickers.setFromPixels(pixelBuffer);
+    if (cineFbo.isAllocated() && pixelBuffer.isAllocated())
+    {
+        cineFbo.readToPixels(pixelBuffer);
+        cineImageWithFlickers.setFromPixels(pixelBuffer);
+    }
     return cineImageWithFlickers;
 }
 

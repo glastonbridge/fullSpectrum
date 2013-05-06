@@ -30,8 +30,8 @@ void ThreadedNetwork::stop(){
 //--------------------------
 void ThreadedNetwork::threadedFunction(){
     
-//    prism.setup("169.254.230.192",11999);
-    prism.setup("localhost",11999);
+    prism.setup("169.254.230.192",11999);
+//    prism.setup("localhost",11999);
     prism.setMessageDelimiter("\n");
     
     while( isThreadRunning() != 0 && prism.isConnected())

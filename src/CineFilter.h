@@ -20,12 +20,12 @@ public:
     void allocate(float width, float height);
     void update(ofxCvColorImage* input);
     void draw();
-    ofxCvColorImage& getImage();
+    ofImage& getImage();
     ofFbo& getFbo();
 private:
     ofFbo cineFbo;
     ofxCvGrayscaleImage cineImage;
-    ofxCvColorImage cineImageWithFlickers;
+    ofImage cineImageWithFlickers;
     ofPixels pixelBuffer;
 };
 
