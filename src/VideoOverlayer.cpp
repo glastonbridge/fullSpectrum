@@ -17,7 +17,7 @@ VideoOverlayer::VideoOverlayer()
 
     //videoIn.allocateCamera(streamWidth, streamHeight);
     lensImage.allocate(streamWidth, streamHeight);
-    ofSetFrameRate(24);
+    ofSetFrameRate(60);
     
     choreography.setOverlayLibrary(&overlayLibrary);
     choreography.setSensorLibrary(&sensorLibrary);

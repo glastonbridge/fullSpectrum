@@ -35,7 +35,7 @@ void Lens::setup(){
     
     videoOverlayer.setVideoInput(&videoIn);
 
-    videoOverlayer.setChoreography("cue-everything.xml");
+    videoOverlayer.setChoreography("cue-cine.xml");
     
 }
 
@@ -96,11 +96,26 @@ void Lens::touchDown(ofTouchEventArgs & touch){
             }
         }
     }
+    
+    // Sneaky hack for parameterising the mottled cine
+    Overlay* cine = videoOverlayer.getNamedOverlay("cine");
+    int radiusIndex = cine->getParamId("circle radius");
+    float minPoint = cine->getFloatMin(radiusIndex);
+    float maxPoint = cine->getFloatMax(radiusIndex);
+    float newValue = minPoint + touch.y * (maxPoint - minPoint) / ofGetHeight();
+    cine->setFloatValue(radiusIndex, newValue);
 }
 
 //--------------------------------------------------------------
 void Lens::touchMoved(ofTouchEventArgs & touch){
-
+    
+    // Sneaky hack for parameterising the mottled cine
+    Overlay* cine = videoOverlayer.getNamedOverlay("cine");
+    int radiusIndex = cine->getParamId("circle radius");
+    float minPoint = cine->getFloatMin(radiusIndex);
+    float maxPoint = cine->getFloatMax(radiusIndex);
+    float newValue = minPoint + touch.y * (maxPoint - minPoint) / ofGetHeight();
+    cine->setFloatValue(radiusIndex, newValue);
 }
 
 //--------------------------------------------------------------

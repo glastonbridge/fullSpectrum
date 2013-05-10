@@ -20,6 +20,10 @@ public:
     virtual void draw();
     virtual void setup(float width, float height);
     virtual std::string getName();
+    MottledCineOverlay();
+    
+private:
+    std::vector<ofPoint> circleCentres;
 };
 
 #endif
