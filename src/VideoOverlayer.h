@@ -31,6 +31,9 @@ public:
     std::vector<Effect*> getActiveEffects();
     Overlay* getNamedOverlay(const std::string& name);
     Sensor* getNamedSensor(const std::string& name);
+    void addEffect(const std::string& effectName);
+    void removeEffect(const std::string& effectName);
+    std::vector<std::string> getAllEffectNames();
     
 private:
     /** The input data, set from the videoIn */

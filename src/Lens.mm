@@ -5,7 +5,10 @@
 #include "ThreadedNetwork.h"
 #include "PoseSensor.h"
 
+#include "DebugMenu.h"
+
 const bool fakeNetworkButton = false;
+const bool useDebugMenu = true;
 
 /**
  * Called once, when the app is opened
@@ -35,8 +38,13 @@ void Lens::setup(){
     
     videoOverlayer.setVideoInput(&videoIn);
 
-    videoOverlayer.setChoreography("cue-cine.xml");
+    videoOverlayer.setChoreography("cue-sometests.xml");
     
+    if (useDebugMenu)
+    {
+        debugMenu.setSize(ofGetWidth(), ofGetHeight());
+        debugMenu.setVideoOverlayer(&videoOverlayer);
+    }
 }
 
 /**
@@ -97,25 +105,33 @@ void Lens::touchDown(ofTouchEventArgs & touch){
         }
     }
     
+    ofRectangle hitRect(0,ofGetHeight()-50,50,50);
+    
+    if (useDebugMenu)
+    {
+        if (hitRect.inside(touch.x, touch.y))
+            debugMenu.setVisible(!debugMenu.getVisible());
+    }
+    
     // Sneaky hack for parameterising the mottled cine
-    Overlay* cine = videoOverlayer.getNamedOverlay("cine");
+    /*Overlay* cine = videoOverlayer.getNamedOverlay("cine");
     int radiusIndex = cine->getParamId("circle radius");
     float minPoint = cine->getFloatMin(radiusIndex);
     float maxPoint = cine->getFloatMax(radiusIndex);
     float newValue = minPoint + touch.y * (maxPoint - minPoint) / ofGetHeight();
-    cine->setFloatValue(radiusIndex, newValue);
+    cine->setFloatValue(radiusIndex, newValue);*/
 }
 
 //--------------------------------------------------------------
 void Lens::touchMoved(ofTouchEventArgs & touch){
     
     // Sneaky hack for parameterising the mottled cine
-    Overlay* cine = videoOverlayer.getNamedOverlay("cine");
+    /*Overlay* cine = videoOverlayer.getNamedOverlay("cine");
     int radiusIndex = cine->getParamId("circle radius");
     float minPoint = cine->getFloatMin(radiusIndex);
     float maxPoint = cine->getFloatMax(radiusIndex);
     float newValue = minPoint + touch.y * (maxPoint - minPoint) / ofGetHeight();
-    cine->setFloatValue(radiusIndex, newValue);
+    cine->setFloatValue(radiusIndex, newValue);*/
 }
 
 //--------------------------------------------------------------

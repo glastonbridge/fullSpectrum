@@ -127,3 +127,19 @@ Sensor* VideoOverlayer::getNamedSensor(const std::string& name)
     return sensorLibrary[name];
 }
 
+
+void VideoOverlayer::addEffect(const std::string& effectName)
+{
+    choreography.activateEffect(effectName, streamWidth, streamHeight);
+}
+
+void VideoOverlayer::removeEffect(const std::string& effectName)
+{
+    choreography.removeEffect(effectName);
+}
+
+std::vector<std::string> VideoOverlayer::getAllEffectNames()
+{
+    return choreography.getAllEffectNames();
+}
+

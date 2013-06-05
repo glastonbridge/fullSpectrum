@@ -114,7 +114,6 @@ std::vector<std::string> Choreography::loadCueSheet(std::string path)
         settings.pushTag("Effect", i);
         Effect* effect = new Effect;
         std::vector<std::string> attributes;
-        bool got = settings.getAttributeNames("Sensor", attributes);
         for (int i=0; i<settings.getNumTags("Sensor"); ++i)
             effect->pushSensor(settings.getAttribute("Sensor", "ref","bad ref", i));
         for (int i=0; i<settings.getNumTags("Overlay"); ++i)
@@ -242,5 +241,17 @@ void Choreography::removeEffect(const std::string& effectName)
     }
     
     activeEffects.erase(effectIter);
+}
+
+std::vector<std::string> Choreography::getAllEffectNames()
+{
+    std::vector<std::string> results;
+    std::string vessel;
+    for (std::map<std::string, Effect*>::const_iterator effect = effects.begin(); effect != effects.end(); ++effect)
+    {
+        vessel = effect->first;
+        results.push_back(vessel);
+    }
+    return results;
 }
 

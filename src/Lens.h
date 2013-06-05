@@ -7,9 +7,9 @@
 #include "ofxiPhoneExtras.h"
 
 #include "ofxOpenCv.h"
-#include "ofxBlender.h"
 
 #include "VideoOverlayer.h"
+#include "DebugMenu.h"
 
 class Lens : public ofxiPhoneApp{
 	
@@ -44,11 +44,8 @@ private:
     /** The actual mechanism that does teh overlaying */
     VideoOverlayer videoOverlayer;
     
-    // Hack to add in a 3d model
-    ofxBlender blendFile;
-    ofEasyCam cam;
-    ofLight light;
 
+    DebugMenu debugMenu;
 };
 
 #endif
